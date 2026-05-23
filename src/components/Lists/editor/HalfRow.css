@@ -1,0 +1,82 @@
+.td-half {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border-radius: 4px;
+  padding: 3px 4px 3px 2px;
+  transition: background 0.15s, box-shadow 0.12s;
+}
+
+.td-half.half-drag-over {
+  background: rgba(200, 150, 60, 0.12);
+  box-shadow: 0 0 0 2px var(--wood-mid);
+}
+
+.td-half.main-drag-over {
+  background: rgba(220, 80, 20, 0.1) !important;
+  box-shadow: 0 0 0 2px rgba(220, 80, 20, 0.5) !important;
+}
+
+/* Handle badge */
+.half-drag-handle {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  cursor: grab;
+  flex-shrink: 0;
+  border-radius: 3px;
+  padding: 2px 5px 2px 3px;
+  transition: opacity 0.15s, background 0.15s;
+  user-select: none;
+  opacity: 0.7;
+}
+.half-drag-handle:hover { opacity: 1; }
+.half-drag-handle.half-dragging { opacity: 0.4; cursor: grabbing; }
+
+.truth-handle {
+  background: rgba(36, 99, 164, 0.2);
+  border: 1px solid rgba(36, 99, 164, 0.3);
+}
+.truth-handle:hover { background: rgba(36, 99, 164, 0.35); }
+
+.dare-handle {
+  background: rgba(192, 30, 46, 0.18);
+  border: 1px solid rgba(192, 30, 46, 0.3);
+}
+.dare-handle:hover { background: rgba(192, 30, 46, 0.32); }
+
+.half-handle-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+.truth-handle .half-handle-label { color: var(--truth-light); }
+.dare-handle  .half-handle-label { color: var(--dare-light); }
+
+.half-handle-dots {
+  font-size: 12px;
+  color: rgba(160, 128, 96, 0.5);
+  line-height: 1;
+}
+
+/* Delete (×) button */
+.half-delete {
+  background: none;
+  border: none;
+  font-size: 14px;
+  line-height: 1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.15s;
+  opacity: 0;
+}
+.td-half:hover .half-delete { opacity: 1; }
+
+.half-delete.truth-del { color: rgba(100, 160, 220, 0.6); }
+.half-delete.truth-del:hover { color: var(--truth-light); background: rgba(36, 99, 164, 0.15); }
+
+.half-delete.dare-del { color: rgba(220, 80, 80, 0.6); }
+.half-delete.dare-del:hover { color: var(--dare-light); background: rgba(192, 30, 46, 0.15); }

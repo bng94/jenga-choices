@@ -1,0 +1,90 @@
+.keep-which-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 400;
+  animation: fadeIn 0.15s ease;
+}
+
+.keep-which-box {
+  background: var(--surface);
+  border: 1px solid rgba(200, 150, 60, 0.25);
+  border-radius: 12px;
+  padding: 26px 24px;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.2s ease;
+}
+
+.keep-which-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: 16px;
+  line-height: 1.4;
+}
+
+.keep-which-options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.keep-btn {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 12px 14px;
+  background: var(--surface2);
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.keep-btn.keep-truth { border-color: rgba(36, 99, 164, 0.25); }
+.keep-btn.keep-truth:hover { background: rgba(36, 99, 164, 0.12); border-color: var(--truth); }
+
+.keep-btn.keep-dare { border-color: rgba(192, 30, 46, 0.22); }
+.keep-btn.keep-dare:hover { background: rgba(192, 30, 46, 0.1); border-color: var(--dare); }
+
+.keep-label-badge {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: 1px;
+  padding: 2px 6px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.keep-label-badge.truth { background: rgba(36, 99, 164, 0.25); color: var(--truth-light); }
+.keep-label-badge.dare  { background: rgba(192, 30, 46, 0.2);  color: var(--dare-light); }
+
+.keep-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+}
+.keep-text em { color: var(--text-muted); font-style: italic; }
+
+.keep-cancel {
+  width: 100%;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  padding: 9px;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.keep-cancel:hover { color: var(--text); border-color: rgba(200, 150, 60, 0.4); }

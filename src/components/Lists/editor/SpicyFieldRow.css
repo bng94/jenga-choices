@@ -1,0 +1,117 @@
+.spicy-field {
+  margin-top: 3px;
+}
+
+.spicy-field-hidden {
+  height: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  border: none;
+  pointer-events: all;
+}
+
+.spicy-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.spicy-drag-handle {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  cursor: grab;
+  flex-shrink: 0;
+  padding: 2px 4px;
+  border-radius: 3px;
+  background: rgba(220, 80, 20, 0.1);
+  border: 1px solid rgba(220, 80, 20, 0.25);
+  transition: all 0.15s;
+  opacity: 0.7;
+}
+.spicy-drag-handle:hover {
+  opacity: 1;
+  background: rgba(220, 80, 20, 0.2);
+  border-color: rgba(220, 80, 20, 0.5);
+}
+.spicy-drag-handle.half-dragging {
+  opacity: 0.4;
+  cursor: grabbing;
+}
+
+.spicy-badge {
+  font-size: 12px;
+  line-height: 1;
+}
+.spicy-dots {
+  font-size: 12px;
+  color: rgba(160, 128, 96, 0.5);
+  line-height: 1;
+}
+
+.spicy-input {
+  border-color: rgba(220, 80, 20, 0.25) !important;
+  background: rgba(220, 80, 20, 0.06) !important;
+}
+.spicy-input:focus {
+  border-color: rgba(220, 80, 20, 0.6) !important;
+}
+.spicy-input::placeholder {
+  color: rgba(200, 100, 60, 0.4) !important;
+}
+
+.spicy-drop-closed {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 8px;
+  border: 1px dashed rgba(220, 80, 20, 0.25);
+  border-radius: 4px;
+  cursor: text;
+  transition: all 0.15s;
+  background: transparent;
+}
+.spicy-drop-closed:hover {
+  border-color: rgba(220, 80, 20, 0.5);
+  background: rgba(220, 80, 20, 0.06);
+}
+.spicy-drop-closed.spicy-drag-over {
+  border-color: rgba(220, 80, 20, 0.7);
+  background: rgba(220, 80, 20, 0.14);
+  box-shadow: 0 0 0 2px rgba(220, 80, 20, 0.4);
+}
+
+.spicy-add-icon {
+  font-size: 12px;
+  opacity: 0.6;
+}
+
+.spicy-inline-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  color: rgba(220, 120, 60, 0.8);
+  padding: 0 4px;
+}
+.spicy-inline-input::placeholder {
+  color: rgba(220, 120, 60, 0.35);
+  font-style: italic;
+}
+
+.spicy-drop-hint {
+  font-size: 10px;
+  color: rgba(220, 120, 60, 0.4);
+  margin-left: 2px;
+  font-style: italic;
+  pointer-events: none;
+}
+
+.spicy-input-row.spicy-drag-over {
+  background: rgba(220, 80, 20, 0.12);
+  box-shadow: 0 0 0 2px rgba(220, 80, 20, 0.5);
+  border-radius: 4px;
+}

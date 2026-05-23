@@ -1,0 +1,104 @@
+.save-warning-box { max-width: 460px !important; }
+
+.save-warning-icon {
+  font-size: 32px;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+.save-warning-sub {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+.save-warning-list {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-bottom: 16px;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.save-warning-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--surface2);
+  border: 1px solid rgba(200, 150, 60, 0.12);
+  border-radius: 6px;
+  padding: 8px 10px;
+}
+
+.save-warning-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  flex-shrink: 0;
+  padding-top: 1px;
+  min-width: 28px;
+}
+
+.save-warning-halves {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.sw-half {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.sw-half.has-content { color: var(--text); }
+.sw-half.is-empty    { color: var(--text-muted); }
+.sw-half.is-empty em { color: rgba(220, 80, 80, 0.7); font-style: italic; }
+
+.viewer-td-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.viewer-td-label.truth { background: rgba(36, 99, 164, 0.25); color: var(--truth-light); }
+.viewer-td-label.dare  { background: rgba(192, 30, 46, 0.2);  color: var(--dare-light); }
+
+.save-warning-choice-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+}
+
+.save-warning-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.save-warning-fix,
+.save-warning-convert {
+  align-items: flex-start !important;
+  gap: 10px !important;
+}
+
+.save-warning-fix { border-color: rgba(200, 150, 60, 0.3) !important; }
+.save-warning-fix:hover { background: rgba(200, 150, 60, 0.1) !important; border-color: var(--wood-mid) !important; }
+
+.save-warning-convert { border-color: rgba(100, 180, 120, 0.3) !important; }
+.save-warning-convert:hover { background: rgba(46, 122, 74, 0.12) !important; border-color: rgba(100, 180, 120, 0.6) !important; }
+
+.save-warning-btn-icon  { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+.save-warning-btn-title { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+.save-warning-btn-sub   { font-size: 11px; color: var(--text-muted); line-height: 1.4; text-align: left; }

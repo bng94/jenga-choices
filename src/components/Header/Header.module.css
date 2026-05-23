@@ -1,0 +1,130 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 28px;
+  border-bottom: 1px solid rgba(200, 150, 60, 0.2);
+  background: rgba(26, 16, 10, 0.92);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  gap: 16px;
+  height: var(--header-height);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.app-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 25px;
+  letter-spacing: 3px;
+  line-height: 1;
+  display: flex;
+  gap: 7px;
+}
+.title-jenga {
+  color: var(--wood-mid);
+}
+.title-choices {
+  color: var(--text-muted);
+}
+
+.active-list-badge {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface2);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 150, 60, 0.15);
+  white-space: nowrap;
+  max-width: 260px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--green);
+  flex-shrink: 0;
+}
+.badge-mode {
+  color: var(--wood-mid);
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-nav {
+  display: flex;
+  gap: 4px;
+}
+
+.nav-btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 15px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.nav-btn:hover {
+  color: var(--text);
+  border-color: rgba(200, 150, 60, 0.4);
+}
+.nav-btn.active {
+  background: var(--wood-mid);
+  color: var(--ink);
+  border-color: var(--wood-mid);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .header {
+    padding: 10px 14px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .active-list-badge {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 6px;
+    border-radius: 10px;
+    white-space: nowrap;
+    max-width: 130px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.nav-btn--lists {
+  border-style: dashed;
+}
+.nav-btn--lists:hover {
+  border-style: solid;
+}

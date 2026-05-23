@@ -1,0 +1,152 @@
+/* ListViewer reuses .editor-overlay / .editor-panel from ListEditor.css
+   for the outer shell (centred modal). Only viewer-specific styles here. */
+
+.viewer-subtitle {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.spicy-mode-banner {
+  background: rgba(220, 80, 20, 0.1);
+  border-bottom: 1px solid rgba(220, 80, 20, 0.2);
+  color: #e07030;
+  font-size: 12px;
+  padding: 8px 22px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.viewer-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.viewer-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 8px 10px;
+  border-radius: var(--radius);
+  background: var(--surface2);
+  border: 1px solid rgba(200, 150, 60, 0.08);
+  transition:
+    background 0.15s,
+    box-shadow 0.15s;
+}
+
+.viewer-item.draggable {
+  cursor: grab;
+  user-select: none;
+}
+.viewer-item.draggable:hover {
+  background: var(--surface3);
+}
+.viewer-item.dragging {
+  opacity: 0.5;
+  cursor: grabbing;
+}
+.viewer-item.drag-over {
+  background: var(--surface3);
+  box-shadow: 0 0 0 2px var(--wood-mid);
+}
+
+.viewer-drag {
+  font-size: 15px;
+  color: rgba(160, 128, 96, 0.4);
+  cursor: grab;
+  line-height: 1;
+  padding: 2px 0;
+  flex-shrink: 0;
+}
+.viewer-item:hover .viewer-drag {
+  color: var(--wood-mid);
+}
+
+.viewer-num {
+  font-family: "DM Mono", monospace;
+  font-size: 11px;
+  color: var(--text-muted);
+  min-width: 20px;
+  padding-top: 2px;
+  flex-shrink: 0;
+}
+
+.viewer-content {
+  text-align: left;
+  flex: 1;
+}
+
+.viewer-single-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+.viewer-single {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+  text-align: left;
+}
+.viewer-spicy-dot {
+  font-size: 11px;
+  flex-shrink: 0;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+.viewer-td-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.4;
+  text-align: left;
+}
+.viewer-td-row + .viewer-td-row {
+  margin-top: 4px;
+}
+
+.viewer-td-label {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  padding: 1px 5px;
+  border-radius: 3px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.viewer-td-label.truth {
+  background: rgba(36, 99, 164, 0.25);
+  color: var(--truth-light);
+}
+.viewer-td-label.dare {
+  background: rgba(192, 30, 46, 0.2);
+  color: var(--dare-light);
+}
+
+.spicy-text {
+  text-align: left;
+  color: #f08040;
+}
+
+.viewer-export-btn {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 12px;
+  border-radius: var(--radius);
+  border: 1px solid rgba(200, 150, 60, 0.3);
+  background: transparent;
+  color: var(--wood-mid);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.viewer-export-btn:hover {
+  background: rgba(200, 150, 60, 0.1);
+  border-color: var(--wood-mid);
+}

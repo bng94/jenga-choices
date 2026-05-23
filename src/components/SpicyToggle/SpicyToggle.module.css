@@ -1,0 +1,33 @@
+.spicy-toggle {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 16px;
+  border: 1px solid rgba(220, 80, 20, 0.3);
+  background: transparent;
+  color: rgba(220, 120, 60, 0.75);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.spicy-toggle:hover {
+  background: rgba(220, 80, 20, 0.1);
+  color: #e86030;
+}
+.spicy-toggle--on {
+  background: rgba(220, 80, 20, 0.18);
+  border-color: rgba(220, 80, 20, 0.6);
+  color: #f08040;
+  box-shadow: 0 0 10px rgba(220, 80, 20, 0.2);
+}
+
+.spicy-toggle--viewer {
+  font-size: 12px;
+  padding: 5px 12px;
+}
+
+.spicy-toggle--editor {
+  font-size: 12px;
+  padding: 5px 12px;
+}

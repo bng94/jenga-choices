@@ -1,0 +1,84 @@
+.confirm-dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.15s ease;
+}
+
+.confirm-dialog {
+  background: var(--surface);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 12px;
+  padding: 28px 24px;
+  width: min(400px, 90vw);
+  box-shadow: var(--shadow);
+  animation: slideUp 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.confirm-dialog h2 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--wood-mid);
+}
+
+.confirm-dialog p {
+  font-size: 14px;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.confirm-dialog-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.confirm-button {
+  flex: 1;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 11px;
+  border: none;
+  border-radius: var(--radius);
+  background: var(--dare);
+  color: #fff;
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    transform 0.15s;
+}
+
+.confirm-button:hover {
+  background: var(--dare-light);
+  transform: translateY(-1px);
+}
+
+.cancel-button {
+  flex: 1;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 11px;
+  border: 1px solid rgba(200, 150, 60, 0.25);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cancel-button:hover {
+  color: var(--text);
+  border-color: rgba(200, 150, 60, 0.5);
+  background: var(--surface2);
+}

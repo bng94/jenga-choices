@@ -1,0 +1,199 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1100;
+  padding: 20px;
+  animation: fadeIn 0.15s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.modal {
+  background: var(--surface);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: 16px;
+  padding: 24px;
+  width: min(480px, 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: var(--shadow);
+  animation: slideUp 0.2s ease;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 22px;
+  letter-spacing: 2px;
+  color: var(--wood-mid);
+  margin: 0;
+}
+
+.instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.instructionLine {
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.formatExamples {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 10px 12px;
+  background: var(--surface2);
+  border-radius: var(--radius);
+  border: 1px solid rgba(200, 150, 60, 0.1);
+}
+
+.exampleRow {
+  font-family: "DM Mono", monospace;
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.pipe {
+  color: var(--wood-mid);
+  font-weight: 600;
+}
+
+.textarea {
+  width: 100%;
+  min-height: 180px;
+  padding: 14px;
+  font-family: "DM Mono", monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  background: var(--surface2);
+  border: 2px solid rgba(200, 150, 60, 0.15);
+  border-radius: var(--radius);
+  color: var(--text);
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  border-color: var(--wood-mid);
+}
+
+.textarea::placeholder {
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.error {
+  font-size: 12px;
+  color: var(--dare-light);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.status {
+  font-size: 12px;
+  min-height: 18px;
+}
+
+.statusCount {
+  font-weight: 700;
+  color: var(--wood-mid);
+  font-size: 13px;
+}
+
+.statusLabel {
+  color: var(--text-muted);
+}
+
+.statusWarn {
+  color: var(--dare-light);
+}
+
+.statusEmpty {
+  color: var(--text-muted);
+  opacity: 0.6;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+}
+
+.cancelBtn {
+  flex: 1;
+  padding: 12px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  background: transparent;
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.cancelBtn:hover {
+  background: var(--surface2);
+  color: var(--text);
+}
+
+.confirmBtn {
+  flex: 2;
+  padding: 12px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  background: var(--wood-mid);
+  border: none;
+  border-radius: var(--radius);
+  color: var(--ink);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.confirmBtn:hover:not(:disabled) {
+  background: var(--wood-light);
+  transform: translateY(-1px);
+}
+
+.confirmBtn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
