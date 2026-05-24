@@ -132,6 +132,12 @@
   color: #f08040;
 }
 
+.drag-hint {
+  font-size: 11px;
+  color: rgba(160, 128, 96, 0.6);
+  margin-bottom: 10px;
+  text-align: center;
+}
 .viewer-export-btn {
   font-family: "DM Sans", sans-serif;
   font-size: 12px;

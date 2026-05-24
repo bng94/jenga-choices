@@ -13,9 +13,9 @@ const ListManagerInfoPanel = () => {
           Each list holds up to 54 items. Empty slots show as blanks during
           gameplay, which groups can use as wild cards or house rules.
         </InfoRow>
-        <InfoRow icon="">
-          Classic mode has its own active list. Set it using the
-          <strong> Use</strong> button on any list card.
+        <InfoRow icon="" centered>
+          Set the active list for Classic Mode using the <strong>Use </strong>
+          button on any list card.
         </InfoRow>
         <InfoRow icon="">
           Default lists can't be edited. Use <strong>Copy &amp; Edit</strong> to
@@ -35,17 +35,6 @@ const ListManagerInfoPanel = () => {
             text="Player picks Truth or Dare, then sees that prompt. Both the Truth and Dare can have their own 🔥 Spicy version."
           />
         </InfoGrid>
-      </InfoSection>
-      <InfoSection heading="Editing &amp; organising">
-        <InfoRow icon="">
-          Use <strong>☰</strong> to drag and reorder rows, <strong>⠿ </strong>
-          to drag and swap prompts between slots.
-        </InfoRow>
-        <InfoRow icon="">
-          Use <strong>Paste</strong> in the editor to quickly add multiple
-          prompts. Type each prompt on its own line, or drop in a JSON file you
-          exported.
-        </InfoRow>
       </InfoSection>
       <InfoSection heading="Import &amp; Export">
         <InfoRow icon="">

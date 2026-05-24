@@ -1,4 +1,4 @@
-import { useState, useRef, type DragEvent } from "react";
+import { useState, useRef, type DragEvent, useMemo } from "react";
 import type {
   CustomList,
   EditorItem,
@@ -9,6 +9,7 @@ import { deserializeItem, itemHasSpicy } from "../../utils/itemModel";
 import SpicyToggle from "../SpicyToggle/SpicyToggle";
 import { exportList } from "../../utils/exportList";
 import "./ListViewer.css";
+import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 
 interface ListViewerProps {
   list: CustomList & { isDefault: boolean };
@@ -20,8 +21,11 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
   const isDefault = list.isDefault;
 
   const [spicyMode, setSpicyMode] = useState(false);
+  const originalRaw = useMemo(() => list.items, [list.id]);
   const [orderedRaw, setOrderedRaw] = useState(() => list.items);
-  const [dirty, setDirty] = useState(false);
+
+  const dirty = orderedRaw.some((item, i) => item !== originalRaw[i]);
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
 
   const dragIdx = useRef<number | null>(null);
   const dragOverIdx = useRef<number | null>(null);
@@ -88,7 +92,6 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
       next.splice(dropActual, 0, moved);
       return next;
     });
-    setDirty(true);
     dragIdx.current = null;
     dragOverIdx.current = null;
   };
@@ -96,7 +99,6 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
   const handleSave = () => {
     if (isDefault || !onSave) return;
     onSave({ ...list, items: orderedRaw });
-    setDirty(false);
     onClose();
   };
 
@@ -149,6 +151,10 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
       className="editor-overlay"
       onClick={(e) => {
         e.stopPropagation();
+        if (dirty) {
+          setShowExitConfirm(true);
+          return;
+        }
         onClose();
       }}
     >
@@ -226,7 +232,16 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
         </div>
 
         <div className="editor-footer">
-          <button className="cancel-btn" onClick={onClose}>
+          <button
+            className="cancel-btn"
+            onClick={() => {
+              if (dirty) {
+                setShowExitConfirm(true);
+                return;
+              }
+              onClose();
+            }}
+          >
             {dirty ? "Discard" : "Close"}
           </button>
           {!isDefault && (
@@ -235,6 +250,17 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
             </button>
           )}
         </div>
+
+        {showExitConfirm && (
+          <ConfirmDialog
+            title="Unsaved Changes"
+            message="You have unsaved changes. Are you sure you want to exit without saving?"
+            confirmLabel="Exit"
+            cancelLabel="Keep Editing"
+            onConfirm={onClose}
+            onCancel={() => setShowExitConfirm(false)}
+          />
+        )}
       </div>
     </div>
   );

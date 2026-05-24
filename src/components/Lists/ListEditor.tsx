@@ -1,4 +1,4 @@
-import { useState, useRef, type DragEvent } from "react";
+import { useState, useRef, type DragEvent, useMemo } from "react";
 import type {
   CustomList,
   EditorItem,
@@ -22,6 +22,7 @@ import SaveWarningDialog from "./editor/SaveWarningDialog";
 import "./ListEditor.css";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import PastePromptsModal from "../PastePromptsModal/PastePromptsModal";
+import ListEditorInfoPanel from "./ListEditorInfoPanel";
 
 /**
  * Pads rawItems to exactly 54 slots (filling missing ones with ""),
@@ -99,12 +100,11 @@ export default function ListEditor({
    */
   const [warningSet, setWarningSet] = useState<Set<number>>(new Set());
 
-  /**
-   * True when the user has made at least one real change since last save.
-   * Only set to true when content actually differs — swapping identical or
-   * empty slots does not count. Drives the exit confirmation dialog.
-   */
-  const [unSavedChanges, setUnSavedChanges] = useState(false);
+  const initialItems = useMemo(() => normalizeItems(list.items), [list.id]);
+  const initialName = list.name || "New List";
+
+  const unSavedChanges =
+    !itemsEqual(items, initialItems) || name !== initialName;
 
   /**
    * True when the user tries to exit while unSavedChanges is true.
@@ -172,7 +172,6 @@ export default function ListEditor({
   const handleChange = (idx: number, field: string, val: string) => {
     const current =
       (items[idx] as unknown as Record<string, string>)[field] ?? "";
-    if (val !== current) setUnSavedChanges(true);
     patch(idx, { [field]: val } as Partial<EditorItem>);
     if (warningSet.has(idx)) {
       setWarningSet((prev) => {
@@ -188,7 +187,6 @@ export default function ListEditor({
    * Always a structural change — marks dirty unconditionally.
    */
   const handleToTD = (idx: number) => {
-    setUnSavedChanges(true);
     setItems((prev) => {
       const next = [...prev];
       const cur = next[idx] as EditorSingleItem;
@@ -216,7 +214,6 @@ export default function ListEditor({
       setKeepWhichIdx(idx);
       return;
     }
-    setUnSavedChanges(true);
     setItems((prev) => {
       const next = [...prev];
       const src = next[idx] as EditorTDItem;
@@ -235,7 +232,6 @@ export default function ListEditor({
    */
   const handleKeepWhich = (half: "truth" | "dare") => {
     const idx = keepWhichIdx!;
-    setUnSavedChanges(true);
     setItems((prev) => {
       const next = [...prev];
       const src = next[idx] as EditorTDItem;
@@ -254,7 +250,6 @@ export default function ListEditor({
    * Always a structural change — marks dirty.
    */
   const handleDeleteHalf = (idx: number, half: "truth" | "dare") => {
-    setUnSavedChanges(true);
     setItems((prev) => {
       const next = [...prev];
       const src = next[idx] as EditorTDItem;
@@ -275,7 +270,6 @@ export default function ListEditor({
     setItems((prev) => {
       const next = [...prev];
       next[idx] = { type: "single", value: "", spicy: "" };
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
 
@@ -335,7 +329,6 @@ export default function ListEditor({
       const next = [...prev];
       const [moved] = next.splice(from, 1);
       next.splice(dropIdx, 0, moved);
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
     rowDragIdx.current = null;
@@ -454,7 +447,6 @@ export default function ListEditor({
         }
 
         next[src.rowIdx] = result;
-        if (!itemsEqual(prev, next)) setUnSavedChanges(true);
         return next;
       }
 
@@ -479,7 +471,6 @@ export default function ListEditor({
         shouldSwapSpicy ? fromSpicy : toSpicy,
       );
 
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
 
@@ -556,7 +547,6 @@ export default function ListEditor({
       const tmp = fromItem[realFrom] ?? "";
       fromItem[realFrom] = toItem[realTo] ?? "";
       toItem[realTo] = tmp;
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
 
@@ -585,7 +575,6 @@ export default function ListEditor({
       const mainText = toItem[mainField] ?? "";
       fromItem[realFrom] = mainText;
       toItem[mainField] = spicyText;
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
 
@@ -652,7 +641,6 @@ export default function ListEditor({
         next[toRowIdx] = td;
       }
 
-      if (!itemsEqual(prev, next)) setUnSavedChanges(true);
       return next;
     });
 
@@ -712,7 +700,6 @@ export default function ListEditor({
           const spicyText = toItem[spicyField] ?? "";
           fromItem[halfField] = spicyText;
           toItem[spicyField] = halfText;
-          if (!itemsEqual(prev, next)) setUnSavedChanges(true);
           return next;
         });
 
@@ -817,7 +804,6 @@ export default function ListEditor({
       return;
     }
 
-    setUnSavedChanges(false);
     onSave({
       ...list,
       name: name.trim() || "Unnamed List",
@@ -841,7 +827,6 @@ export default function ListEditor({
       return item;
     });
     setSaveWarning(null);
-    setUnSavedChanges(false);
     onSave({
       ...list,
       name: name.trim() || "Unnamed List",
@@ -889,7 +874,6 @@ export default function ListEditor({
       }
       return next;
     });
-    setUnSavedChanges(true);
     setShowPaste(false);
   };
 
@@ -905,8 +889,15 @@ export default function ListEditor({
         <div className="editor-header">
           <div className="editor-header-left" />
           <div className="editor-title-block">
-            <div className="editor-title">
-              {isNew ? "Create List" : "Edit List"}
+            <div className="editor-title-content">
+              <div className="editor-title">
+                {isNew ? "Create List" : "Edit List"}
+              </div>
+              <ListEditorInfoPanel />
+            </div>
+            <div className="editor-subtitle">
+              {filledCount !== 54 ? `${filledCount} / 54 items` : "54 items"}
+              {unSavedChanges ? " · unsaved changes" : ""}
             </div>
           </div>
           <div className="editor-header-actions">
@@ -934,28 +925,12 @@ export default function ListEditor({
               className="editor-name-input"
               value={name}
               onChange={(e) => {
-                if (e.target.value !== name) setUnSavedChanges(true);
                 setName(e.target.value);
               }}
               placeholder="List name..."
               maxLength={40}
             />
           </div>
-
-          {filledCount !== 54 && (
-            <div className="item-count-warning">
-              {filledCount}/54 items filled — empty slots won't appear in the
-              game.
-            </div>
-          )}
-
-          <p className="drag-hint">
-            <strong>☰</strong> reorder row &nbsp;·&nbsp;
-            <strong>S⠿</strong> swap single &nbsp;·&nbsp;
-            <strong>⠿T/D</strong> swap halves (spicy travels with it)
-            &nbsp;·&nbsp;
-            <strong>🔥⠿</strong> swap spicy with any slot
-          </p>
 
           <div className="editor-items-list">
             {items.map((item, idx) => {
