@@ -1,64 +1,84 @@
 import type { StoredSingle, StoredTD } from "../types";
 
 export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
-  { v: "Act out getting stung by a bee in slow motion" },
-  { v: "Act out your favorite movie scene using only sounds, no words" },
-  { v: "Be a news anchor reporting on what you had for breakfast" },
-  { v: "Describe your dream vacation without naming a single place" },
-  { v: "Describe your personality as a weather forecast" },
-  { v: "Do 10 jumping jacks" },
-  { v: "Do 5 push-ups" },
-  { v: "Do a one-minute stand-up routine" },
+  { v: "Act out an animal and have everyone guess what it is" },
+  { v: "Air Guitar! Let's see it! Play air guitar for 30 seconds" },
+  {
+    v: "Dare! The player to your left chooses your dare. If you refuse, draw another block",
+  },
+  { v: "Do 10 jumping jacks as fast as you can!" },
+  { v: "Do 5 push-ups. Let's see how many you can do!" },
   { v: "Do your best celebrity impression" },
   { v: "Do your best dance move" },
-  { v: "Do your best evil villain laugh" },
-  { v: "Do your best robot impression" },
   { v: "Do your best superhero landing pose" },
-  { v: "Give everyone in the group a compliment" },
   { v: "Give someone a genuine compliment" },
-  { v: "Give someone the most dramatic 'I missed you' hug you can" },
-  { v: "Give the person to your right an over-the-top compliment" },
-  { v: "Impersonate a household appliance" },
-  { v: "Impersonate someone in the group. Everyone guesses who" },
-  { v: "Impersonate the person across from you" },
-  { v: "Make someone in the group laugh" },
-  { v: "Make up a conspiracy theory about something totally ordinary" },
-  { v: "Make up a rule that applies to everyone for the rest of the game" },
   {
-    v: "Make up a superhero power and give yourself an origin story. You have 30 seconds",
+    v: "Give the player across from you a high five. Don't knock the tower over!",
   },
-  { v: "Name 5 countries in 10 seconds" },
-  { v: "Name 5 things in this room that start with the same letter" },
-  { v: "Name 5 things you cannot live without" },
+  { v: "Give the player to your right a bear hug" },
+  { v: "Go again! Take another turn" },
+  { v: "I am thankful for... Share one thing you are grateful for" },
+  { v: "Impersonate someone in the group. Everyone guesses who" },
+  { v: "Jump as high as you can!" },
+  { v: "Make someone in the group laugh" },
+  { v: "Make up a rule that applies to everyone for the rest of the game" },
+  { v: "Mime making and eating the best sandwich ever until your next turn" },
+  { v: "Moonwalk across the room!" },
   { v: "Name 7 things that are yellow" },
   {
     v: "Name 10 animals, each starting with a different letter. You have 30 seconds",
   },
-  { v: "Name something you pretend to like but actually can't stand" },
-  { v: "Name three things that make you smile every single day" },
-  { v: "Narrate your day like it's an epic movie trailer" },
-  { v: "Only speak in questions for your next two turns" },
-  { v: "Only speak in rhymes for the next two turns" },
-  { v: "Pitch your dream job to the group like you're on Shark Tank" },
-  { v: "Puff your cheeks with air and hold it while everyone counts to 10" },
+  {
+    v: "Categories! The group picks a category and you name as many as you can in 30 seconds",
+  },
+  {
+    v: "Pass this block around the group as fast as possible. Whoever holds it last draws another",
+  },
+  { v: "Place this block back onto the tower with your non-dominant hand" },
+  { v: "Do the chicken dance or draw another block" },
+  {
+    v: "Point to something in this room that is closest to your favorite color",
+  },
   { v: "Pull another block from the tower" },
-  { v: "Read your last text message out loud dramatically" },
-  { v: "Refer to yourself in third person for the next two turns" },
+  { v: "Pull your next block with one eye shut" },
+  { v: "Reverse! Change the direction of play" },
+  { v: "Rub your tummy and pat your head at the same time. Let's see it!" },
+  { v: "Safe! You're off the hook this turn" },
+  { v: "Say 'Once upon a time...' and continue the story for 30 seconds" },
   { v: "Say something kind about every person at the table" },
-  { v: "Say the alphabet backwards" },
-  { v: "Sell a random object in this room. You have 30 seconds" },
-  { v: "Share a funny childhood memory. You have 30 seconds" },
-  { v: "Share something funny that happened to you recently" },
+  { v: "Share one of your favorite memories. You have 30 seconds" },
+  { v: "Share something most people don't know about you" },
   { v: "Sing a line from your favorite song" },
   { v: "Sing Happy Birthday in a completely different music style" },
+  { v: "Speak in an accent for the rest of the round" },
+  { v: "Spin in a circle 5 times, then place this block back onto the tower" },
+  { v: "Stand on one leg while placing this block back onto the tower" },
+  {
+    v: "State both your favorite food and the weirdest food you've ever eaten",
+  },
+  { v: "Have a staring contest with the next player. If you lose, draw again" },
+  { v: "Strike a pose and hold it until the next player takes their turn" },
+  {
+    v: "If you could have any superpower, which one would you choose and why?",
+  },
+  {
+    v: "Play Rock, Paper, Scissors with the next player. If you lose, draw again",
+  },
+  { v: "Take a group selfie!" },
+  { v: "Talent! Show off something you are talented at" },
   { v: "Teach everyone a word in another language" },
-  { v: "Tell us your most embarrassing moment" },
-  { v: "Tell us your weirdest dream" },
-  { v: "What's your go-to excuse when you don't want to do something?" },
-  { v: "What's your go-to karaoke song?" },
-  { v: "What's your most unpopular opinion?" },
-  { v: "You're a tourist visiting your own home for the first time" },
-  { v: "You're on a cooking show. Narrate making your favorite meal" },
+  { v: "Tell a joke" },
+  { v: "Tell 2 truths and 1 lie. Everyone guesses the lie" },
+  { v: "Try to say 5 times fast: 'Snap, Crackle, Pop!'" },
+  {
+    v: "Truth! The player to your left picks a truth. If you refuse, draw another block",
+  },
+  {
+    v: "Whisper something to the person next to you and have them repeat it out loud to the group",
+  },
+  {
+    v: "Tell everyone something you are looking forward to",
+  },
 ];
 
 export const DEFAULT_TD_LIST: StoredTD[] = [
@@ -91,12 +111,8 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
     d: "Pick an animal and be it for 30 seconds. Sounds and movement required",
   },
   {
-    t: "What's your funniest gaming or internet moment?",
-    d: "Act out the most dramatic in-game death or fail you can think of",
-  },
-  {
     t: "What's a talent you have that almost nobody knows about?",
-    d: "Show the group a talent almost nobody knows about. You have to actually do it",
+    d: "Show the group a talent almost nobody knows about. Actually do it",
   },
   {
     t: "What's the most embarrassing song you know every word to?",
@@ -104,15 +120,15 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
   },
   {
     t: "What song do you dance to when nobody's watching?",
-    d: "Put on any song you love and dance to it alone for 30 seconds",
+    d: "Put on any song and dance to it alone for 30 seconds",
   },
   {
     t: "What's your go-to karaoke song?",
-    d: "Perform 30 seconds of any song like you're on stage in front of thousands",
+    d: "Perform 30 seconds of any song like you are on stage in front of thousands",
   },
   {
     t: "What's your best party trick?",
-    d: "Do your best party trick",
+    d: "Show the group your best party trick",
   },
   {
     t: "What's your favorite show or movie right now?",
@@ -120,7 +136,7 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
   },
   {
     t: "Do you have any weird hobbies or collections?",
-    d: "Pitch any hobby like you're a TV shopping host trying to sell it",
+    d: "Pitch any hobby like a TV shopping host trying to sell it",
   },
   {
     t: "What's the most childish thing you still secretly do?",
@@ -131,16 +147,12 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
     d: "Do the weirdest thing you can think of for 20 seconds",
   },
   {
-    t: "What's the pettiest or most dramatic thing you have ever done?",
-    d: "Narrate everything happening in this room like a nature documentary",
-  },
-  {
     t: "What's the most embarrassing thing you have done in front of your parents?",
     d: "Act out the most cringe-worthy parent-walk-in moment you can imagine",
   },
   {
-    t: "What's something you do every day that you know is a little weird?",
-    d: "Do your best impression of someone in this room for 30 seconds",
+    t: "What's the most unexpected thing that has ever made you burst out laughing?",
+    d: "Recreate that laughing fit for 30 seconds. The group tries to keep a straight face",
   },
   {
     t: "Have you ever laughed at the absolute worst possible moment?",
@@ -152,55 +164,63 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
   },
   {
     t: "What's the most childish argument you have ever had?",
-    d: "Talk in a baby voice for your next 3 turns. No breaking character",
+    d: "Argue that your shoe is the most important invention in human history. You have 30 seconds",
   },
   {
     t: "Would you rather be able to fly or be invisible, and what's the first thing you'd do?",
-    d: "Show the group what flying looks like for 30 seconds",
+    d: "Act out what flying looks like for 30 seconds",
   },
   {
     t: "Would you rather only be able to whisper or only be able to shout for the rest of your life?",
-    d: "Whispers only for your next 3 turns",
+    d: "Whisper only for the next 3 turns",
   },
   {
     t: "Would you rather eat the same meal every day or never eat your favorite food again?",
-    d: "Describe your least favorite food like it's the best thing you've ever eaten",
+    d: "Describe your least favorite food like it is the best thing you have ever eaten",
   },
   {
     t: "Would you rather be the funniest person in the room or the smartest?",
     d: "Tell the funniest joke you know. The group rates it",
   },
   {
-    t: "What's your most unpopular opinion about food?",
-    d: "Pick any food opinion nobody agrees with and defend it in a 60-second speech",
+    t: "Would you rather only be able to communicate in song or only in mime for the rest of the day?",
+    d: "Communicate only in mime for the next 2 turns. No sounds allowed",
   },
   {
-    t: "What's something you pretend to like but actually can't stand?",
-    d: "Pick something you clearly hate and pretend to love it for a full minute",
+    t: "Would you rather have the ability to pause time or rewind it, and what's the first thing you would do?",
+    d: "Freeze completely like time has been paused. Hold it until the group counts to 15",
   },
   {
-    t: "What's one thing you would genuinely change about yourself?",
-    d: "Give yourself a 30-second motivational pep talk out loud",
+    t: "Would you rather have to sing everything you say for one hour or speak in a different accent all day?",
+    d: "Sing everything you say for your next 3 turns",
+  },
+  {
+    t: "What food do you think is totally overrated and why?",
+    d: "Eat an imaginary version of the grossest food you can think of and describe every bite",
+  },
+  {
+    t: "If you could add one class to school that doesn't exist, what would it be?",
+    d: "Teach the group one thing you actually know how to do. You have 30 seconds",
   },
   {
     t: "What's something you are scared of?",
-    d: "Act out the most over-the-top reaction you can to something totally harmless, like a piece of paper or a spoon",
+    d: "Act out the most over-the-top reaction to something totally harmless, like a piece of paper or a spoon",
   },
   {
     t: "What's the laziest thing you have ever done?",
     d: "Be the laziest human alive for 30 seconds",
   },
   {
-    t: "What's your biggest pet peeve?",
-    d: "Pick your biggest pet peeve and act it out as dramatically as you can for 30 seconds",
+    t: "What's the weirdest rule at your school?",
+    d: "Make up a ridiculous school rule and announce it like a principal over the intercom",
   },
   {
     t: "Who in this room makes you laugh the most and why?",
-    d: "Tell the funniest or most embarrassing story you know about someone here",
+    d: "Do your best impression of the funniest person you know for 30 seconds",
   },
   {
     t: "Who in this room would survive longest in a zombie apocalypse and why?",
-    d: "Act out your zombie apocalypse survival plan for 30 seconds",
+    d: "Act out a zombie apocalypse survival plan for 30 seconds",
   },
   {
     t: "What's the funniest thing a sibling or family member has ever done?",
@@ -211,28 +231,20 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
     d: "Impersonate the person to your left for 30 seconds",
   },
   {
-    t: "What's something you have never told anyone in this room?",
-    d: "Let the group give you a nickname that sticks for the rest of the game",
+    t: "What's the most dramatic thing you have ever done over something totally small?",
+    d: "Narrate everything happening in this room right now like a nature documentary. You have 30 seconds",
   },
   {
     t: "What was your most embarrassing phase or obsession growing up?",
-    d: "Strike the most dramatic pose you can and hold it for a full minute without breaking",
-  },
-  {
-    t: "What's your go-to excuse when you don't want to do something?",
-    d: "Use your best excuse to get out of something and deliver it to the person on your right",
+    d: "Act out your most embarrassing little-kid obsession for 30 seconds",
   },
   {
     t: "If you could have any superpower for one day, what would it be?",
     d: "Act like you have a superpower for 30 seconds. The group guesses what it is",
   },
   {
-    t: "What's the most embarrassing compliment you have ever received?",
-    d: "Give the person to your right the most awkward but well-meaning compliment you can think of",
-  },
-  {
-    t: "What's the strangest dream you have ever had?",
-    d: "Act out the most bizarre dream scenario you can imagine for 30 seconds",
+    t: "What's the weirdest talent you wish you had?",
+    d: "Attempt to do that talent right now even if you are terrible at it. You have 30 seconds",
   },
   {
     t: "If you could only eat one food for the rest of your life, what would it be?",
@@ -243,12 +255,8 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
     d: "Act like a toddler discovering something new for 30 seconds",
   },
   {
-    t: "What's the most trouble you have ever gotten into?",
-    d: "Reenact getting caught doing something you shouldn't have been doing",
-  },
-  {
-    t: "What cartoon character do you relate to most and why?",
-    d: "Pick any cartoon character and be them for 30 seconds",
+    t: "What's the funniest thing you have ever seen a stranger do in public?",
+    d: "Act out the most dramatic public meltdown you can imagine. You have 30 seconds",
   },
   {
     t: "What's the funniest misunderstanding you have ever been part of?",
@@ -256,19 +264,11 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
   },
   {
     t: "If you could be any age for one week, what age would you pick and why?",
-    d: "Pick an age and act like someone that age for your next 2 turns",
-  },
-  {
-    t: "What's something you are surprisingly bad at?",
-    d: "Name something you are bad at and attempt it in front of the group",
+    d: "Pick an age and act like someone that age for the next 2 turns",
   },
   {
     t: "What's the funniest lie you ever told a younger sibling or cousin?",
     d: "Make up the most ridiculous fake fact and say it with complete confidence",
-  },
-  {
-    t: "What's the most out of place or awkward compliment you have ever given someone?",
-    d: "Give the person to your left the most random compliment you can think of",
   },
   {
     t: "If you could rename any animal, what would you call it?",
@@ -278,14 +278,40 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
     t: "What's the strangest rule your family had growing up?",
     d: "Make up a house rule and announce it to the group like it has always existed",
   },
+  {
+    t: "What's the silliest thing you are afraid of?",
+    d: "Act out being terrified of something completely harmless for 30 seconds",
+  },
+  {
+    t: "What's the funniest prank you have ever pulled on someone?",
+    d: "Plan a harmless prank on someone in the room and describe it in full detail",
+  },
+  {
+    t: "What's the funniest thing you have ever done to make a family member laugh?",
+    d: "Do your best impression of a family member for 30 seconds",
+  },
+  {
+    t: "If you could switch lives with any cartoon character for a day, who would it be and why?",
+    d: "Be that cartoon character for 30 seconds. Voice and movement required",
+  },
+  {
+    t: "If you woke up tomorrow as an animal, which one would you want to be and why?",
+    d: "Be that animal for 30 seconds. The group guesses what you are before you tell them",
+  },
 ];
 
 export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
-  { v: "Act out receiving flowers for the first time" },
+  {
+    v: "Describe the last time someone did something kind for you that you will never forget",
+  },
+
   {
     v: "Act out the moment someone you love walks through the door after a long time away",
   },
-  { v: "Act out your favorite movie scene" },
+  {
+    v: "Act out the moment you realized someone in your life was truly special to you",
+  },
+
   {
     t: "What's the bravest thing you have ever done for someone you care about?",
     d: "Tell someone at the table something kind that you have been too nervous to say",
@@ -294,13 +320,20 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     t: "What's a childhood memory involving love or kindness you'll never forget?",
     d: "Act out a childhood memory involving love or kindness and let the group guess what's happening",
   },
-  { v: "Describe your favorite person in your life without saying their name" },
-  { v: "Describe your perfect day in only three words" },
-  { v: "Do your best cupid impression. Bow and arrow required" },
-  { v: "Do your best dance move" },
+
   {
-    v: "Do your best impression of someone madly in love. The more dramatic the better",
+    v: "Describe your favorite person at this table without saying their name. The group guesses who",
   },
+
+  { v: "Tell the group about a time someone made you feel truly appreciated" },
+  {
+    v: "Show the group a gesture or expression you use to show someone you care without words",
+  },
+
+  {
+    v: "Give everyone at the table one word that describes how they make you feel",
+  },
+
   {
     t: "What does friendship mean to you? Say it in one sentence",
     d: "Give a 30-second toast to the people at this table",
@@ -315,15 +348,19 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     t: "What food makes you think of feeling loved or at home?",
     d: "Describe a food you associate with feeling at home so well that everyone at the table wants it",
   },
-  { v: "Give a standing ovation to whoever organized tonight" },
+  {
+    v: "Give a standing ovation to someone at the table and tell the group exactly why they deserve it",
+  },
+
   { v: "Give everyone a different compliment in 30 seconds" },
-  { v: "Give someone at the table a hug and tell them why" },
   {
     v: "Give someone the most dramatic hug you can",
     s: "Hug the person you feel most comfortable with and you can't let go first",
   },
   { v: "Give the person to your right a nickname based on their best quality" },
-  { v: "Give the person you find hardest to compliment a genuine compliment" },
+  {
+    v: "Give the person you know the least at this table a genuine compliment",
+  },
   {
     v: "Give the person across from you a genuine compliment",
     s: "Tell the person across from you one thing you find attractive about them",
@@ -336,7 +373,7 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     t: "If you could plan the perfect evening for everyone here, what would it look like?",
     d: "Pitch your perfect evening plan to the group like you're hosting a lifestyle show",
   },
-  { v: "Lead the table in a 5-second group cheer" },
+
   {
     t: "What makes someone a truly good friend?",
     d: "Name someone here who you think is a truly great friend and tell them why",
@@ -380,10 +417,6 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     d: "Describe something you love about the world like you are trying to make at least one person smile",
   },
   {
-    t: "What's something small you did recently that you are proud of?",
-    d: "Tell the group something small you did recently that made you feel good about yourself",
-  },
-  {
     t: "What's something you do to make the people around you feel welcome?",
     d: "Welcome the person to your left to the table like they just arrived at the best party of their life",
   },
@@ -398,7 +431,7 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     d: "Act out a small everyday moment like it's the most precious thing in the world",
   },
   {
-    t: "What's a tradition you have with someone you love, whether family, friend, or partner?",
+    t: "What's a tradition you have with someone you care about?",
     d: "Propose a new group tradition and get everyone to do it once",
   },
   {
@@ -428,12 +461,13 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     s: "Say one thing you find physically attractive about every person at the table",
   },
   {
-    v: "Say something to someone at the table that you have been holding back",
+    v: "Say something kind to someone at the table that you have been meaning to tell them",
   },
-  { v: "Say three things you love about yourself out loud" },
+  { v: "Say three things you appreciate about the people in this room" },
+
   {
-    v: "Serenade the group with 15 seconds of any love song",
-    s: "Serenade one person at the table directly for 15 seconds. Eye contact the whole time",
+    v: "Serenade the group with 15 seconds of any song",
+    s: "Serenade one person at the table with a love song directly for 15 seconds. Eye contact the whole time",
   },
   { v: "Tell the group one thing you appreciate about being here" },
   {
@@ -457,9 +491,13 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
     d: "Send someone you have been meaning to check in on a message telling them you were thinking of them",
   },
   {
-    v: "Who do you find the most attractive in this room?",
+    v: "Who at this table makes you feel the most comfortable and why?",
     s: "Tell the person you find most attractive in this room why you find them attractive and look them in the eyes while you say it",
   },
   { v: "Make up a rule that applies to everyone for the rest of the game" },
   { v: "Pull another block from the tower" },
+  {
+    t: "What's something kind someone at this table did recently that you never properly thanked them for?",
+    d: "Thank that person right now. Say it out loud and mean it",
+  },
 ];
