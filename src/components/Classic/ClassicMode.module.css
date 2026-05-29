@@ -400,7 +400,7 @@
   color: var(--text-muted);
   cursor: pointer;
   text-align: center;
-  padding: 4px;
+  padding: 12px 16px;
   transition: color 0.15s;
   text-decoration: underline;
   text-underline-offset: 3px;
@@ -603,13 +603,13 @@
 
 .spicyToggle:hover {
   background: rgba(220, 80, 20, 0.08);
-  color: #e07030;
+  color: var(--spicy-dim);
 }
 
 .spicyToggleOn {
   background: rgba(220, 80, 20, 0.15);
   border-color: rgba(220, 80, 20, 0.6);
-  color: #f08040;
+  color: var(--spicy);
   box-shadow: 0 0 8px rgba(220, 80, 20, 0.15);
 }
 
@@ -696,14 +696,14 @@
   background: rgba(220, 80, 20, 0.15);
   border: 2px solid rgba(220, 80, 20, 0.5);
   border-radius: var(--radius);
-  color: #f08040;
+  color: var(--spicy);
   cursor: pointer;
   transition: all 0.15s;
 }
 
 .spicyYesBtn:hover {
   background: rgba(220, 80, 20, 0.25);
-  border-color: #f08040;
+  border-color: var(--spicy);
 }
 
 .spicyNoBtn {
@@ -732,7 +732,7 @@
   padding: 3px 10px;
   border-radius: 12px;
   background: rgba(220, 80, 20, 0.15);
-  color: #f08040;
+  color: var(--spicy);
   text-align: center;
 }
 
@@ -809,7 +809,7 @@
 }
 
 .lastSpicyLabel {
-  color: #f08040;
+  color: var(--spicy);
 }
 
 .lastVersionText {
@@ -869,4 +869,67 @@
   letter-spacing: 0.6px;
   color: var(--text-muted);
   margin: 0;
+}
+
+.lastPromptPill {
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+  align-self: center;
+}
+
+.lastPromptPill:hover {
+  color: var(--text);
+  border-color: rgba(200, 150, 60, 0.45);
+  background: var(--surface2);
+}
+
+.compactRow {
+  display: flex;
+  gap: 6px;
+}
+
+.compactBtn {
+  flex: 1;
+  padding: 10px 8px;
+  font-family: "DM Sans", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.compactBtn:hover {
+  background: var(--surface2);
+  border-color: rgba(200, 150, 60, 0.4);
+  color: var(--text);
+}
+
+.compactBtnDanger {
+  color: var(--dare-light);
+  border-color: rgba(192, 30, 46, 0.2);
+}
+
+.compactBtnDanger:hover {
+  background: rgba(192, 30, 46, 0.08);
+  border-color: var(--dare);
+  color: var(--dare-light);
+}
+
+.compactBtnDanger:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
 }

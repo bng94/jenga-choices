@@ -27,42 +27,11 @@
   --surface3: #452d14;
   --text: #f0dfc0;
   --text-muted: #a08060;
+  --spicy: #f08040;
+  --spicy-dim: #e07030;
   --radius: 6px;
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --header-height: 54px;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --wood-light: #e8c99a;
-    --wood-mid: #c9933a;
-    --wood-dark: #8b5e2a;
-    --wood-deep: #5c3a1a;
-    --ink: #1a100a;
-    --accent: #d44c1a;
-    --accent-light: #f07040;
-    --truth: #2463a4;
-    --truth-light: #4a90d4;
-    --dare: #c01e2e;
-    --dare-light: #e83545;
-    --green: #2e7a4a;
-    --bg: #16171d;
-    --surface: #2a1a0e;
-    --surface2: #3a2510;
-    --surface3: #452d14;
-    --text: #f0dfc0;
-    --text-muted: #a08060;
-    --text-h: #f0dfc0;
-    --border: rgba(224, 180, 120, 0.14);
-    --code-bg: #2a1a0e;
-    --accent-bg: rgba(212, 76, 26, 0.12);
-    --accent-border: rgba(212, 76, 26, 0.4);
-    --social-bg: rgba(58, 37, 16, 0.5);
-    --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
-  }
-
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
 }
 
 html,
@@ -143,4 +112,17 @@ body::before {
 }
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(200, 150, 60, 0.5);
+}
+
+:focus-visible {
+  outline: 2px solid var(--wood-mid);
+  outline-offset: 3px;
+  border-radius: var(--radius);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
