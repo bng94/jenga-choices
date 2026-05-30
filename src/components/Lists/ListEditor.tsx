@@ -1,4 +1,4 @@
-import { useState, useRef, type DragEvent, useMemo } from "react";
+import { useState, useRef, useEffect, type DragEvent, useMemo } from "react";
 import type {
   CustomList,
   EditorItem,
@@ -64,7 +64,7 @@ export default function ListEditor({
   onClose,
 }: ListEditorProps) {
   /** The display name of the list being edited. Saved on submit. */
-  const [name, setName] = useState(list.name || "New List");
+  const [name, setName] = useState(list.name);
 
   /**
    * The 54-slot working copy of the list in editor format.
@@ -101,7 +101,7 @@ export default function ListEditor({
   const [warningSet, setWarningSet] = useState<Set<number>>(new Set());
 
   const initialItems = useMemo(() => normalizeItems(list.items), [list.id]);
-  const initialName = list.name || "New List";
+  const initialName = list.name;
 
   const unSavedChanges =
     !itemsEqual(items, initialItems) || name !== initialName;
@@ -141,6 +141,8 @@ export default function ListEditor({
   /** Key string of the slot currently highlighted during a spicy drag. */
   const spicyDragOver = useRef<string | null>(null);
 
+  const panelRef = useRef<HTMLDivElement>(null);
+
   /** Number of rows that have at least one filled field. Shown in the warning banner. */
   const filledCount = items.filter((it) =>
     it.type === "td"
@@ -157,6 +159,28 @@ export default function ListEditor({
       onClose();
     }
   };
+
+  // Focus panel on open; name input gets autoFocus for new lists instead.
+  useEffect(() => {
+    if (!isNew) panelRef.current?.focus();
+  }, [isNew]);
+
+  // Escape key — only fires when no child modal is open.
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (
+        e.key !== "Escape" ||
+        showExitConfirm ||
+        showPaste ||
+        keepWhichIdx !== null ||
+        saveWarning !== null
+      ) return;
+      if (unSavedChanges) setShowExitConfirm(true);
+      else onClose();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [unSavedChanges, onClose, showExitConfirm, showPaste, keepWhichIdx, saveWarning]);
 
   const patch = (idx: number, changes: Partial<EditorItem>) =>
     setItems((prev) => {
@@ -885,12 +909,19 @@ export default function ListEditor({
         handleClose();
       }}
     >
-      <div className="editor-panel" onClick={(e) => e.stopPropagation()}>
+      <div
+        ref={panelRef}
+        className="editor-panel"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="editor-title"
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="editor-header">
-          <div className="editor-header-left" />
           <div className="editor-title-block">
             <div className="editor-title-content">
-              <div className="editor-title">
+              <div className="editor-title" id="editor-title">
                 {isNew ? "Create List" : "Edit List"}
               </div>
               <ListEditorInfoPanel />
@@ -929,6 +960,7 @@ export default function ListEditor({
               }}
               placeholder="List name..."
               maxLength={40}
+              autoFocus={isNew}
             />
           </div>
 
@@ -993,7 +1025,7 @@ export default function ListEditor({
                             <span className="half-handle-label">S</span>
                             <span className="half-handle-dots">⠿</span>
                           </div>
-                          <input
+                          <textarea
                             className="item-input"
                             value={single.value}
                             onChange={(e) =>
@@ -1001,6 +1033,10 @@ export default function ListEditor({
                             }
                             maxLength={350}
                             placeholder={`Choice #${idx + 1}...`}
+                            rows={1}
+                            onKeyDown={(e) => {
+                              if (e.key === "Enter") e.preventDefault();
+                            }}
                           />
                         </div>
                         <SpicyFieldRow
@@ -1056,6 +1092,7 @@ export default function ListEditor({
                     className="item-delete"
                     onClick={() => handleClear(idx)}
                     title="Clear this slot"
+                    aria-label={`Clear slot ${idx + 1}`}
                   >
                     ×
                   </button>

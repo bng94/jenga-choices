@@ -47,12 +47,16 @@ export default function SpicyFieldRow({
             <span className="spicy-badge">🔥</span>
             <span className="spicy-dots">⠿</span>
           </div>
-          <input
+          <textarea
             className="item-input spicy-input"
             value={value}
             onChange={(e) => onChange(e.target.value)}
             maxLength={350}
             placeholder={placeholder}
+            rows={1}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") e.preventDefault();
+            }}
           />
           <button
             className="half-delete"

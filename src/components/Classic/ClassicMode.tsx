@@ -301,7 +301,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
             )}
           </div>
 
-          <div className={styles.statsRow}>
+          <div className={styles.statsRow} aria-live="polite" aria-atomic="true">
             <span>
               <strong>{revealedCount}</strong> revealed
             </span>

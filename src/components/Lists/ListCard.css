@@ -4,6 +4,8 @@
   border-radius: 10px;
   padding: 18px;
   transition: border-color 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 .list-card.is-active {
   border-color: var(--wood-mid);
@@ -15,26 +17,29 @@
 
 .list-card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 8px;
 }
 .list-card-name {
   font-weight: 600;
   font-size: 15px;
   color: var(--text);
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 .list-card-meta {
   font-size: 12px;
   color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 .list-card-tags {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .tag {
@@ -54,8 +59,9 @@
   color: #6bc88a;
 }
 .tag-active {
-  background: rgba(212, 76, 26, 0.2);
-  color: var(--accent-light);
+  background: oklch(72% 0.17 148 / 0.18);
+  color: oklch(72% 0.17 148);
+  border: 1px solid oklch(72% 0.17 148 / 0.45);
 }
 .tag-board {
   background: rgba(112, 64, 192, 0.2);
@@ -74,35 +80,11 @@
   color: #e06060;
 }
 
-.list-card-mode-row {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px 12px;
-  background: var(--surface2);
-  border-radius: var(--radius);
-  border: 1px solid rgba(200, 150, 60, 0.08);
-}
-.mode-use-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 7px;
-  flex: 1;
-}
-.mode-use-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-  white-space: nowrap;
-}
-
 .list-card-actions {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .card-btn {
@@ -123,23 +105,27 @@
   background: var(--surface2);
 }
 
+.card-btn:active {
+  opacity: 0.75;
+  transform: scale(0.97);
+}
+
 .card-btn.primary-sm {
-  background: rgba(200, 150, 60, 0.15);
+  background: rgba(200, 150, 60, 0.18);
   color: var(--wood-mid);
-  border-color: rgba(200, 150, 60, 0.3);
-  font-size: 11px;
-  padding: 4px 6px;
+  border-color: rgba(200, 150, 60, 0.4);
+  font-weight: 600;
 }
 .card-btn.primary-sm:hover {
-  background: rgba(200, 150, 60, 0.25);
+  background: rgba(200, 150, 60, 0.28);
+  border-color: var(--wood-mid);
 }
 
 .card-btn.mode-active {
-  background: rgba(46, 122, 74, 0.2);
+  background: rgba(46, 122, 74, 0.18);
   color: #6bc88a;
-  border-color: rgba(46, 122, 74, 0.3);
-  font-size: 11px;
-  padding: 4px 6px;
+  border-color: rgba(46, 122, 74, 0.35);
+  font-weight: 600;
   cursor: default;
 }
 
@@ -152,9 +138,3 @@
   border-color: rgba(220, 60, 60, 0.4);
 }
 
-@media (max-width: 640px) {
-  .list-card-mode-row {
-    flex-direction: column;
-    gap: 8px;
-  }
-}

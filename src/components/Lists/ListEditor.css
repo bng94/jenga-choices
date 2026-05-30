@@ -25,7 +25,7 @@
 }
 
 .editor-header {
-  padding: 17px 22px;
+  padding: 16px 22px;
   border-bottom: 1px solid rgba(200, 150, 60, 0.15);
   display: flex;
   align-items: center;
@@ -208,11 +208,11 @@
 }
 
 .type-btn {
-  font-size: 10px;
+  font-size: 11px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 3px;
   border: 1px solid rgba(200, 150, 60, 0.2);
   background: transparent;
@@ -234,8 +234,8 @@
 .item-input {
   font-family: "DM Sans", sans-serif;
   font-size: 13px;
-  padding: 5px 9px;
-  background: rgba(0, 0, 0, 0.2);
+  padding: 6px 9px;
+  background: var(--surface);
   border: 1px solid rgba(200, 150, 60, 0.1);
   border-radius: 4px;
   color: var(--text);
@@ -243,6 +243,12 @@
   transition: border-color 0.15s;
   width: 100%;
   box-sizing: border-box;
+  /* Textarea auto-expand */
+  field-sizing: content;
+  min-height: 34px;
+  resize: none;
+  overflow: hidden;
+  line-height: 1.5;
 }
 .item-input:focus {
   border-color: rgba(200, 150, 60, 0.3);
@@ -264,7 +270,7 @@
 }
 .single-drop-target {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .item-delete {
@@ -308,6 +314,10 @@
 .save-btn:hover {
   background: var(--wood-light);
 }
+
+.save-btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
 .save-btn:disabled {
   opacity: 0.5;
   cursor: default;
@@ -336,5 +346,28 @@
   }
   .editor-panel {
     max-height: 94vh;
+  }
+  .item-input {
+    font-size: 16px;
+    padding: 8px 10px;
+  }
+  .item-delete {
+    padding: 8px 6px;
+    font-size: 18px;
+  }
+  .item-num {
+    padding-top: 8px;
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .drag-handle {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .editor-item.item-warning {
+    animation: none;
   }
 }

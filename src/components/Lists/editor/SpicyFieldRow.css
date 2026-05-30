@@ -13,7 +13,7 @@
 
 .spicy-input-row {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
 }
 
@@ -114,4 +114,10 @@
   background: rgba(220, 80, 20, 0.12);
   box-shadow: 0 0 0 2px rgba(220, 80, 20, 0.5);
   border-radius: 4px;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .spicy-drag-handle {
+    display: none;
+  }
 }

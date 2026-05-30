@@ -1,4 +1,4 @@
-import { useState, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ReactNode } from "react";
 import styles from "./InfoPanel.module.css";
 
 interface InfoPanelProps {
@@ -8,6 +8,22 @@ interface InfoPanelProps {
 
 const InfoPanel = ({ title, children }: InfoPanelProps) => {
   const [open, setOpen] = useState(false);
+
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    dialogRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [open === false]);
 
   return (
     <>
@@ -29,6 +45,11 @@ const InfoPanel = ({ title, children }: InfoPanelProps) => {
           <div
             className={styles["info-modal"]}
             onClick={(e) => e.stopPropagation()}
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby={`${title}-info-modal`}
+            tabIndex={-1}
           >
             <div className={styles["info-modal-header"]}>
               <div className={styles["info-modal-title"]}>{title}</div>
