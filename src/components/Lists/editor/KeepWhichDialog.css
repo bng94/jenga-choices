@@ -1,7 +1,7 @@
 .keep-which-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: var(--overlay-dim);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -12,8 +12,8 @@
 
 .keep-which-box {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.25);
-  border-radius: 12px;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
   padding: 26px 24px;
   max-width: 400px;
   width: 90%;
@@ -22,8 +22,8 @@
 }
 
 .keep-which-title {
-  font-size: 14px;
-  font-weight: 600;
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
   color: var(--text);
   margin-bottom: 16px;
   line-height: 1.4;
@@ -42,34 +42,34 @@
   gap: 10px;
   padding: 12px 14px;
   background: var(--surface2);
-  border-radius: 8px;
+  border-radius: var(--radius-card);
   border: 1px solid transparent;
   cursor: pointer;
   text-align: left;
   transition: all 0.15s;
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-body);
 }
 
-.keep-btn.keep-truth { border-color: rgba(36, 99, 164, 0.25); }
-.keep-btn.keep-truth:hover { background: rgba(36, 99, 164, 0.12); border-color: var(--truth); }
+.keep-btn.keep-truth { border-color: var(--border-truth); }
+.keep-btn.keep-truth:hover { background: var(--fill-truth); border-color: var(--truth); }
 
-.keep-btn.keep-dare { border-color: rgba(192, 30, 46, 0.22); }
-.keep-btn.keep-dare:hover { background: rgba(192, 30, 46, 0.1); border-color: var(--dare); }
+.keep-btn.keep-dare { border-color: var(--border-dare); }
+.keep-btn.keep-dare:hover { background: var(--fill-dare); border-color: var(--dare); }
 
 .keep-label-badge {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 13px;
+  font-family: var(--font-display);
+  font-size: var(--text-sm);
   letter-spacing: 1px;
   padding: 2px 6px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   flex-shrink: 0;
   margin-top: 1px;
 }
-.keep-label-badge.truth { background: rgba(36, 99, 164, 0.25); color: var(--truth-light); }
-.keep-label-badge.dare  { background: rgba(192, 30, 46, 0.2);  color: var(--dare-light); }
+.keep-label-badge.truth { background: var(--border-truth); color: var(--truth-light); }
+.keep-label-badge.dare  { background: var(--fill-dare);   color: var(--dare-light); }
 
 .keep-text {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--text);
   line-height: 1.4;
 }
@@ -77,14 +77,14 @@
 
 .keep-cancel {
   width: 100%;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
   padding: 9px;
   background: transparent;
   color: var(--text-muted);
-  border: 1px solid rgba(200, 150, 60, 0.2);
+  border: 1px solid var(--border-mid);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.15s;
 }
-.keep-cancel:hover { color: var(--text); border-color: rgba(200, 150, 60, 0.4); }
+.keep-cancel:hover { color: var(--text); border-color: var(--border-active); }

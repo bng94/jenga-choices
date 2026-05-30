@@ -1,7 +1,7 @@
 .lm-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--overlay);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
@@ -13,8 +13,8 @@
 
 .lm-modal {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.2);
-  border-radius: 16px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-xl);
   width: min(900px, 100%);
   max-height: 88vh;
   display: flex;
@@ -47,14 +47,14 @@
 }
 
 .lm-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 26px;
+  font-family: var(--font-display);
+  font-size: var(--text-display-lg);
   letter-spacing: 3px;
   color: var(--wood-mid);
 }
 
 .lm-sub {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--text-muted);
   margin-top: 5px;
 }
@@ -68,9 +68,9 @@
 
 .lm-create-btn {
   display: flex;
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   padding: 8px 14px;
   background: var(--accent);
   color: var(--text);
@@ -86,13 +86,13 @@
 }
 
 .lm-import-btn {
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
   padding: 8px 14px;
   background: transparent;
   color: var(--wood-mid);
-  border: 1px solid rgba(200, 150, 60, 0.35);
+  border: 1px solid var(--border-emphasis);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.2s;
@@ -102,19 +102,19 @@
   gap: 5px;
 }
 .lm-import-btn:hover {
-  background: rgba(200, 150, 60, 0.08);
+  background: var(--fill-faint);
   border-color: var(--wood-mid);
   transform: translateY(-1px);
 }
 
 .lm-close {
-  font-size: 17px;
+  font-size: var(--icon-xs);
   background: none;
   border: none;
   color: var(--text-muted);
   cursor: pointer;
   padding: 5px 8px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   transition: all 0.15s;
 }
 .lm-close:hover {
@@ -152,7 +152,7 @@
     padding: 4px 16px 16px;
   }
   .lm-title {
-    font-size: 20px;
+    font-size: var(--text-display-sm);
   }
   .lists-grid {
     grid-template-columns: 1fr;
@@ -162,7 +162,7 @@
 .lm-import-help-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--overlay-light);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -174,8 +174,8 @@
 
 .lm-import-help-dialog {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.2);
-  border-radius: 16px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-xl);
   padding: 28px 24px;
   width: min(440px, 100%);
   display: flex;
@@ -186,15 +186,15 @@
 }
 
 .lm-import-help-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
   letter-spacing: 2px;
   color: var(--wood-mid);
   margin: 0;
 }
 
 .lm-import-help-desc {
-  font-size: 14px;
+  font-size: var(--text-base);
   color: var(--text);
   line-height: 1.5;
   margin: 0;
@@ -211,8 +211,8 @@
 }
 
 .lm-import-help-format-label {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
   color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.6px;
@@ -220,11 +220,11 @@
 }
 
 .lm-import-help-code {
-  font-family: "DM Mono", monospace;
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   line-height: 1.6;
   background: var(--surface2);
-  border: 1px solid rgba(200, 150, 60, 0.12);
+  border: 1px solid var(--border-subtle);
   border-radius: var(--radius);
   padding: 12px 14px;
   color: var(--text);
@@ -234,7 +234,7 @@
 }
 
 .lm-import-help-hint {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
@@ -252,11 +252,11 @@
 .lm-import-help-cancel {
   flex: 1;
   padding: 12px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   background: transparent;
-  border: 1px solid rgba(200, 150, 60, 0.2);
+  border: 1px solid var(--border-mid);
   border-radius: var(--radius);
   color: var(--text-muted);
   cursor: pointer;
@@ -270,9 +270,9 @@
 .lm-import-help-confirm {
   flex: 2;
   padding: 12px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
   background: var(--wood-mid);
   border: none;
   border-radius: var(--radius);

@@ -1,7 +1,7 @@
 .confirm-dialog-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--overlay);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -12,8 +12,8 @@
 
 .confirm-dialog {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.2);
-  border-radius: 12px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-md);
   padding: 28px 24px;
   width: min(400px, 90vw);
   box-shadow: var(--shadow);
@@ -24,14 +24,14 @@
 }
 
 .confirm-dialog h2 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
   letter-spacing: 2px;
   color: var(--wood-mid);
 }
 
 .confirm-dialog p {
-  font-size: 14px;
+  font-size: var(--text-base);
   color: var(--text-muted);
   line-height: 1.55;
 }
@@ -44,9 +44,9 @@
 
 .confirm-button {
   flex: 1;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-semibold);
   padding: 11px;
   border: none;
   border-radius: var(--radius);
@@ -65,11 +65,11 @@
 
 .cancel-button {
   flex: 1;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   padding: 11px;
-  border: 1px solid rgba(200, 150, 60, 0.25);
+  border: 1px solid var(--border-card);
   border-radius: var(--radius);
   background: transparent;
   color: var(--text-muted);
@@ -79,6 +79,6 @@
 
 .cancel-button:hover {
   color: var(--text);
-  border-color: rgba(200, 150, 60, 0.5);
+  border-color: var(--border-hover);
   background: var(--surface2);
 }

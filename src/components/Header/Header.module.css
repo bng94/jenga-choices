@@ -3,8 +3,8 @@
   align-items: center;
   justify-content: space-between;
   padding: 13px 28px;
-  border-bottom: 1px solid rgba(200, 150, 60, 0.2);
-  background: rgba(26, 16, 10, 0.92);
+  border-bottom: 1px solid var(--border-mid);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
@@ -21,8 +21,8 @@
 }
 
 .app-title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 25px;
+  font-family: var(--font-display);
+  font-size: var(--text-title);
   letter-spacing: 3px;
   line-height: 1;
   display: flex;
@@ -39,13 +39,13 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  font-size: 11px;
-  font-weight: 500;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
   color: var(--text-muted);
   background: var(--surface2);
   padding: 4px 10px;
-  border-radius: 20px;
-  border: 1px solid rgba(200, 150, 60, 0.15);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-light);
   white-space: nowrap;
   max-width: 260px;
   overflow: hidden;
@@ -56,13 +56,13 @@
   width: 6px;
   height: 6px;
   background: var(--green);
-  border-radius: 50%;
+  border-radius: var(--radius-circle);
   box-shadow: 0 0 6px var(--green);
   flex-shrink: 0;
 }
 .badge-mode {
   color: var(--wood-mid);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
   flex-shrink: 0;
 }
 
@@ -78,12 +78,12 @@
 }
 
 .nav-btn {
-  font-family: "DM Sans", sans-serif;
-  font-size: 13px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
   padding: 7px 15px;
-  border-radius: 20px;
-  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-mid);
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
@@ -92,13 +92,13 @@
 }
 .nav-btn:hover {
   color: var(--text);
-  border-color: rgba(200, 150, 60, 0.4);
+  border-color: var(--border-active);
 }
 .nav-btn.active {
   background: var(--wood-mid);
   color: var(--ink);
   border-color: var(--wood-mid);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
 }
 
 @media (max-width: 640px) {
@@ -111,10 +111,10 @@
     display: flex;
     align-items: center;
     gap: 4px;
-    font-size: 11px;
-    font-weight: 500;
+    font-size: var(--text-2xs);
+    font-weight: var(--weight-medium);
     padding: 2px 6px;
-    border-radius: 10px;
+    border-radius: var(--radius-list);
     white-space: nowrap;
     max-width: 130px;
     overflow: hidden;

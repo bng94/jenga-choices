@@ -1,33 +1,33 @@
 .spicy-toggle {
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
   padding: 6px 13px;
-  border-radius: 16px;
-  border: 1px solid rgba(220, 80, 20, 0.3);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-spicy);
   background: transparent;
-  color: rgba(220, 120, 60, 0.75);
+  color: var(--spicy-text-mid);
   cursor: pointer;
   transition: all 0.2s;
   white-space: nowrap;
 }
 .spicy-toggle:hover {
-  background: rgba(220, 80, 20, 0.1);
-  color: #e86030;
+  background: var(--spicy-hover);
+  color: var(--spicy-hover-text);
 }
 .spicy-toggle--on {
-  background: rgba(220, 80, 20, 0.18);
-  border-color: rgba(220, 80, 20, 0.6);
-  color: #f08040;
-  box-shadow: 0 0 10px rgba(220, 80, 20, 0.2);
+  background: var(--fill-spicy);
+  border-color: var(--spicy-border-active);
+  color: var(--spicy);
+  box-shadow: 0 0 10px var(--spicy-active);
 }
 
 .spicy-toggle--viewer {
-  font-size: 12px;
+  font-size: var(--text-xs);
   padding: 5px 12px;
 }
 
 .spicy-toggle--editor {
-  font-size: 12px;
+  font-size: var(--text-xs);
   padding: 5px 12px;
 }
