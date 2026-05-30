@@ -5,7 +5,7 @@
   align-items: center;
   justify-content: center;
   padding: 40px 24px;
-  height: calc(100vh - var(--header-height));
+  height: calc(100dvh - var(--header-height));
 }
 
 .container {
@@ -14,12 +14,6 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-}
-
-@media (max-width: 640px) {
-  .screen {
-    height: calc(100vh - var(--header-height));
-  }
 }
 
 .setupHeader {
