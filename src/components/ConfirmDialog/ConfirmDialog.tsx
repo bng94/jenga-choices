@@ -1,3 +1,4 @@
+import { useEffect, useRef } from "react";
 import styles from "./ConfirmDialog.module.css";
 
 interface ConfirmDialogProps {
@@ -17,6 +18,20 @@ const ConfirmDialog = ({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    dialogRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onCancel]);
+
   return (
     <div
       className={styles["confirm-dialog-backdrop"]}
@@ -26,10 +41,15 @@ const ConfirmDialog = ({
       }}
     >
       <div
+        ref={dialogRef}
         className={styles["confirm-dialog"]}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="confirm-dialog-title"
+        tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
-        <h2>{title}</h2>
+        <h2 id="confirm-dialog-title">{title}</h2>
         <p>{message}</p>
         <div className={styles["confirm-dialog-buttons"]}>
           <button className={styles["confirm-button"]} onClick={onConfirm}>

@@ -1,7 +1,7 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.75);
+  background: var(--overlay);
   backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
@@ -22,8 +22,8 @@
 
 .modal {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.2);
-  border-radius: 16px;
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-xl);
   padding: 24px;
   width: min(480px, 100%);
   display: flex;
@@ -45,8 +45,8 @@
 }
 
 .title {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 22px;
+  font-family: var(--font-display);
+  font-size: var(--text-display-md);
   letter-spacing: 2px;
   color: var(--wood-mid);
   margin: 0;
@@ -59,7 +59,7 @@
 }
 
 .instructionLine {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--text-muted);
   line-height: 1.5;
   margin: 0;
@@ -72,30 +72,30 @@
   padding: 10px 12px;
   background: var(--surface2);
   border-radius: var(--radius);
-  border: 1px solid rgba(200, 150, 60, 0.1);
+  border: 1px solid var(--border-faint);
 }
 
 .exampleRow {
-  font-family: "DM Mono", monospace;
-  font-size: 12px;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: var(--text-muted);
   line-height: 1.6;
 }
 
 .pipe {
   color: var(--wood-mid);
-  font-weight: 600;
+  font-weight: var(--weight-semibold);
 }
 
 .textarea {
   width: 100%;
   min-height: 180px;
   padding: 14px;
-  font-family: "DM Mono", monospace;
-  font-size: 13px;
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
   line-height: 1.6;
   background: var(--surface2);
-  border: 2px solid rgba(200, 150, 60, 0.15);
+  border: 2px solid var(--border-light);
   border-radius: var(--radius);
   color: var(--text);
   resize: vertical;
@@ -114,7 +114,7 @@
 }
 
 .error {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--dare-light);
   margin: 0;
   line-height: 1.5;
@@ -127,14 +127,14 @@
 }
 
 .status {
-  font-size: 12px;
+  font-size: var(--text-xs);
   min-height: 18px;
 }
 
 .statusCount {
-  font-weight: 700;
+  font-weight: var(--weight-bold);
   color: var(--wood-mid);
-  font-size: 13px;
+  font-size: var(--text-sm);
 }
 
 .statusLabel {
@@ -158,11 +158,11 @@
 .cancelBtn {
   flex: 1;
   padding: 12px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-medium);
   background: transparent;
-  border: 1px solid rgba(200, 150, 60, 0.2);
+  border: 1px solid var(--border-mid);
   border-radius: var(--radius);
   color: var(--text-muted);
   cursor: pointer;
@@ -177,9 +177,9 @@
 .confirmBtn {
   flex: 2;
   padding: 12px;
-  font-family: "DM Sans", sans-serif;
-  font-size: 14px;
-  font-weight: 700;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: var(--weight-bold);
   background: var(--wood-mid);
   border: none;
   border-radius: var(--radius);

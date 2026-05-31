@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   CustomList,
   DefaultListIds,
@@ -56,6 +56,12 @@ const ListManager = ({
   const [importError, setImportError] = useState<string | null>(null);
   const [showImportHelp, setShowImportHelp] = useState(false);
 
+  const lmModalRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    lmModalRef.current?.focus();
+  }, []);
+
   const handleImportHelpConfirm = () => {
     setShowImportHelp(false);
     document.getElementById("lm-file-input")?.click();
@@ -98,7 +104,7 @@ const ListManager = ({
   const handleCreateNew = () => {
     const newList: CustomList = {
       id: generateListId(),
-      name: "New List",
+      name: "",
       items: Array.from({ length: 54 }, () => ({ v: "" })),
     };
     setEditing({ list: newList, isNew: true });
@@ -189,37 +195,25 @@ const ListManager = ({
 
   return (
     <div className={styles["lm-overlay"]} onClick={onClose}>
-      <div className={styles["lm-modal"]} onClick={(e) => e.stopPropagation()}>
+      <div
+        ref={lmModalRef}
+        className={styles["lm-modal"]}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="lm-modal-title"
+        tabIndex={-1}
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className={styles["lm-header"]}>
           <div className={styles["lm-header-left"]}>
             <div className={styles["lm-title-wrap"]}>
-              <div className={styles["lm-title"]}>YOUR LISTS</div>
+              <div className={styles["lm-title"]} id="lm-modal-title">
+                YOUR LISTS
+              </div>
               <ListManagerInfoPanel />
             </div>
             <div className={styles["lm-sub"]}>
               Each list holds up to 54 items, one item per Jenga block.
-            </div>
-
-            <div className={styles["lm-header-buttons"]}>
-              <button
-                className={styles["lm-import-btn"]}
-                onClick={() => setShowImportHelp(true)}
-              >
-                ⬆ Import
-              </button>
-              <input
-                id="lm-file-input"
-                type="file"
-                accept=".json"
-                onChange={handleImportFile}
-                hidden
-              />
-              <button
-                className={styles["lm-create-btn"]}
-                onClick={handleCreateNew}
-              >
-                + New List
-              </button>
             </div>
           </div>
 
@@ -231,6 +225,28 @@ const ListManager = ({
         </div>
 
         <div className={styles["lm-body"]}>
+          <div className={styles["lm-toolbar"]}>
+            <button
+              className={styles["lm-import-btn"]}
+              onClick={() => setShowImportHelp(true)}
+            >
+              ⬆ Import
+            </button>
+            <input
+              id="lm-file-input"
+              type="file"
+              accept=".json"
+              onChange={handleImportFile}
+              hidden
+            />
+            <button
+              className={styles["lm-create-btn"]}
+              onClick={handleCreateNew}
+            >
+              + New List
+            </button>
+          </div>
+
           <div className={styles["lists-grid"]}>
             {allCards.map((card) => (
               <ListCard
@@ -320,10 +336,13 @@ const ListManager = ({
         <ConfirmDialog
           title="Import Failed"
           message={importError}
-          confirmLabel="OK"
-          cancelLabel=""
+          confirmLabel="Cancel"
+          cancelLabel="Try Again"
           onConfirm={() => setImportError(null)}
-          onCancel={() => setImportError(null)}
+          onCancel={() => {
+            setImportError(null);
+            setShowImportHelp(true);
+          }}
         />
       )}
 

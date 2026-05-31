@@ -61,12 +61,16 @@ export default function HalfRow({
         <span className="half-handle-dots">⠿</span>
       </div>
 
-      <input
+      <textarea
         className={`item-input ${inputClass}`}
         value={value}
         onChange={(e) => onChange(e.target.value)}
         maxLength={350}
         placeholder={placeholder}
+        rows={1}
+        onKeyDown={(e) => {
+          if (e.key === "Enter") e.preventDefault();
+        }}
       />
       {/* 
       <button

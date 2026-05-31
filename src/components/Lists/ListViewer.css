@@ -2,16 +2,16 @@
    for the outer shell (centred modal). Only viewer-specific styles here. */
 
 .viewer-subtitle {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--text-muted);
   margin-top: 2px;
 }
 
 .spicy-mode-banner {
-  background: rgba(220, 80, 20, 0.1);
-  border-bottom: 1px solid rgba(220, 80, 20, 0.2);
+  background: var(--spicy-hover);
+  border-bottom: 1px solid var(--spicy-active);
   color: #e07030;
-  font-size: 12px;
+  font-size: var(--text-xs);
   padding: 8px 22px;
   text-align: center;
   flex-shrink: 0;
@@ -30,7 +30,7 @@
   padding: 8px 10px;
   border-radius: var(--radius);
   background: var(--surface2);
-  border: 1px solid rgba(200, 150, 60, 0.08);
+  border: 1px solid var(--border-faint);
   transition:
     background 0.15s,
     box-shadow 0.15s;
@@ -53,8 +53,8 @@
 }
 
 .viewer-drag {
-  font-size: 15px;
-  color: rgba(160, 128, 96, 0.4);
+  font-size: var(--text-lg);
+  color: var(--drag-handle);
   cursor: grab;
   line-height: 1;
   padding: 2px 0;
@@ -65,8 +65,8 @@
 }
 
 .viewer-num {
-  font-family: "DM Mono", monospace;
-  font-size: 11px;
+  font-family: var(--font-mono);
+  font-size: var(--text-2xs);
   color: var(--text-muted);
   min-width: 20px;
   padding-top: 2px;
@@ -84,13 +84,13 @@
   gap: 6px;
 }
 .viewer-single {
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--text);
   line-height: 1.4;
   text-align: left;
 }
 .viewer-spicy-dot {
-  font-size: 11px;
+  font-size: var(--text-2xs);
   flex-shrink: 0;
   opacity: 0.7;
   margin-top: 2px;
@@ -100,7 +100,7 @@
   display: flex;
   align-items: flex-start;
   gap: 8px;
-  font-size: 13px;
+  font-size: var(--text-sm);
   color: var(--text);
   line-height: 1.4;
   text-align: left;
@@ -110,41 +110,41 @@
 }
 
 .viewer-td-label {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 11px;
+  font-family: var(--font-display);
+  font-size: var(--text-2xs);
   letter-spacing: 1px;
   padding: 1px 5px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   flex-shrink: 0;
   margin-top: 1px;
 }
 .viewer-td-label.truth {
-  background: rgba(36, 99, 164, 0.25);
+  background: var(--border-truth);
   color: var(--truth-light);
 }
 .viewer-td-label.dare {
-  background: rgba(192, 30, 46, 0.2);
+  background: var(--fill-dare);
   color: var(--dare-light);
 }
 
 .spicy-text {
   text-align: left;
-  color: #f08040;
+  color: var(--spicy);
 }
 
 .drag-hint {
-  font-size: 11px;
-  color: rgba(160, 128, 96, 0.6);
+  font-size: var(--text-2xs);
+  color: var(--drag-hint);
   margin-bottom: 10px;
   text-align: center;
 }
 .viewer-export-btn {
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
   padding: 5px 12px;
   border-radius: var(--radius);
-  border: 1px solid rgba(200, 150, 60, 0.3);
+  border: 1px solid var(--border-interactive);
   background: transparent;
   color: var(--wood-mid);
   cursor: pointer;
@@ -153,6 +153,6 @@
 }
 
 .viewer-export-btn:hover {
-  background: rgba(200, 150, 60, 0.1);
+  background: var(--fill-light);
   border-color: var(--wood-mid);
 }

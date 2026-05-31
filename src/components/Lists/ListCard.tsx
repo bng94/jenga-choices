@@ -69,10 +69,22 @@ const ListCard = ({
       </div>
 
       <div className="list-card-tags">
-        {card.isDefault && <span className="tag tag-default">Default</span>}
-        {!card.isDefault && <span className="tag tag-custom">Custom</span>}
-        {activeForClassic && <span className="tag tag-active">Classic</span>}
-        {activeForBoard && <span className="tag tag-board">Board</span>}
+        {/* Future: when Board mode is live, change ": Active" → ": Classic" and handle Board separately */}
+        <span
+          className={`tag ${
+            activeForClassic
+              ? "tag-active"
+              : card.isDefault
+                ? "tag-default"
+                : "tag-custom"
+          }`}
+        >
+          {card.isDefault ? "Default" : "Custom"}
+          {activeForClassic ? ": Active" : ""}
+        </span>
+        {activeForBoard && (
+          <span className="tag tag-board">Active: Board</span>
+        )}
         {listType === "truth-dare" && (
           <span className="tag tag-td">Truth/Dare</span>
         )}
@@ -80,42 +92,16 @@ const ListCard = ({
         {hasSpicyContent && <span className="tag tag-spicy">Spicy</span>}
       </div>
 
-      <div className="list-card-mode-row">
-        <div className="mode-use-group">
-          <span className="mode-use-label">Classic</span>
-          <button
-            className={`card-btn ${activeForClassic ? "mode-active" : "primary-sm"}`}
-            onClick={activeForClassic ? undefined : onUseClassic}
-            disabled={activeForClassic}
-            title={
-              activeForClassic
-                ? "Already active for Classic"
-                : "Use for Classic mode"
-            }
-          >
-            {activeForClassic ? "Active" : "Use"}
-          </button>
-        </div>
-        {false && (
-          <div className="mode-use-group">
-            <span className="mode-use-label">Block Board</span>
-            <button
-              className={`card-btn ${activeForBoard ? "mode-active" : "primary-sm"}`}
-              onClick={activeForBoard ? undefined : onUseBoard}
-              disabled={activeForBoard}
-              title={
-                activeForBoard
-                  ? "Already active for Block Board"
-                  : "Use for Block Board mode"
-              }
-            >
-              {activeForBoard ? "Active" : "Use"}
-            </button>
-          </div>
-        )}
-      </div>
-
       <div className="list-card-actions">
+        {!activeForClassic && (
+          <button
+            className="card-btn primary-sm"
+            onClick={onUseClassic}
+            title="Use for Classic mode"
+          >
+            Use
+          </button>
+        )}
         <button className="card-btn" onClick={onView}>
           View
         </button>

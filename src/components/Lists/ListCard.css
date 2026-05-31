@@ -1,13 +1,15 @@
 .list-card {
   background: var(--surface);
-  border: 1px solid rgba(200, 150, 60, 0.15);
-  border-radius: 10px;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-list);
   padding: 18px;
   transition: border-color 0.2s;
+  display: flex;
+  flex-direction: column;
 }
 .list-card.is-active {
   border-color: var(--wood-mid);
-  box-shadow: 0 0 20px rgba(200, 150, 60, 0.1);
+  box-shadow: 0 0 20px var(--fill-light);
 }
 .list-card.is-default {
   border-style: dashed;
@@ -15,103 +17,83 @@
 
 .list-card-header {
   display: flex;
-  align-items: flex-start;
+  align-items: baseline;
   justify-content: space-between;
-  flex-wrap: wrap;
+  gap: 8px;
   margin-bottom: 8px;
 }
 .list-card-name {
-  font-weight: 600;
-  font-size: 15px;
+  font-weight: var(--weight-semibold);
+  font-size: var(--text-lg);
   color: var(--text);
+  overflow-wrap: break-word;
+  min-width: 0;
 }
 .list-card-meta {
-  font-size: 12px;
+  font-size: var(--text-xs);
   color: var(--text-muted);
+  flex-shrink: 0;
 }
 
 .list-card-tags {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 
 .tag {
-  font-size: 10px;
-  font-weight: 600;
+  font-size: var(--text-3xs);
+  font-weight: var(--weight-semibold);
   text-transform: uppercase;
   letter-spacing: 1px;
   padding: 3px 8px;
-  border-radius: 12px;
+  border-radius: var(--radius-md);
 }
 .tag-default {
-  background: rgba(200, 150, 60, 0.15);
+  background: var(--border-light);
   color: var(--wood-mid);
 }
 .tag-custom {
-  background: rgba(100, 180, 120, 0.15);
-  color: #6bc88a;
+  background: var(--tag-custom-bg);
+  color: var(--tag-custom-text);
 }
 .tag-active {
-  background: rgba(212, 76, 26, 0.2);
-  color: var(--accent-light);
+  background: var(--tag-active-fill);
+  color: var(--tag-active-color);
+  border: 1px solid var(--tag-active-border);
 }
 .tag-board {
-  background: rgba(112, 64, 192, 0.2);
-  color: #a07aea;
+  background: var(--tag-board-fill);
+  color: var(--tag-board-color);
 }
 .tag-td {
-  background: rgba(36, 99, 164, 0.2);
-  color: #6aadee;
+  background: var(--fill-truth);
+  color: var(--tag-td-color);
 }
 .tag-mixed {
-  background: rgba(160, 80, 160, 0.2);
-  color: #c08ae0;
+  background: var(--tag-mixed-fill);
+  color: var(--tag-mixed-color);
 }
 .tag-spicy {
-  background: rgba(220, 60, 60, 0.2);
-  color: #e06060;
-}
-
-.list-card-mode-row {
-  display: flex;
-  gap: 10px;
-  width: 100%;
-  margin-bottom: 12px;
-  padding: 10px 12px;
-  background: var(--surface2);
-  border-radius: var(--radius);
-  border: 1px solid rgba(200, 150, 60, 0.08);
-}
-.mode-use-group {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  gap: 7px;
-  flex: 1;
-}
-.mode-use-label {
-  font-size: 11px;
-  color: var(--text-muted);
-  font-weight: 500;
-  white-space: nowrap;
+  background: var(--danger-bg);
+  color: var(--tag-danger-color);
 }
 
 .list-card-actions {
   display: flex;
   gap: 6px;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 .card-btn {
-  font-family: "DM Sans", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
   padding: 6px 11px;
-  border-radius: 4px;
-  border: 1px solid rgba(200, 150, 60, 0.2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-mid);
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
@@ -119,42 +101,39 @@
 }
 .card-btn:hover {
   color: var(--text);
-  border-color: rgba(200, 150, 60, 0.4);
+  border-color: var(--border-active);
   background: var(--surface2);
 }
 
+.card-btn:active {
+  opacity: 0.75;
+  transform: scale(0.97);
+}
+
 .card-btn.primary-sm {
-  background: rgba(200, 150, 60, 0.15);
+  background: var(--fill-warm);
   color: var(--wood-mid);
-  border-color: rgba(200, 150, 60, 0.3);
-  font-size: 11px;
-  padding: 4px 6px;
+  border-color: var(--border-active);
+  font-weight: var(--weight-semibold);
 }
 .card-btn.primary-sm:hover {
-  background: rgba(200, 150, 60, 0.25);
+  background: var(--border-interactive);
+  border-color: var(--wood-mid);
 }
 
 .card-btn.mode-active {
-  background: rgba(46, 122, 74, 0.2);
-  color: #6bc88a;
-  border-color: rgba(46, 122, 74, 0.3);
-  font-size: 11px;
-  padding: 4px 6px;
+  background: var(--green-active-fill);
+  color: var(--tag-active-color);
+  border-color: var(--green-active-border);
+  font-weight: var(--weight-semibold);
   cursor: default;
 }
 
 .card-btn.danger {
-  color: #e06060;
-  border-color: rgba(220, 60, 60, 0.25);
+  color: var(--tag-danger-color);
+  border-color: var(--danger-border);
 }
 .card-btn.danger:hover {
-  background: rgba(220, 60, 60, 0.1);
-  border-color: rgba(220, 60, 60, 0.4);
-}
-
-@media (max-width: 640px) {
-  .list-card-mode-row {
-    flex-direction: column;
-    gap: 8px;
-  }
+  background: var(--danger-fill);
+  border-color: var(--danger-border-active);
 }

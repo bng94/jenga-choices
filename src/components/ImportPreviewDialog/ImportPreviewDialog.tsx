@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 import { ImportPreview } from "../../types";
 import styles from "./ImportPreviewDialog.module.css";
 
@@ -12,6 +14,20 @@ const ImportPreviewDialog = ({
   onConfirm,
   onCancel,
 }: ImportPreviewDialogProps) => {
+  const dialogRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    dialogRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onCancel();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [onCancel]);
+
   return (
     <div
       className={styles.overlay}
@@ -20,7 +36,15 @@ const ImportPreviewDialog = ({
         onCancel();
       }}
     >
-      <div className={styles.dialog} onClick={(e) => e.stopPropagation()}>
+      <div
+        className={styles.dialog}
+        onClick={(e) => e.stopPropagation()}
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="import-preview-title"
+        tabIndex={-1}
+      >
         <h3 className={styles.title}>Import List</h3>
 
         <div className={styles.previewBox}>

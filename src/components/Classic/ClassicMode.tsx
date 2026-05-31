@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type {
   BlockType,
   CustomList,
@@ -100,6 +100,8 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [showConfirmSwitchBlockType, setShowConfirmSwitchBlockType] =
     useState(false);
+  const revealModalRef = useRef<HTMLDivElement>(null);
+  const lastModalRef = useRef<HTMLDivElement>(null);
 
   const activeList_ = numberedOrder === "random" ? shuffledList : listOrderList;
   const totalCount = activeList_.length;
@@ -107,9 +109,6 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
   const allRevealed = revealedCount >= totalCount;
   const activeListName = activeList.name;
   const listHasSpicy = activeList.items.some(itemHasSpicyContent);
-  const filledCount = activeList.items
-    .map(deserializeItem)
-    .filter((it) => !isBlankItem(it)).length;
   const gameNotStarted = revealedCount === 0;
 
   useEffect(() => {
@@ -131,6 +130,24 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
     setSpicyEnabled(false);
     setNumberedOrder("random");
   }, [activeList.id]);
+
+  useEffect(() => {
+    if (revealStep !== null) revealModalRef.current?.focus();
+  }, [revealStep]);
+
+  useEffect(() => {
+    if (showLast) lastModalRef.current?.focus();
+  }, [showLast]);
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      if (showLast) { setShowLast(false); return; }
+      if (revealStep === "prompt" || revealStep === "blank") handleCloseReveal();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [revealStep, showLast]);
 
   const handleStartGame = () => {
     if (!blockType) return;
@@ -284,7 +301,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
             )}
           </div>
 
-          <div className={styles.statsRow}>
+          <div className={styles.statsRow} aria-live="polite" aria-atomic="true">
             <span>
               <strong>{revealedCount}</strong> revealed
             </span>
@@ -376,31 +393,34 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
 
           {lastReveal && (
             <button
-              className={styles.secondaryBtn}
+              className={styles.lastPromptPill}
               onClick={() => setShowLast(true)}
             >
-              ↩ View Last Prompt
+              ↩ Last Prompt
             </button>
           )}
-          <button
-            className={styles.secondaryBtn}
-            onClick={() => setShowListViewer(true)}
-          >
-            📋 View Active List
-          </button>
-          <button
-            className={styles.switchBtn}
-            onClick={handleConfirmSwitchBlockType}
-          >
-            ⇄ Switch Block Type
-          </button>
-          <button
-            className={styles.resetDangerBtn}
-            disabled={revealedCount === 0}
-            onClick={() => setShowConfirmReset(true)}
-          >
-            ↺ Reset Game
-          </button>
+
+          <div className={styles.compactRow}>
+            <button
+              className={styles.compactBtn}
+              onClick={() => setShowListViewer(true)}
+            >
+              📋 List
+            </button>
+            <button
+              className={styles.compactBtn}
+              onClick={handleConfirmSwitchBlockType}
+            >
+              ⇄ Switch
+            </button>
+            <button
+              className={`${styles.compactBtn} ${styles.compactBtnDanger}`}
+              disabled={revealedCount === 0}
+              onClick={() => setShowConfirmReset(true)}
+            >
+              ↺ Reset
+            </button>
+          </div>
         </div>
 
         {showConfirmSwitchBlockType && (
@@ -424,10 +444,18 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
             handleCloseReveal();
           }}
         >
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
+          <div
+            ref={revealModalRef}
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="reveal-modal-title"
+            tabIndex={-1}
+            onClick={(e) => e.stopPropagation()}
+          >
             {revealStep === "blank" && (
               <>
-                <h3 className={styles.modalTitle}>You pulled a blank</h3>
+                <h3 id="reveal-modal-title" className={styles.modalTitle}>You pulled a blank</h3>
                 <div className={styles.blankRevealIcon}>🧱</div>
                 <p className={styles.blankRevealSub}>
                   This block has no prompt!
@@ -445,7 +473,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
 
             {revealStep === "td-choice" && (
               <>
-                <h3 className={styles.modalTitle}>Truth or Dare?</h3>
+                <h3 id="reveal-modal-title" className={styles.modalTitle}>Truth or Dare?</h3>
                 <p className={styles.modalSub}>Choose one:</p>
                 <div className={styles.tdChoiceRow}>
                   <button
@@ -467,7 +495,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
             {revealStep === "spicy-choice" && (
               <>
                 <div className={styles.spicyAskIcon}>🔥</div>
-                <h3 className={styles.modalTitle}>Spicy Version Available</h3>
+                <h3 id="reveal-modal-title" className={styles.modalTitle}>Spicy Version Available</h3>
                 <p className={styles.modalSub}>
                   This prompt has a spicier version. Do you want it?
                 </p>
@@ -490,7 +518,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
 
             {revealStep === "prompt" && (
               <>
-                <h3 className={styles.modalTitle}>
+                <h3 id="reveal-modal-title" className={styles.modalTitle}>
                   {revealedItem.type === "td"
                     ? chosenHalf === "truth"
                       ? "Truth"
@@ -517,8 +545,16 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
 
       {showLast && lastReveal && (
         <div className={styles.modalOverlay} onClick={() => setShowLast(false)}>
-          <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-            <h3 className={styles.modalTitle}>Last Prompt</h3>
+          <div
+            ref={lastModalRef}
+            className={styles.modal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="last-modal-title"
+            tabIndex={-1}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 id="last-modal-title" className={styles.modalTitle}>Last Prompt</h3>
 
             {isBlankItem(lastReveal.item) ? (
               <>

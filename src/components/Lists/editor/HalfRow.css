@@ -1,20 +1,20 @@
 .td-half {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 6px;
-  border-radius: 4px;
+  border-radius: var(--radius-sm);
   padding: 3px 4px 3px 2px;
   transition: background 0.15s, box-shadow 0.12s;
 }
 
 .td-half.half-drag-over {
-  background: rgba(200, 150, 60, 0.12);
+  background: var(--border-subtle);
   box-shadow: 0 0 0 2px var(--wood-mid);
 }
 
 .td-half.main-drag-over {
-  background: rgba(220, 80, 20, 0.1) !important;
-  box-shadow: 0 0 0 2px rgba(220, 80, 20, 0.5) !important;
+  background: var(--spicy-hover) !important;
+  box-shadow: 0 0 0 2px var(--spicy-border-strong) !important;
 }
 
 /* Handle badge */
@@ -24,7 +24,7 @@
   gap: 3px;
   cursor: grab;
   flex-shrink: 0;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   padding: 2px 5px 2px 3px;
   transition: opacity 0.15s, background 0.15s;
   user-select: none;
@@ -34,20 +34,20 @@
 .half-drag-handle.half-dragging { opacity: 0.4; cursor: grabbing; }
 
 .truth-handle {
-  background: rgba(36, 99, 164, 0.2);
-  border: 1px solid rgba(36, 99, 164, 0.3);
+  background: var(--fill-truth);
+  border: 1px solid var(--border-truth);
 }
-.truth-handle:hover { background: rgba(36, 99, 164, 0.35); }
+.truth-handle:hover { background: var(--truth-handle-hover); }
 
 .dare-handle {
-  background: rgba(192, 30, 46, 0.18);
-  border: 1px solid rgba(192, 30, 46, 0.3);
+  background: var(--fill-dare);
+  border: 1px solid var(--border-dare);
 }
-.dare-handle:hover { background: rgba(192, 30, 46, 0.32); }
+.dare-handle:hover { background: var(--dare-handle-hover); }
 
 .half-handle-label {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 12px;
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
   letter-spacing: 0.5px;
   line-height: 1;
 }
@@ -55,19 +55,25 @@
 .dare-handle  .half-handle-label { color: var(--dare-light); }
 
 .half-handle-dots {
-  font-size: 12px;
-  color: rgba(160, 128, 96, 0.5);
+  font-size: var(--text-xs);
+  color: var(--drag-handle);
   line-height: 1;
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .half-drag-handle {
+    display: none;
+  }
 }
 
 /* Delete (×) button */
 .half-delete {
   background: none;
   border: none;
-  font-size: 14px;
+  font-size: var(--text-base);
   line-height: 1;
   padding: 2px 4px;
-  border-radius: 3px;
+  border-radius: var(--radius-xs);
   cursor: pointer;
   flex-shrink: 0;
   transition: all 0.15s;
@@ -75,8 +81,8 @@
 }
 .td-half:hover .half-delete { opacity: 1; }
 
-.half-delete.truth-del { color: rgba(100, 160, 220, 0.6); }
-.half-delete.truth-del:hover { color: var(--truth-light); background: rgba(36, 99, 164, 0.15); }
+.half-delete.truth-del { color: var(--truth-del-icon); }
+.half-delete.truth-del:hover { color: var(--truth-light); background: var(--truth-subtle); }
 
-.half-delete.dare-del { color: rgba(220, 80, 80, 0.6); }
-.half-delete.dare-del:hover { color: var(--dare-light); background: rgba(192, 30, 46, 0.15); }
+.half-delete.dare-del { color: var(--delete-icon-mid); }
+.half-delete.dare-del:hover { color: var(--dare-light); background: var(--dare-muted); }
