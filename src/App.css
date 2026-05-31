@@ -22,9 +22,9 @@
   --dare-light: #e83545;
   --green: #2e7a4a;
   --bg: #1a100a;
-  --surface: #2a1a0e;
-  --surface2: #3a2510;
-  --surface3: #452d14;
+  --surface: #321e0e;
+  --surface2: #3e2810;
+  --surface3: #4a3214;
   --text: #f0dfc0;
   --text-muted: #a08060;
   --spicy: #f08040;
@@ -33,18 +33,15 @@
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   --header-height: 54px;
 
-  /* font stacks */
   --font-display: "Bebas Neue", sans-serif;
   --font-body: "DM Sans", sans-serif;
   --font-mono: "DM Mono", monospace;
 
-  /* type scale: display (Bebas Neue) */
   --text-display-xl: 38px;
   --text-display-lg: 26px;
   --text-display-md: 22px;
   --text-display-sm: 20px;
 
-  /* type scale: body */
   --text-lg: 15px;
   --text-base: 14px;
   --text-sm: 13px;
@@ -52,57 +49,44 @@
   --text-2xs: 11px;
   --text-3xs: 10px;
 
-  /* icon / control size scale */
   --icon-xs: 16px;
   --icon-sm: 18px;
   --icon-md: 20px;
   --icon-lg: 32px;
 
-  /* weight scale */
   --weight-bold: 700;
   --weight-semibold: 600;
   --weight-medium: 500;
 
-  /* amber border opacity scale */
   --border-faint: rgba(200, 150, 60, 0.08);
   --border-subtle: rgba(200, 150, 60, 0.12);
   --border-light: rgba(200, 150, 60, 0.15);
   --border-mid: rgba(200, 150, 60, 0.2);
   --border-emphasis: rgba(200, 150, 60, 0.35);
   --border-active: rgba(200, 150, 60, 0.4);
-
-  /* amber fill tints */
   --border-ghost: rgba(200, 150, 60, 0.05);
   --fill-faint: rgba(200, 150, 60, 0.07);
   --fill-light: rgba(200, 150, 60, 0.1);
-
-  /* amber at additional opacity levels */
   --fill-warm: rgba(200, 150, 60, 0.18);
   --border-card: rgba(200, 150, 60, 0.25);
   --border-interactive: rgba(200, 150, 60, 0.3);
   --border-hover: rgba(200, 150, 60, 0.5);
 
-  /* truth family (blue) */
   --fill-truth: rgba(36, 99, 164, 0.2);
   --border-truth: rgba(36, 99, 164, 0.25);
 
-  /* dare family (red) */
   --fill-dare: rgba(192, 30, 46, 0.2);
   --border-dare: rgba(192, 30, 46, 0.25);
 
-  /* spicy family (orange) */
   --fill-spicy: rgba(220, 80, 20, 0.15);
   --border-spicy: rgba(220, 80, 20, 0.3);
 
-  /* drag handle: muted warm neutral */
   --drag-handle: rgba(160, 128, 96, 0.45);
 
-  /* modal overlays */
   --overlay: rgba(0, 0, 0, 0.75);
   --overlay-light: rgba(0, 0, 0, 0.7);
   --overlay-dim: rgba(0, 0, 0, 0.6);
 
-  /* radius scale */
   --radius-xs: 3px;
   --radius-sm: 4px;
   --radius-md: 12px;
@@ -114,7 +98,6 @@
   --radius-lg: 14px;
   --radius-circle: 50%;
 
-  /* spicy opacity scale (220 80 20) */
   --spicy-input-bg: rgba(220, 80, 20, 0.06);
   --spicy-tag-faint: rgba(220, 80, 20, 0.08);
   --spicy-hover: rgba(220, 80, 20, 0.1);
@@ -129,7 +112,6 @@
   --spicy-border-on: rgba(220, 80, 20, 0.65);
   --spicy-border-max: rgba(220, 80, 20, 0.7);
 
-  /* spicy text (220 120 60) */
   --spicy-text-dim: rgba(220, 120, 60, 0.35);
   --spicy-text-hint: rgba(220, 120, 60, 0.4);
   --spicy-text-faint: rgba(220, 120, 60, 0.7);
@@ -137,7 +119,6 @@
   --spicy-text: rgba(220, 120, 60, 0.8);
   --spicy-placeholder: rgba(200, 100, 60, 0.4);
 
-  /* truth extended (36 99 164) */
   --truth-subtle: rgba(36, 99, 164, 0.15);
   --truth-hover: rgba(36, 99, 164, 0.32);
   --truth-handle-hover: rgba(36, 99, 164, 0.35);
@@ -146,7 +127,6 @@
   --td-type-fill: rgba(100, 160, 240, 0.15);
   --td-type-border: rgba(100, 160, 240, 0.4);
 
-  /* dare extended (192 30 46) */
   --dare-subtle: rgba(192, 30, 46, 0.07);
   --dare-faint: rgba(192, 30, 46, 0.08);
   --dare-muted: rgba(192, 30, 46, 0.15);
@@ -154,7 +134,6 @@
   --dare-handle-hover: rgba(192, 30, 46, 0.32);
   --dare-border-full: rgba(192, 30, 46, 0.55);
 
-  /* danger / delete red (220 60-80 60-80) */
   --danger-fill: rgba(220, 60, 60, 0.1);
   --danger-bg: rgba(220, 60, 60, 0.2);
   --danger-border: rgba(220, 60, 60, 0.25);
@@ -163,13 +142,11 @@
   --delete-icon-mid: rgba(220, 80, 80, 0.6);
   --delete-error: rgba(220, 80, 80, 0.7);
 
-  /* warning / caution (240 160 40) */
   --warning-fill: rgba(240, 160, 40, 0.07);
   --warning-glow: rgba(240, 160, 40, 0.15);
   --warning-shadow: rgba(240, 160, 40, 0.3);
   --warning-border: rgba(240, 160, 40, 0.6);
 
-  /* green / status (46 122 74 and 100 180 120) */
   --green-hover: rgba(46, 122, 74, 0.12);
   --green-active-fill: rgba(46, 122, 74, 0.18);
   --green-active-border: rgba(46, 122, 74, 0.35);
@@ -177,37 +154,28 @@
   --tag-convert-border: rgba(100, 180, 120, 0.3);
   --tag-convert-active: rgba(100, 180, 120, 0.6);
 
-  /* list card tag fills */
   --tag-board-fill: rgba(112, 64, 192, 0.2);
   --tag-mixed-fill: rgba(160, 80, 160, 0.2);
 
-  /* custom list tag: gold — distinct from amber, signals "yours" */
-  --tag-custom-bg:   rgba(210, 180, 40, 0.18);
+  --tag-custom-bg: rgba(210, 180, 40, 0.18);
   --tag-custom-text: #c8a830;
 
-  /* list card tag text colors */
   --tag-custom-color: #6bc88a;
   --tag-board-color: #a07aea;
   --tag-td-color: #6aadee;
   --tag-mixed-color: #c08ae0;
   --tag-danger-color: #e06060;
 
-  /* tag-active: green status badge */
   --tag-active-fill: oklch(72% 0.17 148 / 0.18);
   --tag-active-color: oklch(72% 0.17 148);
   --tag-active-border: oklch(72% 0.17 148 / 0.45);
 
-  /* spicy toggle hover text */
   --spicy-hover-text: #e86030;
-
-  /* drag hint */
   --drag-hint: rgba(160, 128, 96, 0.6);
 
-  /* surface tokens */
   --header-bg: rgba(26, 16, 10, 0.92);
   --overlay-deep: rgba(0, 0, 0, 0.78);
 
-  /* game display / reveal sizes */
   --text-title: 25px;
   --text-game: 24px;
   --text-reveal: 28px;
@@ -241,14 +209,20 @@ body::before {
   inset: 0;
   background:
     radial-gradient(
-      ellipse at 20% 20%,
-      rgba(196, 120, 40, 0.08) 0%,
-      transparent 60%
+      ellipse at 50% 45%,
+      rgba(196, 120, 40, 0.22) 0%,
+      rgba(160, 80, 20, 0.1) 40%,
+      transparent 70%
     ),
     radial-gradient(
-      ellipse at 80% 80%,
-      rgba(180, 60, 20, 0.06) 0%,
-      transparent 60%
+      ellipse at 15% 10%,
+      rgba(196, 120, 40, 0.1) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      ellipse at 85% 90%,
+      rgba(180, 60, 20, 0.09) 0%,
+      transparent 45%
     );
   pointer-events: none;
   z-index: 0;
