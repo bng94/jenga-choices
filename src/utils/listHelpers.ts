@@ -23,6 +23,25 @@ export function getListNameById(id: string, customLists: CustomList[]): string {
   return customLists.find((l) => l.id === id)?.name ?? "Unknown";
 }
 
+export function getFullListById(
+  id: string,
+  customLists: CustomList[],
+): CustomList {
+  if (id === DEFAULT_LIST_IDS.singles)
+    return { id, name: "Classic Singles", items: DEFAULT_SINGLES_LIST };
+  if (id === DEFAULT_LIST_IDS.truthDare)
+    return { id, name: "Truth or Dare", items: DEFAULT_TD_LIST };
+  if (id === DEFAULT_LIST_IDS.valentine)
+    return { id, name: "Valentine's Day", items: DEFAULT_VALENTINE_LIST };
+  return (
+    customLists.find((l: CustomList) => l.id === id) ?? {
+      id,
+      name: "Unknown",
+      items: DEFAULT_SINGLES_LIST,
+    }
+  );
+}
+
 export function generateListId(): string {
   return `custom-${Date.now()}`;
 }

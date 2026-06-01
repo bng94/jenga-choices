@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header/Header";
+import ThemePicker from "./components/ThemePicker/ThemePicker";
 import ListManager from "./components/Lists/ListManager";
 import type { AppView, CustomList, GameMode } from "./types";
 import "./App.css";
@@ -11,7 +12,7 @@ import {
   saveBoardListId,
   saveClassicListId,
 } from "./utils/storage";
-import { getListById, getListNameById } from "./utils/listHelpers";
+import { getFullListById } from "./utils/listHelpers";
 
 function App() {
   const [view, setView] = useState<AppView>("classic");
@@ -25,6 +26,7 @@ function App() {
     loadBoardListId(),
   );
   const [showLists, setShowLists] = useState(false);
+  const [classicInProgress, setClassicInProgress] = useState(false);
 
   const handleSetActive = (id: string, forMode: GameMode) => {
     if (forMode === "classic") {
@@ -46,11 +48,8 @@ function App() {
           onShowLists={() => setShowLists(true)}
         />
         <ClassicMode
-          activeList={{
-            id: classicListId,
-            name: getListNameById(classicListId, customLists),
-            items: getListById(classicListId, customLists),
-          }}
+          activeList={getFullListById(classicListId, customLists)}
+          onProgressChange={setClassicInProgress}
         />
         {showLists && (
           <ListManager
@@ -60,8 +59,10 @@ function App() {
             boardListId={boardListId}
             onSetActive={handleSetActive}
             onClose={() => setShowLists(false)}
+            classicInProgress={classicInProgress}
           />
         )}
+        <ThemePicker />
       </section>
     </>
   );

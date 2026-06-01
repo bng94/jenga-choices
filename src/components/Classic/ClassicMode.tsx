@@ -61,9 +61,10 @@ const padToFiftyFour = (items: EditorItem[]): EditorItem[] => {
 
 interface ClassicModeProps {
   activeList: CustomList;
+  onProgressChange?: (inProgress: boolean) => void;
 }
 
-const ClassicMode = ({ activeList }: ClassicModeProps) => {
+const ClassicMode = ({ activeList, onProgressChange }: ClassicModeProps) => {
   const [gamePhase, setGamePhase] = useState<GamePhase>("setup");
   const [blockType, setBlockType] = useState<BlockType | null>(null);
 
@@ -100,6 +101,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
   const [showConfirmReset, setShowConfirmReset] = useState(false);
   const [showConfirmSwitchBlockType, setShowConfirmSwitchBlockType] =
     useState(false);
+  const [houseRulesRevealOpen, setHouseRulesRevealOpen] = useState(false);
   const revealModalRef = useRef<HTMLDivElement>(null);
   const lastModalRef = useRef<HTMLDivElement>(null);
 
@@ -123,13 +125,21 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
     setChosenHalf(null);
     setChosenSpicy(false);
     setShowLast(false);
-    setGamePhase("setup");
-    setBlockType(null);
     setNumberInput("");
     setNumberError("");
-    setSpicyEnabled(false);
-    setNumberedOrder("random");
+    // If the player is already in-game, keep their block mode and preferences —
+    // just swap the list and reset progress. Only fully reset when on setup screen.
+    if (gamePhase !== "playing") {
+      setGamePhase("setup");
+      setBlockType(null);
+      setSpicyEnabled(false);
+      setNumberedOrder("random");
+    }
   }, [activeList.id]);
+
+  useEffect(() => {
+    onProgressChange?.(usedPositions.size > 0);
+  }, [usedPositions]);
 
   useEffect(() => {
     if (revealStep !== null) revealModalRef.current?.focus();
@@ -203,12 +213,14 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
     setRevealedItem(null);
     setChosenHalf(null);
     setChosenSpicy(false);
+    setHouseRulesRevealOpen(false);
   };
 
   const handleCloseReveal = () => {
     setRevealStep(null);
     setRevealedItem(null);
     setChosenHalf(null);
+    setHouseRulesRevealOpen(false);
     setChosenSpicy(false);
   };
 
@@ -539,6 +551,23 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
                 </button>
               </>
             )}
+
+            {activeList.houseRules?.trim() && (
+              <div className={styles.houseRulesReveal}>
+                <button
+                  type="button"
+                  className={styles.houseRulesPill}
+                  onClick={() => setHouseRulesRevealOpen((v) => !v)}
+                >
+                  House Rules {houseRulesRevealOpen ? "▾" : "▸"}
+                </button>
+                {houseRulesRevealOpen && (
+                  <p className={styles.houseRulesRevealText}>
+                    {activeList.houseRules}
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         </div>
       )}
@@ -724,6 +753,7 @@ const ClassicMode = ({ activeList }: ClassicModeProps) => {
           shuffledMap={activeList_}
           usedPositions={usedPositions}
           onClose={() => setShowListViewer(false)}
+          houseRules={activeList.houseRules}
         />
       )}
     </>

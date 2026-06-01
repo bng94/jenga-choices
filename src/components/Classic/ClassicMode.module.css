@@ -941,3 +941,45 @@
   opacity: 0.35;
   cursor: not-allowed;
 }
+
+.houseRulesReveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  /* negative top margin so it tucks in closer to the action above it */
+  margin-top: -4px;
+}
+
+.houseRulesPill {
+  font-family: var(--font-body);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-medium);
+  padding: 5px 14px;
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--border-subtle);
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.3px;
+}
+.houseRulesPill:hover {
+  color: var(--text);
+  border-color: var(--border-active);
+  background: var(--surface2);
+}
+
+.houseRulesRevealText {
+  font-size: var(--text-sm);
+  color: var(--text);
+  line-height: 1.55;
+  text-align: left;
+  white-space: pre-wrap;
+  width: 100%;
+  padding: 10px 14px;
+  background: var(--surface2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+  margin: 0;
+}

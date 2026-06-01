@@ -183,6 +183,11 @@
   --icon-xl: 36px;
   --icon-2xl: 40px;
   --icon-3xl: 48px;
+
+  --bg-glow:
+    radial-gradient(ellipse at 50% 45%, rgba(196, 120, 40, 0.22) 0%, rgba(160, 80, 20, 0.1) 40%, transparent 70%),
+    radial-gradient(ellipse at 15% 10%, rgba(196, 120, 40, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 90%, rgba(180, 60, 20, 0.09) 0%, transparent 45%);
 }
 
 html,
@@ -207,23 +212,7 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
-  background:
-    radial-gradient(
-      ellipse at 50% 45%,
-      rgba(196, 120, 40, 0.22) 0%,
-      rgba(160, 80, 20, 0.1) 40%,
-      transparent 70%
-    ),
-    radial-gradient(
-      ellipse at 15% 10%,
-      rgba(196, 120, 40, 0.1) 0%,
-      transparent 45%
-    ),
-    radial-gradient(
-      ellipse at 85% 90%,
-      rgba(180, 60, 20, 0.09) 0%,
-      transparent 45%
-    );
+  background: var(--bg-glow);
   pointer-events: none;
   z-index: 0;
 }
@@ -285,3 +274,78 @@ body::before {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ── Themes ──────────────────────────────────────────────── */
+
+[data-theme="party"] {
+  --bg: #080c16;
+  --surface: #101828;
+  --surface2: #162038;
+  --surface3: #1e2a4a;
+  --ink: #040610;
+  --accent: #4868e0;
+  --accent-light: #6888f4;
+  --text: #d8e6ff;
+  --text-muted: #6882b8;
+  --wood-light: #a8c4f8;
+  --wood-mid: #4868e0;
+  --wood-dark: #2a44b0;
+  --wood-deep: #162880;
+  --header-bg: rgba(8, 12, 22, 0.92);
+  --border-faint: rgba(70, 110, 220, 0.08);
+  --border-subtle: rgba(70, 110, 220, 0.13);
+  --border-light: rgba(70, 110, 220, 0.17);
+  --border-mid: rgba(70, 110, 220, 0.23);
+  --border-emphasis: rgba(70, 110, 220, 0.36);
+  --border-active: rgba(70, 110, 220, 0.44);
+  --border-ghost: rgba(70, 110, 220, 0.05);
+  --fill-faint: rgba(70, 110, 220, 0.07);
+  --fill-light: rgba(70, 110, 220, 0.11);
+  --fill-warm: rgba(70, 110, 220, 0.2);
+  --border-card: rgba(70, 110, 220, 0.26);
+  --border-interactive: rgba(70, 110, 220, 0.32);
+  --border-hover: rgba(70, 110, 220, 0.52);
+  --drag-handle: rgba(80, 110, 200, 0.45);
+  --drag-hint: rgba(80, 110, 200, 0.62);
+  --bg-glow:
+    radial-gradient(ellipse at 50% 45%, rgba(60, 90, 220, 0.2) 0%, rgba(40, 60, 180, 0.1) 40%, transparent 70%),
+    radial-gradient(ellipse at 15% 10%, rgba(80, 50, 200, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 90%, rgba(40, 80, 200, 0.08) 0%, transparent 45%);
+}
+
+[data-theme="velvet"] {
+  --bg: #0c0608;
+  --surface: #1c0c14;
+  --surface2: #26101c;
+  --surface3: #321624;
+  --ink: #060304;
+  --accent: #9e3060;
+  --accent-light: #c04878;
+  --text: #f0dce8;
+  --text-muted: #9a7084;
+  --wood-light: #e8aec4;
+  --wood-mid: #9e3060;
+  --wood-dark: #6a1e40;
+  --wood-deep: #3e0e26;
+  --header-bg: rgba(12, 6, 8, 0.92);
+  --border-faint: rgba(160, 60, 100, 0.08);
+  --border-subtle: rgba(160, 60, 100, 0.13);
+  --border-light: rgba(160, 60, 100, 0.17);
+  --border-mid: rgba(160, 60, 100, 0.23);
+  --border-emphasis: rgba(160, 60, 100, 0.36);
+  --border-active: rgba(160, 60, 100, 0.44);
+  --border-ghost: rgba(160, 60, 100, 0.05);
+  --fill-faint: rgba(160, 60, 100, 0.07);
+  --fill-light: rgba(160, 60, 100, 0.11);
+  --fill-warm: rgba(160, 60, 100, 0.2);
+  --border-card: rgba(160, 60, 100, 0.26);
+  --border-interactive: rgba(160, 60, 100, 0.32);
+  --border-hover: rgba(160, 60, 100, 0.52);
+  --drag-handle: rgba(150, 70, 100, 0.45);
+  --drag-hint: rgba(150, 70, 100, 0.62);
+  --bg-glow:
+    radial-gradient(ellipse at 50% 45%, rgba(140, 40, 80, 0.2) 0%, rgba(100, 20, 55, 0.1) 40%, transparent 70%),
+    radial-gradient(ellipse at 15% 10%, rgba(120, 30, 65, 0.1) 0%, transparent 45%),
+    radial-gradient(ellipse at 85% 90%, rgba(100, 20, 50, 0.08) 0%, transparent 45%);
+}
+

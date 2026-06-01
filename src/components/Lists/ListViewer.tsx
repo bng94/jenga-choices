@@ -21,6 +21,7 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
   const isDefault = list.isDefault;
 
   const [spicyMode, setSpicyMode] = useState(false);
+  const [houseRulesOpen, setHouseRulesOpen] = useState(false);
   const originalRaw = useMemo(() => list.items, [list.id]);
   const [orderedRaw, setOrderedRaw] = useState(() => list.items);
 
@@ -196,6 +197,24 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
         )}
 
         <div className="editor-body">
+          {list.houseRules?.trim() && (
+            <div className="house-rules-section">
+              <button
+                type="button"
+                className={`house-rules-toggle${houseRulesOpen ? " open" : ""}`}
+                onClick={() => setHouseRulesOpen((v) => !v)}
+              >
+                <span>House Rules</span>
+                <span className={`house-rules-arrow${houseRulesOpen ? " open" : ""}`}>▶</span>
+              </button>
+              {houseRulesOpen && (
+                <div className="house-rules-body">
+                  <p className="house-rules-text">{list.houseRules}</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {!isDefault && (
             <p className="drag-hint">
               ☰ Drag rows to reorder — click Save to keep the new order

@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type {
   EditorItem,
   EditorSingleItem,
@@ -10,6 +11,7 @@ interface ActiveListViewerProps {
   shuffledMap: EditorItem[];
   usedPositions: Set<number>;
   onClose: () => void;
+  houseRules?: string;
 }
 
 export default function ActiveListViewer({
@@ -17,8 +19,10 @@ export default function ActiveListViewer({
   shuffledMap,
   usedPositions,
   onClose,
+  houseRules,
 }: ActiveListViewerProps) {
   const remaining = shuffledMap.length - usedPositions.size;
+  const [houseRulesOpen, setHouseRulesOpen] = useState(false);
 
   const renderItem = (item: EditorItem) => {
     if (item.type === "single") {
@@ -80,6 +84,24 @@ export default function ActiveListViewer({
             Pulled
           </span>
         </div>
+
+        {houseRules?.trim() && (
+          <div className={styles["alv-house-rules"]}>
+            <button
+              type="button"
+              className={[styles["alv-house-rules-toggle"], houseRulesOpen ? styles["alv-house-rules-toggle--open"] : ""].join(" ")}
+              onClick={() => setHouseRulesOpen((v) => !v)}
+            >
+              <span>House Rules</span>
+              <span className={[styles["alv-house-rules-arrow"], houseRulesOpen ? styles["alv-house-rules-arrow--open"] : ""].join(" ")}>▶</span>
+            </button>
+            {houseRulesOpen && (
+              <div className={styles["alv-house-rules-body"]}>
+                <p className={styles["alv-house-rules-text"]}>{houseRules}</p>
+              </div>
+            )}
+          </div>
+        )}
 
         <div className={styles["alv-list"]}>
           {shuffledMap.map((item, pos) => {
