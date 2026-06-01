@@ -138,6 +138,13 @@
   margin-bottom: 10px;
   text-align: center;
 }
+.house-rules-text {
+  font-size: var(--text-sm);
+  color: var(--text);
+  line-height: 1.55;
+  white-space: pre-wrap;
+}
+
 .viewer-export-btn {
   font-family: var(--font-body);
   font-size: var(--text-xs);

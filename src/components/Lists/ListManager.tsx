@@ -34,6 +34,7 @@ interface ListManagerProps {
   boardListId: string;
   onSetActive: (id: string, forMode: GameMode) => void;
   onClose: () => void;
+  classicInProgress: boolean;
 }
 
 type EditorState = { list: CustomList; isNew: boolean } | null;
@@ -46,10 +47,12 @@ const ListManager = ({
   boardListId,
   onSetActive,
   onClose,
+  classicInProgress,
 }: ListManagerProps) => {
   const [editing, setEditing] = useState<EditorState>(null);
   const [viewing, setViewing] = useState<ViewerState>(null);
   const [deletingListId, setDeletingListId] = useState<string | null>(null);
+  const [pendingUseId, setPendingUseId] = useState<string | null>(null);
   const [importPreview, setImportPreview] = useState<ImportPreview | null>(
     null,
   );
@@ -254,7 +257,13 @@ const ListManager = ({
                 card={card}
                 activeForClassic={classicListId === card.id}
                 activeForBoard={boardListId === card.id}
-                onUseClassic={() => onSetActive(card.id, "classic")}
+                onUseClassic={() => {
+                  if (classicInProgress) {
+                    setPendingUseId(card.id);
+                  } else {
+                    onSetActive(card.id, "classic");
+                  }
+                }}
                 onUseBoard={() => onSetActive(card.id, "board")}
                 onView={() => setViewing({ list: card })}
                 onCopyAndEdit={
@@ -351,6 +360,20 @@ const ListManager = ({
           preview={importPreview}
           onConfirm={handleImportConfirm}
           onCancel={() => setImportPreview(null)}
+        />
+      )}
+
+      {pendingUseId && (
+        <ConfirmDialog
+          title="Switch List"
+          message="Switching lists will reset your current game and any progress will be lost. Continue?"
+          confirmLabel="Switch"
+          cancelLabel="Cancel"
+          onConfirm={() => {
+            onSetActive(pendingUseId, "classic");
+            setPendingUseId(null);
+          }}
+          onCancel={() => setPendingUseId(null)}
         />
       )}
 

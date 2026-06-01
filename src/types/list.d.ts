@@ -34,6 +34,7 @@ export interface CustomList {
   id: string;
   name: string;
   items: StoredItem[];
+  houseRules?: string;
 }
 
 export type SpicySlot = "spicy" | "spicyTruth" | "spicyDare";
