@@ -74,6 +74,12 @@ const ImportPreviewDialog = ({
               <span className={styles.previewValue}>{preview.spicyCount}</span>
             </div>
           )}
+          {preview.houseRules && (
+            <div className={styles.previewRow}>
+              <span className={styles.previewLabel}>House rules</span>
+              <span className={styles.previewValue}>{preview.houseRules}</span>
+            </div>
+          )}
           {preview.totalItems < 54 && (
             <p className={styles.padNote}>
               {54 - preview.totalItems} empty slots will be added to reach 54
