@@ -125,17 +125,19 @@ export function parseImportFile(jsonText: string): ImportResult {
         (!!item.spicy_truth?.trim() || !!item.spicy_dare?.trim())),
   ).length;
 
-  return {
-    ok: true,
-    preview: {
-      name: file.name.trim(),
-      totalItems: storedItems.length,
-      singles,
-      tdPairs,
-      spicyCount,
-      rawItems: storedItems,
-    },
+  const preview: ImportPreview = {
+    name: file.name.trim(),
+    totalItems: storedItems.length,
+    singles,
+    tdPairs,
+    spicyCount,
+    rawItems: storedItems,
   };
+  if (typeof file.houseRules === "string" && file.houseRules.trim()) {
+    preview.houseRules = file.houseRules.trim();
+  }
+
+  return { ok: true, preview };
 }
 
 /**
@@ -149,9 +151,11 @@ export function buildImportedList(
   const padded: StoredItem[] = [...preview.rawItems];
   while (padded.length < 54) padded.push(null);
 
-  return {
+  const list: CustomList = {
     id: newId,
     name: preview.name,
     items: padded.slice(0, 54),
   };
+  if (preview.houseRules) list.houseRules = preview.houseRules;
+  return list;
 }

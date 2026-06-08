@@ -79,6 +79,7 @@ export interface ExportFile {
   id: string;
   name: string;
   items: ExportItem[];
+  houseRules?: string;
 }
 
 export interface ImportPreview {
@@ -88,6 +89,7 @@ export interface ImportPreview {
   tdPairs: number;
   spicyCount: number;
   rawItems: StoredItem[];
+  houseRules?: string;
 }
 
 export interface ImportError {
