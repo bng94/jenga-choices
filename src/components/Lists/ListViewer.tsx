@@ -7,6 +7,7 @@ import type {
 } from "../../types";
 import { deserializeItem, itemHasSpicy } from "../../utils/itemModel";
 import SpicyToggle from "../SpicyToggle/SpicyToggle";
+import HouseRulesDisplay from "../HouseRules/HouseRulesDisplay";
 import { exportList } from "../../utils/exportList";
 import "./ListViewer.css";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
@@ -197,7 +198,7 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
         )}
 
         <div className="editor-body">
-          {list.houseRules?.trim() && (
+          {(list.houseRules?.length ?? 0) > 0 && (
             <div className="house-rules-section">
               <button
                 type="button"
@@ -209,7 +210,7 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
               </button>
               {houseRulesOpen && (
                 <div className="house-rules-body">
-                  <p className="house-rules-text">{list.houseRules}</p>
+                  <HouseRulesDisplay rules={list.houseRules!} />
                 </div>
               )}
             </div>

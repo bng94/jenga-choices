@@ -74,10 +74,12 @@ const ImportPreviewDialog = ({
               <span className={styles.previewValue}>{preview.spicyCount}</span>
             </div>
           )}
-          {preview.houseRules && (
+          {preview.houseRules && preview.houseRules.length > 0 && (
             <div className={styles.previewRow}>
               <span className={styles.previewLabel}>House rules</span>
-              <span className={styles.previewValue}>{preview.houseRules}</span>
+              <span className={styles.previewValue}>
+                {preview.houseRules.length}
+              </span>
             </div>
           )}
           {preview.totalItems < 54 && (

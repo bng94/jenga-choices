@@ -1,18 +1,7 @@
 import { useState, useRef, useEffect } from "react";
-import {
-  CustomList,
-  DefaultListIds,
-  GameMode,
-  ImportPreview,
-  ListId,
-  StoredItem,
-} from "../../types";
+import { CustomList, GameMode, ImportPreview } from "../../types";
 import { generateListId } from "../../utils/listHelpers";
-import {
-  DEFAULT_SINGLES_LIST,
-  DEFAULT_TD_LIST,
-  DEFAULT_VALENTINE_LIST,
-} from "../../data/defaults";
+import { DEFAULT_LISTS } from "../../data/defaults";
 import ListCard from "./ListCard";
 import styles from "./ListManager.module.css";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
@@ -113,21 +102,16 @@ const ListManager = ({
     setEditing({ list: newList, isNew: true });
   };
 
-  const handleCopyDefault = (which: DefaultListIds) => {
-    const items =
-      which === "singles"
-        ? DEFAULT_SINGLES_LIST.map((s) => ({ ...s }))
-        : which === "truthDare"
-          ? DEFAULT_TD_LIST.map((td) => ({ ...td }))
-          : DEFAULT_VALENTINE_LIST.map((v) =>
-              typeof v === "string" ? v : { ...v },
-            );
+  const handleCopyDefault = (source: CustomList) => {
     const newList: CustomList = {
       id: generateListId(),
-      name: `Copy of ${which === "singles" ? "Classic Singles" : which === "truthDare" ? "Truth or Dare" : "Valentine's Day"}`,
-      items,
+      name: `Copy of ${source.name}`,
+      items: source.items.map((it) =>
+        it && typeof it === "object" ? { ...it } : it,
+      ),
     };
-    setCustomLists((prev) => [...prev, newList]);
+    // The copy only becomes a real list on Save — canceling the editor
+    // must leave nothing behind (handleSave appends unknown ids).
     setEditing({ list: newList, isNew: false });
   };
 
@@ -152,8 +136,9 @@ const ListManager = ({
     setCustomLists(updated);
     saveCustomLists(updated);
     if (classicListId === deletingListId)
-      onSetActive("default-singles", "classic");
-    if (boardListId === deletingListId) onSetActive("default-singles", "board");
+      onSetActive(DEFAULT_LISTS[0].id, "classic");
+    if (boardListId === deletingListId)
+      onSetActive(DEFAULT_LISTS[0].id, "board");
     setDeletingListId(null);
   };
 
@@ -166,30 +151,7 @@ const ListManager = ({
     setViewing(null);
   };
 
-  const defaultCards: ({
-    id: ListId;
-    name: string;
-    items: StoredItem[];
-  } & { isDefault: boolean })[] = [
-    {
-      id: "default-singles",
-      name: "Classic Singles",
-      items: DEFAULT_SINGLES_LIST,
-      isDefault: true,
-    },
-    {
-      id: "default-truthdare",
-      name: "Truth or Dare",
-      items: DEFAULT_TD_LIST,
-      isDefault: true,
-    },
-    {
-      id: "default-valentine",
-      name: "Valentine's Day",
-      items: DEFAULT_VALENTINE_LIST,
-      isDefault: true,
-    },
-  ];
+  const defaultCards = DEFAULT_LISTS.map((l) => ({ ...l, isDefault: true }));
 
   const allCards = [
     ...defaultCards,
@@ -267,18 +229,7 @@ const ListManager = ({
                 onUseBoard={() => onSetActive(card.id, "board")}
                 onView={() => setViewing({ list: card })}
                 onCopyAndEdit={
-                  card.isDefault
-                    ? () =>
-                        handleCopyDefault(
-                          card.id === "default-singles"
-                            ? "singles"
-                            : card.id === "default-truthdare"
-                              ? "truthDare"
-                              : card.id === "default-valentine"
-                                ? "valentine"
-                                : "singles",
-                        )
-                    : undefined
+                  card.isDefault ? () => handleCopyDefault(card) : undefined
                 }
                 onEdit={
                   !card.isDefault

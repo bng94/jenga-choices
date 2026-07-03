@@ -30,11 +30,28 @@ export interface EditorTDItem {
 
 export type EditorItem = EditorSingleItem | EditorTDItem;
 
+/**
+ * `when` may be empty for rules migrated from the old free-text format.
+ */
+export interface HouseRule {
+  /**
+   * A short phrase describing the trigger for this rule,
+   * e.g. "The tower falls".
+   */
+  when: string;
+  /**
+   * A short phrase describing the consequence of this rule,
+   * e.g. "Rebuild it and do 10 jumping jacks".
+   * Must be at least 2 characters long to be actionable.
+   */
+  then: string;
+}
+
 export interface CustomList {
   id: string;
   name: string;
   items: StoredItem[];
-  houseRules?: string;
+  houseRules?: HouseRule[];
 }
 
 export type SpicySlot = "spicy" | "spicyTruth" | "spicyDare";
@@ -79,7 +96,8 @@ export interface ExportFile {
   id: string;
   name: string;
   items: ExportItem[];
-  houseRules?: string;
+  /** Modern exports write HouseRule[]; older files may contain a plain string. */
+  houseRules?: HouseRule[] | string;
 }
 
 export interface ImportPreview {
@@ -89,7 +107,7 @@ export interface ImportPreview {
   tdPairs: number;
   spicyCount: number;
   rawItems: StoredItem[];
-  houseRules?: string;
+  houseRules?: HouseRule[];
 }
 
 export interface ImportError {

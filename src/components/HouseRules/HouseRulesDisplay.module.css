@@ -1,0 +1,33 @@
+.rules {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+}
+
+.rule {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 8px 12px;
+  background: var(--surface2);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius);
+}
+
+.when {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--wood-mid);
+}
+
+.then {
+  font-size: var(--text-sm);
+  color: var(--text);
+  line-height: 1.5;
+  white-space: pre-wrap;
+}

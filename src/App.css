@@ -179,6 +179,8 @@
   --text-title: 25px;
   --text-game: 24px;
   --text-reveal: 28px;
+  /* The revealed prompt is read across a table: largest text in the app */
+  --text-prompt: 31px;
   --icon-card: 26px;
   --icon-xl: 36px;
   --icon-2xl: 40px;
@@ -206,6 +208,8 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  /* Block pull-to-refresh so a mid-game swipe can't reload the app */
+  overscroll-behavior-y: none;
 }
 
 body::before {

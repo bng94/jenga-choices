@@ -490,15 +490,23 @@
 }
 
 .modalPrompt {
-  font-size: var(--text-game);
+  font-size: var(--text-prompt);
+  font-weight: var(--weight-medium);
   color: var(--text);
-  line-height: 1.55;
+  line-height: 1.4;
   text-align: center;
   letter-spacing: 0.01em;
+  /* Breathing room so the prompt reads as the hero, not a dialog message */
+  padding: 6px 0 10px;
+}
+
+.modal:has(.modalPrompt) {
+  padding: 36px 24px 24px;
 }
 
 .modalClose {
   width: 100%;
+  min-height: 48px;
   padding: 13px;
   font-family: var(--font-body);
   font-size: var(--text-lg);
@@ -597,9 +605,10 @@
 
 .spicyToggle {
   font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: var(--text-base);
   font-weight: var(--weight-semibold);
-  padding: 5px 12px;
+  min-height: 40px;
+  padding: 7px 16px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-spicy);
   background: transparent;
@@ -881,9 +890,10 @@
 
 .lastPromptPill {
   font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--weight-medium);
-  padding: 8px 16px;
+  min-height: 40px;
+  padding: 9px 18px;
   border-radius: var(--radius-pill);
   border: 1px solid var(--border-subtle);
   background: transparent;
@@ -907,9 +917,10 @@
 
 .compactBtn {
   flex: 1;
+  min-height: 44px;
   padding: 10px 8px;
   font-family: var(--font-body);
-  font-size: var(--text-xs);
+  font-size: var(--text-sm);
   font-weight: var(--weight-medium);
   background: transparent;
   color: var(--text-muted);
@@ -970,16 +981,3 @@
   background: var(--surface2);
 }
 
-.houseRulesRevealText {
-  font-size: var(--text-sm);
-  color: var(--text);
-  line-height: 1.55;
-  text-align: left;
-  white-space: pre-wrap;
-  width: 100%;
-  padding: 10px 14px;
-  background: var(--surface2);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius);
-  margin: 0;
-}

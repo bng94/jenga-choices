@@ -4,13 +4,15 @@
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 7px;
+  gap: 9px;
   align-items: center;
-  padding: 6px 11px;
+  padding: 8px 13px;
   background: var(--surface);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-pill);
-  z-index: 9999;
+  /* Below every panel/dialog layer (editor 500, manager 700, modals 900+):
+     the picker is an ambient control for the base screen only. */
+  z-index: 300;
   opacity: 0.3;
   transition: opacity 0.2s ease;
 }
@@ -21,8 +23,8 @@
 }
 
 .swatch {
-  width: 13px;
-  height: 13px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: 1.5px solid transparent;
   background-color: var(--c);

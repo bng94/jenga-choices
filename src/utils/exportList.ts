@@ -53,7 +53,7 @@ export function exportList(list: CustomList): void {
     name: list.name,
     items: exportItems,
   };
-  if (list.houseRules?.trim()) file.houseRules = list.houseRules.trim();
+  if (list.houseRules?.length) file.houseRules = list.houseRules;
 
   const blob = new Blob([JSON.stringify(file, null, 2)], {
     type: "application/json",

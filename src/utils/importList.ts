@@ -10,6 +10,7 @@ import type {
   StoredSingle,
   StoredTD,
 } from "../types";
+import { EXAMPLE_HOUSE_RULES, normalizeHouseRules } from "./houseRules";
 
 export const exampleImportCode = `{
   "name": "My List",
@@ -17,6 +18,9 @@ export const exampleImportCode = `{
     { "prompt": "Do 10 push-ups" },
     { "prompt": "Sing a song", "spicy": "Sing it in opera" },
     { "truth": "What is your fear?", "dare": "Run around the room" }
+  ],
+  "houseRules": [
+    ${EXAMPLE_HOUSE_RULES.map((rule) => JSON.stringify(rule)).join(",\n    ")}
   ]
 }`;
 
@@ -133,9 +137,10 @@ export function parseImportFile(jsonText: string): ImportResult {
     spicyCount,
     rawItems: storedItems,
   };
-  if (typeof file.houseRules === "string" && file.houseRules.trim()) {
-    preview.houseRules = file.houseRules.trim();
-  }
+  // Accepts both shapes: modern HouseRule[] and the legacy plain string
+  // (which lands in the "then" slot of a single rule).
+  const houseRules = normalizeHouseRules(file.houseRules);
+  if (houseRules.length) preview.houseRules = houseRules;
 
   return { ok: true, preview };
 }
@@ -156,6 +161,6 @@ export function buildImportedList(
     name: preview.name,
     items: padded.slice(0, 54),
   };
-  if (preview.houseRules) list.houseRules = preview.houseRules;
+  if (preview.houseRules?.length) list.houseRules = preview.houseRules;
   return list;
 }

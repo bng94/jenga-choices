@@ -3,6 +3,7 @@ import type { DefaultListIds, ListId } from "../types";
 export const STORAGE_KEYS = {
   customLists: "jenga_custom_lists",
   classicList: "jenga_classic_list",
+  classicSession: "jenga_classic_session",
   boardList: "jenga_board_list",
   spicyEnabled: {
     classic: "jenga_spicy_classic",
