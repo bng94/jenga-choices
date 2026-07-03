@@ -1,6 +1,7 @@
-import type { StoredSingle, StoredTD } from "../types";
+import type { CustomList, StoredSingle, StoredTD } from "../types";
+import { DEFAULT_LIST_IDS } from "../constants/storage";
 
-export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
+const SINGLES_ITEMS: StoredSingle[] = [
   { v: "Act out an animal and have everyone guess what it is" },
   { v: "Air guitar! Rock out for 30 seconds" },
   {
@@ -87,7 +88,7 @@ export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   { v: "Tell everyone something you are looking forward to" },
 ];
 
-export const DEFAULT_TD_LIST: StoredTD[] = [
+const TD_ITEMS: StoredTD[] = [
   {
     t: "What's the funniest thing that has ever happened to you at school?",
     d: "Act out the funniest school moment you can think of",
@@ -306,7 +307,7 @@ export const DEFAULT_TD_LIST: StoredTD[] = [
   },
 ];
 
-export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
+const VALENTINE_ITEMS: (StoredSingle | StoredTD)[] = [
   {
     v: "Describe the last time someone did something kind for you that you will never forget",
   },
@@ -505,5 +506,29 @@ export const DEFAULT_VALENTINE_LIST: (StoredSingle | StoredTD)[] = [
   {
     t: "What's something kind someone at this table did recently that you never properly thanked them for?",
     d: "Thank that person right now. Say it out loud and mean it",
+  },
+];
+
+/**
+ * The built-in lists, each a full CustomList (id + name + items) so their
+ * identity lives in one place instead of being re-declared wherever a default
+ * is referenced. These are read-only: the UI offers "Edit a Copy" rather than
+ * mutating them.
+ */
+export const DEFAULT_LISTS: CustomList[] = [
+  {
+    id: DEFAULT_LIST_IDS.singles,
+    name: "Classic Singles",
+    items: SINGLES_ITEMS,
+  },
+  {
+    id: DEFAULT_LIST_IDS.truthDare,
+    name: "Truth or Dare",
+    items: TD_ITEMS,
+  },
+  {
+    id: DEFAULT_LIST_IDS.valentine,
+    name: "Valentine's Day",
+    items: VALENTINE_ITEMS,
   },
 ];

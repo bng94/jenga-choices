@@ -1,4 +1,4 @@
-import { STORAGE_KEYS } from "../constants/storage";
+import { DEFAULT_LIST_IDS, STORAGE_KEYS } from "../constants/storage";
 import type { CustomList, GameSession } from "../types";
 import { normalizeHouseRules } from "./houseRules";
 
@@ -25,7 +25,9 @@ export function saveCustomLists(lists: CustomList[]): void {
 }
 
 export function loadClassicListId(): string {
-  return localStorage.getItem(STORAGE_KEYS.classicList) ?? "default-singles";
+  return (
+    localStorage.getItem(STORAGE_KEYS.classicList) ?? DEFAULT_LIST_IDS.singles
+  );
 }
 
 export function saveClassicListId(id: string): void {
@@ -41,7 +43,9 @@ export function saveClassicSpicyEnabled(enabled: boolean): void {
 }
 
 export function loadBoardListId(): string {
-  return localStorage.getItem(STORAGE_KEYS.boardList) ?? "default-singles";
+  return (
+    localStorage.getItem(STORAGE_KEYS.boardList) ?? DEFAULT_LIST_IDS.singles
+  );
 }
 
 export function saveBoardListId(id: string): void {

@@ -31,12 +31,19 @@ export interface EditorTDItem {
 export type EditorItem = EditorSingleItem | EditorTDItem;
 
 /**
- * One structured house rule: a trigger ("The tower falls") and its
- * consequence ("Rebuild it and do 10 jumping jacks"). `when` may be empty
- * for rules migrated from the old free-text format.
+ * `when` may be empty for rules migrated from the old free-text format.
  */
 export interface HouseRule {
+  /**
+   * A short phrase describing the trigger for this rule,
+   * e.g. "The tower falls".
+   */
   when: string;
+  /**
+   * A short phrase describing the consequence of this rule,
+   * e.g. "Rebuild it and do 10 jumping jacks".
+   * Must be at least 2 characters long to be actionable.
+   */
   then: string;
 }
 
