@@ -18,7 +18,7 @@ const ListManagerInfoPanel = () => {
           button on any list card.
         </InfoRow>
         <InfoRow icon="">
-          Default lists can't be edited. Use <strong>Copy &amp; Edit</strong> to
+          Default lists can't be edited. Use <strong>Edit a Copy</strong> to
           make your own version.
         </InfoRow>
       </InfoSection>
@@ -42,8 +42,8 @@ const ListManagerInfoPanel = () => {
           file. Use this to back it up or share it with someone else.
         </InfoRow>
         <InfoRow icon="" centered>
-          Use <strong>Import</strong> to load a list from a file to either
-          backup you a list you exported or one someone shared with you.
+          Use <strong>Import</strong> to load a list from a file, either one
+          you exported earlier or one someone shared with you.
         </InfoRow>
       </InfoSection>
       <InfoSection heading="Viewing">

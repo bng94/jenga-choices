@@ -17,9 +17,9 @@ const SetupScreen = ({
     <main className={styles.screen}>
       <div className={styles.container}>
         <div className={styles.setupHeader}>
-          <h1 className={styles.setupTitle}>Jenga Choices</h1>
+          <h1 className={styles.setupTitle}>Game Setup</h1>
           <p className={styles.setupDesc}>
-            Set up your physical tower, then choose how your Jenga blocks are
+            Build your physical tower, then choose how your Jenga blocks are
             labelled:
           </p>
         </div>

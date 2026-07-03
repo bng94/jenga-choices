@@ -3,7 +3,9 @@ import type {
   EditorItem,
   EditorSingleItem,
   EditorTDItem,
+  HouseRule,
 } from "../../../types";
+import HouseRulesDisplay from "../../HouseRules/HouseRulesDisplay";
 import styles from "./ActiveListViewer.module.css";
 
 interface ActiveListViewerProps {
@@ -11,7 +13,7 @@ interface ActiveListViewerProps {
   shuffledMap: EditorItem[];
   usedPositions: Set<number>;
   onClose: () => void;
-  houseRules?: string;
+  houseRules?: HouseRule[];
 }
 
 export default function ActiveListViewer({
@@ -74,30 +76,29 @@ export default function ActiveListViewer({
           </button>
         </div>
 
-        <div className={styles["alv-legend"]}>
-          <span className={styles["alv-legend-item"]}>
-            <span className={styles["alv-legend-dot remaining"]} />
-            Remaining
-          </span>
-          <span className={styles["alv-legend-item"]}>
-            <span className={styles["alv-legend-dot pulled"]} />
-            Pulled
-          </span>
-        </div>
-
-        {houseRules?.trim() && (
+        {(houseRules?.length ?? 0) > 0 && (
           <div className={styles["alv-house-rules"]}>
             <button
               type="button"
-              className={[styles["alv-house-rules-toggle"], houseRulesOpen ? styles["alv-house-rules-toggle--open"] : ""].join(" ")}
+              className={[
+                styles["alv-house-rules-toggle"],
+                houseRulesOpen ? styles["alv-house-rules-toggle--open"] : "",
+              ].join(" ")}
               onClick={() => setHouseRulesOpen((v) => !v)}
             >
               <span>House Rules</span>
-              <span className={[styles["alv-house-rules-arrow"], houseRulesOpen ? styles["alv-house-rules-arrow--open"] : ""].join(" ")}>▶</span>
+              <span
+                className={[
+                  styles["alv-house-rules-arrow"],
+                  houseRulesOpen ? styles["alv-house-rules-arrow--open"] : "",
+                ].join(" ")}
+              >
+                ▶
+              </span>
             </button>
             {houseRulesOpen && (
               <div className={styles["alv-house-rules-body"]}>
-                <p className={styles["alv-house-rules-text"]}>{houseRules}</p>
+                <HouseRulesDisplay rules={houseRules!} />
               </div>
             )}
           </div>

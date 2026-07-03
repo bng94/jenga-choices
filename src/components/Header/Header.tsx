@@ -7,7 +7,8 @@ interface HeaderProps {
   onShowLists: () => void;
 }
 
-const Header = ({ view, onViewChange, onShowLists }: HeaderProps) => {
+// view / onViewChange stay in HeaderProps for the future board-mode switch below
+const Header = ({ onShowLists }: HeaderProps) => {
   return (
     <header className={styles["header"]}>
       <div className={styles["header-left"]}>

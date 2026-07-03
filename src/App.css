@@ -179,6 +179,8 @@
   --text-title: 25px;
   --text-game: 24px;
   --text-reveal: 28px;
+  /* The revealed prompt is read across a table: largest text in the app */
+  --text-prompt: 31px;
   --icon-card: 26px;
   --icon-xl: 36px;
   --icon-2xl: 40px;

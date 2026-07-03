@@ -1,11 +1,20 @@
 import { STORAGE_KEYS } from "../constants/storage";
 import type { CustomList, GameSession } from "../types";
+import { normalizeHouseRules } from "./houseRules";
 
 export function loadCustomLists(): CustomList[] {
   try {
-    return (
-      JSON.parse(localStorage.getItem(STORAGE_KEYS.customLists) ?? "null") ?? []
-    );
+    const lists: CustomList[] =
+      JSON.parse(localStorage.getItem(STORAGE_KEYS.customLists) ?? "null") ??
+      [];
+    // Migrate legacy string houseRules (and drop malformed values) on read;
+    // the next save persists the normalized shape.
+    return lists.map((l) => {
+      const rules = normalizeHouseRules(l.houseRules);
+      return rules.length
+        ? { ...l, houseRules: rules }
+        : { ...l, houseRules: undefined };
+    });
   } catch {
     return [];
   }

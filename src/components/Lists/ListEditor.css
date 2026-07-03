@@ -205,6 +205,130 @@
   color: var(--drag-handle);
 }
 
+.house-rules-hint {
+  font-size: var(--text-xs);
+  color: var(--text-muted);
+  line-height: 1.5;
+  margin: 0 0 10px;
+  text-align: left;
+}
+
+.house-rule-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.house-rule-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.house-rule-when {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  padding: 7px 10px;
+  background: var(--surface2);
+  border: 1px solid var(--border-faint);
+  border-radius: var(--radius-sm);
+  color: var(--wood-light);
+  outline: none;
+  transition: border-color 0.15s;
+  width: 100%;
+}
+.house-rule-when:focus {
+  border-color: var(--border-interactive);
+}
+.house-rule-when::placeholder {
+  color: var(--drag-handle);
+}
+
+.house-rule-then {
+  min-height: 44px;
+}
+
+.house-rule-remove {
+  flex-shrink: 0;
+  width: 30px;
+  height: 30px;
+  margin-top: 2px;
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--delete-icon);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.house-rule-remove:hover {
+  color: var(--delete-icon-mid);
+  border-color: var(--danger-border);
+  background: var(--danger-fill);
+}
+
+.house-rule-examples {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px dashed var(--border-subtle);
+  text-align: left;
+}
+
+.house-rule-examples-label {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+}
+
+.house-rule-example-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.house-rule-example-chip {
+  padding: 6px 12px;
+  background: var(--fill-faint);
+  border: 1px solid var(--border-mid);
+  border-radius: var(--radius-pill);
+  color: var(--wood-light);
+  font-family: var(--font-body);
+  font-size: var(--text-xs);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.house-rule-example-chip:hover {
+  background: var(--fill-light);
+  border-color: var(--wood-mid);
+  color: var(--text);
+}
+
+.house-rule-add {
+  width: 100%;
+  padding: 9px;
+  background: transparent;
+  border: 1px dashed var(--border-mid);
+  border-radius: var(--radius-sm);
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.house-rule-add:hover {
+  color: var(--text);
+  border-color: var(--border-active);
+  background: var(--fill-faint);
+}
+
 .editor-items-list {
   display: flex;
   flex-direction: column;

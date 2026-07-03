@@ -4,6 +4,7 @@ import type {
   EditorItem,
   EditorSingleItem,
   EditorTDItem,
+  HouseRule,
   StoredItem,
   HalfDragHalf,
   SpicySlot,
@@ -14,6 +15,13 @@ import {
   serializeItem,
   itemHasSpicy,
 } from "../../utils/itemModel";
+import {
+  EXAMPLE_HOUSE_RULES,
+  HOUSE_RULE_THEN_MAX,
+  HOUSE_RULE_WHEN_MAX,
+  HOUSE_RULES_MAX,
+  normalizeHouseRules,
+} from "../../utils/houseRules";
 import ListEditorHeader from "./editor/ListEditorHeader";
 import ListEditorItem from "./editor/ListEditorItem";
 import type { EditorItemHandlers } from "./editor/ListEditorItem";
@@ -56,17 +64,30 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
   const [keepWhichIdx, setKeepWhichIdx] = useState<number | null>(null);
   const [saveWarning, setSaveWarning] = useState<SaveWarning | null>(null);
   const [warningSet, setWarningSet] = useState<Set<number>>(new Set());
-  const [houseRules, setHouseRules] = useState(list.houseRules ?? "");
+  const [houseRules, setHouseRules] = useState<HouseRule[]>(() =>
+    normalizeHouseRules(list.houseRules),
+  );
   const [houseRulesOpen, setHouseRulesOpen] = useState(false);
-  const initialHouseRules = list.houseRules ?? "";
 
   const initialItems = useMemo(() => normalizeItems(list.items), [list.id]);
+  const initialHouseRules = useMemo(
+    () => normalizeHouseRules(list.houseRules),
+    [list.id],
+  );
   const initialName = list.name;
 
+  // Compare normalized so a blank in-progress rule row doesn't count as a change.
   const unSavedChanges =
     !itemsEqual(items, initialItems) ||
     name !== initialName ||
-    houseRules !== initialHouseRules;
+    JSON.stringify(normalizeHouseRules(houseRules)) !==
+      JSON.stringify(initialHouseRules);
+
+  /** Rules as they'll be saved: trimmed, clamped, empty rows dropped. */
+  const savedHouseRules = () => {
+    const rules = normalizeHouseRules(houseRules);
+    return rules.length ? rules : undefined;
+  };
 
   const [showExitConfirm, setShowExitConfirm] = useState(false);
   const [showPaste, setShowPaste] = useState(false);
@@ -583,7 +604,7 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
       ...list,
       name: name.trim() || "Unnamed List",
       items: promoted.map(serializeItem),
-      houseRules: houseRules.trim() || undefined,
+      houseRules: savedHouseRules(),
     });
   };
 
@@ -603,7 +624,7 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
       ...list,
       name: name.trim() || "Unnamed List",
       items: fixed.map(serializeItem),
-      houseRules: houseRules.trim() || undefined,
+      houseRules: savedHouseRules(),
     });
   };
 
@@ -686,18 +707,108 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
               className={`house-rules-toggle${houseRulesOpen ? " open" : ""}`}
               onClick={() => setHouseRulesOpen((v) => !v)}
             >
-              <span>House Rules</span>
+              <span>
+                House Rules
+                {houseRules.length > 0 ? ` (${houseRules.length})` : ""}
+              </span>
               <span className={`house-rules-arrow${houseRulesOpen ? " open" : ""}`}>▶</span>
             </button>
             {houseRulesOpen && (
               <div className="house-rules-body">
-                <textarea
-                  className="house-rules-textarea"
-                  value={houseRules}
-                  onChange={(e) => setHouseRules(e.target.value)}
-                  placeholder="Add any house rules for this list (optional)..."
-                  maxLength={600}
-                />
+                {houseRules.length === 0 && (
+                  <p className="house-rules-hint">
+                    Optional rules shown with every prompt.{" "}
+                    <strong>When</strong> is the trigger, something that
+                    happens at the table. <strong>Then</strong> is the
+                    consequence your group agreed on.
+                  </p>
+                )}
+                {houseRules.map((rule, i) => (
+                  <div className="house-rule-row" key={i}>
+                    <div className="house-rule-fields">
+                      <input
+                        className="house-rule-when"
+                        value={rule.when}
+                        maxLength={HOUSE_RULE_WHEN_MAX}
+                        placeholder="When... (e.g. someone refuses a prompt)"
+                        onChange={(e) =>
+                          setHouseRules((prev) =>
+                            prev.map((r, j) =>
+                              j === i ? { ...r, when: e.target.value } : r,
+                            ),
+                          )
+                        }
+                      />
+                      <textarea
+                        className="house-rules-textarea house-rule-then"
+                        value={rule.then}
+                        maxLength={HOUSE_RULE_THEN_MAX}
+                        placeholder="Then... (e.g. they pull an extra block)"
+                        onChange={(e) =>
+                          setHouseRules((prev) =>
+                            prev.map((r, j) =>
+                              j === i ? { ...r, then: e.target.value } : r,
+                            ),
+                          )
+                        }
+                      />
+                    </div>
+                    <button
+                      type="button"
+                      className="house-rule-remove"
+                      title="Remove this rule"
+                      onClick={() =>
+                        setHouseRules((prev) => prev.filter((_, j) => j !== i))
+                      }
+                    >
+                      ✕
+                    </button>
+                  </div>
+                ))}
+                {houseRules.length < HOUSE_RULES_MAX && (
+                  <button
+                    type="button"
+                    className="house-rule-add"
+                    onClick={() =>
+                      setHouseRules((prev) => [...prev, { when: "", then: "" }])
+                    }
+                  >
+                    + Add rule
+                  </button>
+                )}
+                {(() => {
+                  const unused = EXAMPLE_HOUSE_RULES.filter(
+                    (ex) => !houseRules.some((r) => r.when === ex.when),
+                  );
+                  if (!unused.length || houseRules.length >= HOUSE_RULES_MAX)
+                    return null;
+                  return (
+                    <div className="house-rule-examples">
+                      <span className="house-rule-examples-label">
+                        Examples, tap to add:
+                      </span>
+                      <div className="house-rule-example-chips">
+                        {unused.map((ex) => (
+                          <button
+                            key={ex.when}
+                            type="button"
+                            className="house-rule-example-chip"
+                            title={`When ${ex.when.toLowerCase()} → ${ex.then.toLowerCase()}`}
+                            onClick={() =>
+                              setHouseRules((prev) =>
+                                prev.length < HOUSE_RULES_MAX
+                                  ? [...prev, { ...ex }]
+                                  : prev,
+                              )
+                            }
+                          >
+                            {ex.when}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
             )}
           </div>

@@ -26,6 +26,8 @@ export interface ActiveReveal {
   step: RevealStep;
   half: "truth" | "dare" | null;
   spicy: boolean;
+  /** Position in the active list, so "Put it back" can un-consume the block. */
+  pos: number | null;
 }
 
 /**

@@ -34,12 +34,12 @@ interface ListCardProps {
   onDelete?: () => void;
 }
 
+// onUseBoard stays in ListCardProps for the future board mode
 const ListCard = ({
   card,
   activeForClassic,
   activeForBoard,
   onUseClassic,
-  onUseBoard,
   onView,
   onCopyAndEdit,
   onEdit,
@@ -107,8 +107,12 @@ const ListCard = ({
         </button>
 
         {card.isDefault ? (
-          <button className="card-btn" onClick={onCopyAndEdit}>
-            Copy &amp; Edit
+          <button
+            className="card-btn"
+            onClick={onCopyAndEdit}
+            title="Default lists can't be changed; this edits a copy"
+          >
+            Edit a Copy
           </button>
         ) : (
           <>

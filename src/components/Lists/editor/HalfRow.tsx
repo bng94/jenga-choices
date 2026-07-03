@@ -24,7 +24,6 @@ export default function HalfRow({
   half,
   value,
   onChange,
-  onDelete,
   onDragStart,
   onDragEnd,
   onDragOver,

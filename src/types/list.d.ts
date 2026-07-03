@@ -30,11 +30,21 @@ export interface EditorTDItem {
 
 export type EditorItem = EditorSingleItem | EditorTDItem;
 
+/**
+ * One structured house rule: a trigger ("The tower falls") and its
+ * consequence ("Rebuild it and do 10 jumping jacks"). `when` may be empty
+ * for rules migrated from the old free-text format.
+ */
+export interface HouseRule {
+  when: string;
+  then: string;
+}
+
 export interface CustomList {
   id: string;
   name: string;
   items: StoredItem[];
-  houseRules?: string;
+  houseRules?: HouseRule[];
 }
 
 export type SpicySlot = "spicy" | "spicyTruth" | "spicyDare";
@@ -79,7 +89,8 @@ export interface ExportFile {
   id: string;
   name: string;
   items: ExportItem[];
-  houseRules?: string;
+  /** Modern exports write HouseRule[]; older files may contain a plain string. */
+  houseRules?: HouseRule[] | string;
 }
 
 export interface ImportPreview {
@@ -89,7 +100,7 @@ export interface ImportPreview {
   tdPairs: number;
   spicyCount: number;
   rawItems: StoredItem[];
-  houseRules?: string;
+  houseRules?: HouseRule[];
 }
 
 export interface ImportError {

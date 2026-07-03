@@ -127,7 +127,8 @@ const ListManager = ({
       name: `Copy of ${which === "singles" ? "Classic Singles" : which === "truthDare" ? "Truth or Dare" : "Valentine's Day"}`,
       items,
     };
-    setCustomLists((prev) => [...prev, newList]);
+    // The copy only becomes a real list on Save — canceling the editor
+    // must leave nothing behind (handleSave appends unknown ids).
     setEditing({ list: newList, isNew: false });
   };
 
