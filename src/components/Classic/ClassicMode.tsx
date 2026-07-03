@@ -6,12 +6,18 @@ import type {
   EditorSingleItem,
   EditorTDItem,
   GamePhase,
+  GameSession,
   LastReveal,
   NumberedOrder,
   RevealStep,
 } from "../../types";
 import { shuffle } from "../../utils/shuffle";
 import { deserializeItem, itemHasSpicyContent } from "../../utils/itemModel";
+import {
+  clearGameSession,
+  loadGameSession,
+  saveGameSession,
+} from "../../utils/storage";
 import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
 import ActiveListViewer from "../Lists/ActiveListViewer/ActiveListViewer";
 import styles from "./ClassicMode.module.css";
@@ -65,35 +71,65 @@ interface ClassicModeProps {
 }
 
 const ClassicMode = ({ activeList, onProgressChange }: ClassicModeProps) => {
-  const [gamePhase, setGamePhase] = useState<GamePhase>("setup");
-  const [blockType, setBlockType] = useState<BlockType | null>(null);
+  // A saved in-progress game is restored once, on mount. undefined = not yet
+  // loaded; null = no valid session for this list.
+  const sessionRef = useRef<GameSession | null | undefined>(undefined);
+  if (sessionRef.current === undefined) {
+    sessionRef.current = loadGameSession(activeList.id);
+  }
+  const session = sessionRef.current;
+
+  const [gamePhase, setGamePhase] = useState<GamePhase>(
+    session ? "playing" : "setup",
+  );
+  const [blockType, setBlockType] = useState<BlockType | null>(
+    session?.blockType ?? null,
+  );
 
   const [shuffledList, setShuffledList] = useState<EditorItem[]>(() =>
-    shuffle(padToFiftyFour(activeList.items.map(deserializeItem))),
+    session
+      ? session.shuffledItems
+      : shuffle(padToFiftyFour(activeList.items.map(deserializeItem))),
   );
   const [listOrderList, setListOrderList] = useState<EditorItem[]>(() =>
     padToFiftyFour(activeList.items.map(deserializeItem)),
   );
 
   /** Controls whether numbered mode uses random or list order. Default is random. */
-  const [numberedOrder, setNumberedOrder] = useState<NumberedOrder>("random");
+  const [numberedOrder, setNumberedOrder] = useState<NumberedOrder>(
+    session?.numberedOrder ?? "random",
+  );
 
-  const [usedPositions, setUsedPositions] = useState<Set<number>>(new Set());
-  const [spicyEnabled, setSpicyEnabled] = useState(false);
-  const [revealedItem, setRevealedItem] = useState<EditorItem | null>(null);
-  const [lastReveal, setLastReveal] = useState<LastReveal | null>(null);
+  const [usedPositions, setUsedPositions] = useState<Set<number>>(
+    () => new Set(session?.usedPositions ?? []),
+  );
+  const [spicyEnabled, setSpicyEnabled] = useState(
+    session?.spicyEnabled ?? false,
+  );
+  const [revealedItem, setRevealedItem] = useState<EditorItem | null>(
+    session?.activeReveal?.item ?? null,
+  );
+  const [lastReveal, setLastReveal] = useState<LastReveal | null>(
+    session?.lastReveal ?? null,
+  );
 
   /**
    * The last completed reveal that had actual prompt content.
    * Separate from lastReveal so a blank pull doesn't erase it.
    */
   const [lastWrittenReveal, setLastWrittenReveal] = useState<LastReveal | null>(
-    null,
+    session?.lastWrittenReveal ?? null,
   );
 
-  const [revealStep, setRevealStep] = useState<RevealStep | null>(null);
-  const [chosenHalf, setChosenHalf] = useState<"truth" | "dare" | null>(null);
-  const [chosenSpicy, setChosenSpicy] = useState(false);
+  const [revealStep, setRevealStep] = useState<RevealStep | null>(
+    session?.activeReveal?.step ?? null,
+  );
+  const [chosenHalf, setChosenHalf] = useState<"truth" | "dare" | null>(
+    session?.activeReveal?.half ?? null,
+  );
+  const [chosenSpicy, setChosenSpicy] = useState(
+    session?.activeReveal?.spicy ?? false,
+  );
   const [numberInput, setNumberInput] = useState("");
   const [numberError, setNumberError] = useState("");
   const [showLast, setShowLast] = useState(false);
@@ -113,7 +149,11 @@ const ClassicMode = ({ activeList, onProgressChange }: ClassicModeProps) => {
   const listHasSpicy = activeList.items.some(itemHasSpicyContent);
   const gameNotStarted = revealedCount === 0;
 
+  const prevListIdRef = useRef(activeList.id);
   useEffect(() => {
+    // Skip the mount run — it would wipe a game session restored from storage.
+    if (prevListIdRef.current === activeList.id) return;
+    prevListIdRef.current = activeList.id;
     const base = padToFiftyFour(activeList.items.map(deserializeItem));
     setShuffledList(shuffle([...base]));
     setListOrderList(base);
@@ -136,6 +176,48 @@ const ClassicMode = ({ activeList, onProgressChange }: ClassicModeProps) => {
       setNumberedOrder("random");
     }
   }, [activeList.id]);
+
+  // Persist the in-progress game so it survives reloads, tab discards, and
+  // PWA relaunches. Cleared whenever the player is back on the setup screen.
+  useEffect(() => {
+    if (gamePhase !== "playing" || !blockType) {
+      clearGameSession();
+      return;
+    }
+    saveGameSession({
+      listId: activeList.id,
+      blockType,
+      numberedOrder,
+      shuffledItems: shuffledList,
+      usedPositions: [...usedPositions],
+      spicyEnabled,
+      lastReveal,
+      lastWrittenReveal,
+      activeReveal:
+        revealStep !== null && revealedItem
+          ? {
+              item: revealedItem,
+              step: revealStep,
+              half: chosenHalf,
+              spicy: chosenSpicy,
+            }
+          : null,
+    });
+  }, [
+    gamePhase,
+    blockType,
+    numberedOrder,
+    shuffledList,
+    usedPositions,
+    spicyEnabled,
+    lastReveal,
+    lastWrittenReveal,
+    revealStep,
+    revealedItem,
+    chosenHalf,
+    chosenSpicy,
+    activeList.id,
+  ]);
 
   useEffect(() => {
     onProgressChange?.(usedPositions.size > 0);

@@ -2,25 +2,29 @@ import type { StoredSingle, StoredTD } from "../types";
 
 export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   { v: "Act out an animal and have everyone guess what it is" },
-  { v: "Air Guitar! Let's see it! Play air guitar for 30 seconds" },
+  { v: "Air guitar! Rock out for 30 seconds" },
   {
     v: "Dare! The player to your left chooses your dare. If you refuse, draw another block",
   },
   { v: "Do 10 jumping jacks as fast as you can!" },
-  { v: "Do 5 push-ups. Let's see how many you can do!" },
-  { v: "Do your best celebrity impression" },
+  { v: "Do 5 push-ups!" },
+  { v: "Do your best celebrity impression. Everyone guesses who" },
   { v: "Do your best dance move" },
   { v: "Do your best superhero landing pose" },
   { v: "Give someone a genuine compliment" },
   {
     v: "Give the player across from you a high five. Don't knock the tower over!",
   },
-  { v: "Give the player to your right a bear hug" },
+  {
+    v: "Give the player to your right a high five, fist bump, or hug — their pick",
+  },
   { v: "Go again! Take another turn" },
   { v: "I am thankful for... Share one thing you are grateful for" },
   { v: "Impersonate someone in the group. Everyone guesses who" },
-  { v: "Jump as high as you can!" },
-  { v: "Make someone in the group laugh" },
+  {
+    v: "Compliment battle! Trade compliments with the next player until someone laughs or runs out",
+  },
+  { v: "Make someone in the group laugh. You have 30 seconds" },
   { v: "Make up a rule that applies to everyone for the rest of the game" },
   { v: "Mime making and eating the best sandwich ever until your next turn" },
   { v: "Moonwalk across the room!" },
@@ -37,7 +41,7 @@ export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   { v: "Place this block back onto the tower with your non-dominant hand" },
   { v: "Do the chicken dance or draw another block" },
   {
-    v: "Point to something in this room that is closest to your favorite color",
+    v: "Point to the thing in this room closest to your favorite color",
   },
   { v: "Pull another block from the tower" },
   { v: "Pull your next block with one eye shut" },
@@ -50,11 +54,13 @@ export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   { v: "Share something most people don't know about you" },
   { v: "Sing a line from your favorite song" },
   { v: "Sing Happy Birthday in a completely different music style" },
-  { v: "Speak in an accent for the rest of the round" },
+  {
+    v: "Talk like a pirate, robot, or cowboy for the rest of the round. Group picks which",
+  },
   { v: "Spin in a circle 5 times, then place this block back onto the tower" },
   { v: "Stand on one leg while placing this block back onto the tower" },
   {
-    v: "State both your favorite food and the weirdest food you've ever eaten",
+    v: "Name your favorite food and the weirdest food you've ever eaten",
   },
   { v: "Have a staring contest with the next player. If you lose, draw again" },
   { v: "Strike a pose and hold it until the next player takes their turn" },
@@ -64,8 +70,10 @@ export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   {
     v: "Play Rock, Paper, Scissors with the next player. If you lose, draw again",
   },
-  { v: "Take a group selfie!" },
-  { v: "Talent! Show off something you are talented at" },
+  {
+    v: "Invent a group victory pose. Everyone does it together and holds it for 5 seconds",
+  },
+  { v: "Talent show! Show off something you are talented at" },
   { v: "Teach everyone a word in another language" },
   { v: "Tell a joke" },
   { v: "Tell 2 truths and 1 lie. Everyone guesses the lie" },
@@ -76,9 +84,7 @@ export const DEFAULT_SINGLES_LIST: StoredSingle[] = [
   {
     v: "Whisper something to the person next to you and have them repeat it out loud to the group",
   },
-  {
-    v: "Tell everyone something you are looking forward to",
-  },
+  { v: "Tell everyone something you are looking forward to" },
 ];
 
 export const DEFAULT_TD_LIST: StoredTD[] = [

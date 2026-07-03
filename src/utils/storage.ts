@@ -1,5 +1,5 @@
 import { STORAGE_KEYS } from "../constants/storage";
-import type { CustomList } from "../types";
+import type { CustomList, GameSession } from "../types";
 
 export function loadCustomLists(): CustomList[] {
   try {
@@ -45,6 +45,42 @@ export function loadBoardSpicyEnabled(): boolean {
 
 export function saveBoardSpicyEnabled(enabled: boolean): void {
   localStorage.setItem(STORAGE_KEYS.spicyEnabled.board, String(enabled));
+}
+
+/**
+ * Restore a saved in-progress game, or null if there is none or it doesn't
+ * belong to the given list (e.g. the active list changed since it was saved).
+ */
+export function loadGameSession(listId: string): GameSession | null {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEYS.classicSession);
+    if (!raw) return null;
+    const session = JSON.parse(raw) as GameSession;
+    if (
+      session.listId !== listId ||
+      (session.blockType !== "blank" && session.blockType !== "numbered") ||
+      !Array.isArray(session.shuffledItems) ||
+      session.shuffledItems.length === 0 ||
+      !Array.isArray(session.usedPositions)
+    ) {
+      return null;
+    }
+    return session;
+  } catch {
+    return null;
+  }
+}
+
+export function saveGameSession(session: GameSession): void {
+  try {
+    localStorage.setItem(STORAGE_KEYS.classicSession, JSON.stringify(session));
+  } catch {
+    // Storage full or unavailable — the game still works, it just won't survive a reload.
+  }
+}
+
+export function clearGameSession(): void {
+  localStorage.removeItem(STORAGE_KEYS.classicSession);
 }
 
 export function loadInfoPanelOpen(key: string): boolean | null {
