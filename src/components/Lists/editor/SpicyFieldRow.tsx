@@ -20,14 +20,14 @@ interface SpicyFieldRowProps {
  * that still accepts drops — the spicy toggle is the gate, not
  * the individual row.
  */
-export default function SpicyFieldRow({
+const SpicyFieldRow = ({
   value,
   onChange,
   placeholder,
   spicyVisible,
   dragHandleProps,
   dropProps,
-}: SpicyFieldRowProps) {
+}: SpicyFieldRowProps) => {
   // If a value is dropped in from outside, auto-open
   if (!spicyVisible) {
     return <div className="spicy-field spicy-field-hidden" {...dropProps} />;
@@ -94,4 +94,6 @@ export default function SpicyFieldRow({
       </div>
     </div>
   );
-}
+};
+
+export default SpicyFieldRow;

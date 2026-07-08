@@ -1,4 +1,4 @@
-import type { HouseRule } from "../../types";
+import type { HouseRule } from "@types";
 import styles from "./HouseRulesDisplay.module.css";
 
 interface HouseRulesDisplayProps {

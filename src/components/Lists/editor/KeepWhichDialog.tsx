@@ -1,4 +1,5 @@
-import type { EditorTDItem } from "../../../types";
+import type { EditorTDItem } from "@types";
+import Modal from "@components/ui/Modal/Modal";
 import "./KeepWhichDialog.css";
 
 interface KeepWhichDialogProps {
@@ -7,23 +8,16 @@ interface KeepWhichDialogProps {
   onCancel: () => void;
 }
 
-export default function KeepWhichDialog({
+const KeepWhichDialog = ({
   item,
   onKeep,
   onCancel,
-}: KeepWhichDialogProps) {
+}: KeepWhichDialogProps) => {
   return (
-    <div
-      className="keep-which-overlay"
-      onClick={(e) => {
-        e.stopPropagation();
-        onCancel();
-      }}
-    >
-      <div className="keep-which-box" onClick={(e) => e.stopPropagation()}>
-        <div className="keep-which-title">
-          Convert to Single — keep which text?
-        </div>
+    <Modal variant="dialog" onRequestClose={onCancel}>
+      <div className="keep-which-title">
+        Convert to Single — keep which text?
+      </div>
 
         <div className="keep-which-options">
           <button
@@ -47,7 +41,8 @@ export default function KeepWhichDialog({
         <button className="keep-cancel" onClick={onCancel}>
           Cancel
         </button>
-      </div>
-    </div>
+    </Modal>
   );
-}
+};
+
+export default KeepWhichDialog;

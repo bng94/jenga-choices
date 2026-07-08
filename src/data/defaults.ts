@@ -1,5 +1,5 @@
-import type { CustomList, StoredSingle, StoredTD } from "../types";
-import { DEFAULT_LIST_IDS } from "../constants/storage";
+import type { CustomList, StoredSingle, StoredTD } from "@types";
+import { DEFAULT_LIST_IDS } from "@constants/storage";
 
 const SINGLES_ITEMS: StoredSingle[] = [
   { v: "Act out an animal and have everyone guess what it is" },

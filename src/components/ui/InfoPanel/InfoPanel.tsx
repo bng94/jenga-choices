@@ -28,7 +28,7 @@ const InfoPanel = ({ title, children }: InfoPanelProps) => {
   return (
     <>
       <button
-        className={styles["info-trigger"]}
+        className={styles.infoTrigger}
         onClick={() => setOpen(true)}
         title={`Help: ${title}`}
         type="button"
@@ -38,12 +38,9 @@ const InfoPanel = ({ title, children }: InfoPanelProps) => {
       </button>
 
       {open && (
-        <div
-          className={styles["info-modal-overlay"]}
-          onClick={() => setOpen(false)}
-        >
+        <div className={styles.infoModalOverlay} onClick={() => setOpen(false)}>
           <div
-            className={styles["info-modal"]}
+            className={styles.infoModal}
             onClick={(e) => e.stopPropagation()}
             ref={dialogRef}
             role="dialog"
@@ -51,16 +48,16 @@ const InfoPanel = ({ title, children }: InfoPanelProps) => {
             aria-labelledby={`${title}-info-modal`}
             tabIndex={-1}
           >
-            <div className={styles["info-modal-header"]}>
-              <div className={styles["info-modal-title"]}>{title}</div>
+            <div className={styles.infoModalHeader}>
+              <div className={styles.infoModalTitle}>{title}</div>
               <button
-                className={styles["info-modal-close"]}
+                className={styles.infoModalClose}
                 onClick={() => setOpen(false)}
               >
                 ✕
               </button>
             </div>
-            <div className={styles["info-modal-body"]}>{children}</div>
+            <div className={styles.infoModalBody}>{children}</div>
           </div>
         </div>
       )}
@@ -77,17 +74,15 @@ interface InfoSectionProps {
 
 const InfoSection = ({ heading, children }: InfoSectionProps) => {
   return (
-    <div className={styles["info-section"]}>
-      {heading && (
-        <div className={styles["info-section-heading"]}>{heading}</div>
-      )}
+    <div className={styles.infoSection}>
+      {heading && <div className={styles.infoSectionHeading}>{heading}</div>}
       {children}
     </div>
   );
 };
 
 const InfoGrid = ({ children }: { children: ReactNode }) => {
-  return <div className={styles["info-grid"]}>{children}</div>;
+  return <div className={styles.infoGrid}>{children}</div>;
 };
 
 interface InfoCardProps {
@@ -98,10 +93,10 @@ interface InfoCardProps {
 
 const InfoCard = ({ icon, label, text }: InfoCardProps) => {
   return (
-    <div className={styles["info-card"]}>
-      <div className={styles["info-card-icon"]}>{icon}</div>
-      <div className={styles["info-card-label"]}>{label}</div>
-      <div className={styles["info-card-text"]}>{text}</div>
+    <div className={styles.infoCard}>
+      <div className={styles.infoCardIcon}>{icon}</div>
+      <div className={styles.infoCardLabel}>{label}</div>
+      <div className={styles.infoCardText}>{text}</div>
     </div>
   );
 };
@@ -115,10 +110,10 @@ interface InfoRowProps {
 const InfoRow = ({ icon, centered, children }: InfoRowProps) => {
   return (
     <div
-      className={`${styles["info-row"]} ${centered ? styles["info-row-centered"] : ""}`}
+      className={`${styles.infoRow} ${centered ? styles.infoRowCentered : ""}`}
     >
-      <span className={styles["info-row-icon"]}>{icon}</span>
-      <span className={styles["info-row-text"]}>{children}</span>
+      <span className={styles.infoRowIcon}>{icon}</span>
+      <span className={styles.infoRowText}>{children}</span>
     </div>
   );
 };

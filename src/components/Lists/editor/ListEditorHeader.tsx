@@ -1,4 +1,4 @@
-import SpicyToggle from "../../SpicyToggle/SpicyToggle";
+import SpicyToggle from "@components/ui/SpicyToggle/SpicyToggle";
 import ListEditorInfoPanel from "../ListEditorInfoPanel";
 
 interface ListEditorHeaderProps {

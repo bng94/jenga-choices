@@ -5,7 +5,7 @@ import type {
   EditorTDItem,
   HalfDragHalf,
   SpicySlot,
-} from "../../../types";
+} from "@types";
 import HalfRow from "./HalfRow";
 import SpicyFieldRow from "./SpicyFieldRow";
 

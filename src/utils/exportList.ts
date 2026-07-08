@@ -7,18 +7,18 @@ import type {
   StoredItem,
   StoredSingle,
   StoredTD,
-} from "../types";
+} from "@types";
 
-function isStoredSingle(raw: StoredItem): raw is StoredSingle {
+const isStoredSingle = (raw: StoredItem): raw is StoredSingle => {
   return typeof raw === "object" && raw !== null && "v" in raw;
-}
+};
 
-function isStoredTD(raw: StoredItem): raw is StoredTD {
+const isStoredTD = (raw: StoredItem): raw is StoredTD => {
   return typeof raw === "object" && raw !== null && "t" in raw;
-}
+};
 
 /** Converts one StoredItem to its human-readable export shape. Skips null/undefined/blank. */
-function toExportItem(raw: StoredItem): ExportItem | null {
+const toExportItem = (raw: StoredItem): ExportItem | null => {
   if (raw === null || raw === undefined) return null;
 
   if (isStoredSingle(raw)) {
@@ -37,13 +37,13 @@ function toExportItem(raw: StoredItem): ExportItem | null {
   }
 
   return null;
-}
+};
 
 /**
  * Converts a CustomList to a human-readable JSON file and triggers a browser download.
  * Empty/blank items are excluded from the export.
  */
-export function exportList(list: CustomList): void {
+export const exportList = (list: CustomList): void => {
   const exportItems = list.items
     .map(toExportItem)
     .filter((item): item is ExportItem => item !== null);
@@ -65,4 +65,4 @@ export function exportList(list: CustomList): void {
   anchor.download = `${list.name.toLowerCase().replace(/\s+/g, "-")}.json`;
   anchor.click();
   URL.revokeObjectURL(url);
-}
+};

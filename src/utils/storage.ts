@@ -1,8 +1,8 @@
-import { DEFAULT_LIST_IDS, STORAGE_KEYS } from "../constants/storage";
-import type { CustomList, GameSession } from "../types";
+import { DEFAULT_LIST_IDS, STORAGE_KEYS } from "@constants/storage";
+import type { CustomList, GameSession } from "@types";
 import { normalizeHouseRules } from "./houseRules";
 
-export function loadCustomLists(): CustomList[] {
+export const loadCustomLists = (): CustomList[] => {
   try {
     const lists: CustomList[] =
       JSON.parse(localStorage.getItem(STORAGE_KEYS.customLists) ?? "null") ??
@@ -18,53 +18,53 @@ export function loadCustomLists(): CustomList[] {
   } catch {
     return [];
   }
-}
+};
 
-export function saveCustomLists(lists: CustomList[]): void {
+export const saveCustomLists = (lists: CustomList[]): void => {
   localStorage.setItem(STORAGE_KEYS.customLists, JSON.stringify(lists));
-}
+};
 
-export function loadClassicListId(): string {
+export const loadClassicListId = (): string => {
   return (
     localStorage.getItem(STORAGE_KEYS.classicList) ?? DEFAULT_LIST_IDS.singles
   );
-}
+};
 
-export function saveClassicListId(id: string): void {
+export const saveClassicListId = (id: string): void => {
   localStorage.setItem(STORAGE_KEYS.classicList, id);
-}
+};
 
-export function loadClassicSpicyEnabled(): boolean {
+export const loadClassicSpicyEnabled = (): boolean => {
   return localStorage.getItem(STORAGE_KEYS.spicyEnabled.classic) === "true";
-}
+};
 
-export function saveClassicSpicyEnabled(enabled: boolean): void {
+export const saveClassicSpicyEnabled = (enabled: boolean): void => {
   localStorage.setItem(STORAGE_KEYS.spicyEnabled.classic, String(enabled));
-}
+};
 
-export function loadBoardListId(): string {
+export const loadBoardListId = (): string => {
   return (
     localStorage.getItem(STORAGE_KEYS.boardList) ?? DEFAULT_LIST_IDS.singles
   );
-}
+};
 
-export function saveBoardListId(id: string): void {
+export const saveBoardListId = (id: string): void => {
   localStorage.setItem(STORAGE_KEYS.boardList, id);
-}
+};
 
-export function loadBoardSpicyEnabled(): boolean {
+export const loadBoardSpicyEnabled = (): boolean => {
   return localStorage.getItem(STORAGE_KEYS.spicyEnabled.board) === "true";
-}
+};
 
-export function saveBoardSpicyEnabled(enabled: boolean): void {
+export const saveBoardSpicyEnabled = (enabled: boolean): void => {
   localStorage.setItem(STORAGE_KEYS.spicyEnabled.board, String(enabled));
-}
+};
 
 /**
  * Restore a saved in-progress game, or null if there is none or it doesn't
  * belong to the given list (e.g. the active list changed since it was saved).
  */
-export function loadGameSession(listId: string): GameSession | null {
+export const loadGameSession = (listId: string): GameSession | null => {
   try {
     const raw = localStorage.getItem(STORAGE_KEYS.classicSession);
     if (!raw) return null;
@@ -82,26 +82,26 @@ export function loadGameSession(listId: string): GameSession | null {
   } catch {
     return null;
   }
-}
+};
 
-export function saveGameSession(session: GameSession): void {
+export const saveGameSession = (session: GameSession): void => {
   try {
     localStorage.setItem(STORAGE_KEYS.classicSession, JSON.stringify(session));
   } catch {
     // Storage full or unavailable — the game still works, it just won't survive a reload.
   }
-}
+};
 
-export function clearGameSession(): void {
+export const clearGameSession = (): void => {
   localStorage.removeItem(STORAGE_KEYS.classicSession);
-}
+};
 
-export function loadInfoPanelOpen(key: string): boolean | null {
+export const loadInfoPanelOpen = (key: string): boolean | null => {
   const saved = localStorage.getItem(key);
   if (saved === null) return null;
   return saved === "true";
-}
+};
 
-export function saveInfoPanelOpen(key: string, open: boolean): void {
+export const saveInfoPanelOpen = (key: string, open: boolean): void => {
   localStorage.setItem(key, String(open));
-}
+};

@@ -6,7 +6,7 @@ Jenga Choices is a React, Vite, and TypeScript web app designed as a digital com
 
 ## Project Overview
 
-It addresses the limitations of traditional custom Jenga, such as slow gameplay due to reading or memorized prompts. It allows for a physical tower while managing challenges instantly via a mobile device.
+It addresses the limitations of traditional custom Jenga, such as slow gameplay due to writing or replacing written prompts on blocks. It allows for a physical tower while managing prompt challenges instantly via a mobile device. It provdes the flexiblity to customizing prompts when they are no longer relveant or over-used in games.
 
 ## Key Features
 

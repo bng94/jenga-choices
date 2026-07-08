@@ -1,5 +1,5 @@
 import styles from "./ClassicMode.module.css";
-import type { BlockType } from "../../types";
+import type { BlockType } from "@types";
 
 interface SetupScreenProps {
   blockType: BlockType | null;

@@ -4,13 +4,15 @@ import type {
   EditorItem,
   EditorSingleItem,
   EditorTDItem,
-} from "../../types";
-import { deserializeItem, itemHasSpicy } from "../../utils/itemModel";
-import SpicyToggle from "../SpicyToggle/SpicyToggle";
-import HouseRulesDisplay from "../HouseRules/HouseRulesDisplay";
-import { exportList } from "../../utils/exportList";
+} from "@types";
+import { deserializeItem, itemHasSpicy } from "@utils/itemModel";
+import SpicyToggle from "@components/ui/SpicyToggle/SpicyToggle";
+import HouseRulesDisplay from "@components/ui/HouseRules/HouseRulesDisplay";
+import { exportList } from "@utils/exportList";
 import "./ListViewer.css";
-import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
+import ConfirmDialog from "@components/ui/ConfirmDialog/ConfirmDialog";
+import Modal from "@components/ui/Modal/Modal";
+import TDLabel from "@components/ui/TDLabel/TDLabel";
 
 interface ListViewerProps {
   list: CustomList & { isDefault: boolean };
@@ -18,7 +20,7 @@ interface ListViewerProps {
   onSave: (updated: CustomList) => void;
 }
 
-export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
+const ListViewer = ({ list, onClose, onSave }: ListViewerProps) => {
   const isDefault = list.isDefault;
 
   const [spicyMode, setSpicyMode] = useState(false);
@@ -131,14 +133,14 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
     return (
       <>
         <div className="viewer-td-row truth">
-          <span className="viewer-td-label truth">T</span>
+          <TDLabel type="truth" />
           <span className={spicyMode && hasTruthSpicy ? "spicy-text" : ""}>
             {spicyMode && hasTruthSpicy ? td.spicyTruth : td.truth}
           </span>
           {hasTruthSpicy && <span className="viewer-spicy-dot">🔥</span>}
         </div>
         <div className="viewer-td-row dare">
-          <span className="viewer-td-label dare">D</span>
+          <TDLabel type="dare" />
           <span className={spicyMode && hasDareSpicy ? "spicy-text" : ""}>
             {spicyMode && hasDareSpicy ? td.spicyDare : td.dare}
           </span>
@@ -149,10 +151,8 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
   };
 
   return (
-    <div
-      className="editor-overlay"
-      onClick={(e) => {
-        e.stopPropagation();
+    <Modal
+      onRequestClose={() => {
         if (dirty) {
           setShowExitConfirm(true);
           return;
@@ -160,8 +160,7 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
         onClose();
       }}
     >
-      <div className="editor-panel" onClick={(e) => e.stopPropagation()}>
-        <div className="editor-header">
+      <div className="editor-header">
           <div>
             <div className="editor-title">{list.name}</div>
             <div className="viewer-subtitle">
@@ -281,7 +280,8 @@ export default function ListViewer({ list, onClose, onSave }: ListViewerProps) {
             onCancel={() => setShowExitConfirm(false)}
           />
         )}
-      </div>
-    </div>
+    </Modal>
   );
-}
+};
+
+export default ListViewer;

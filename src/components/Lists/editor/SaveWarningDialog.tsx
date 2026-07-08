@@ -1,4 +1,6 @@
-import type { HalfEmptyEntry } from "../../../types";
+import type { HalfEmptyEntry } from "@types";
+import Modal from "@components/ui/Modal/Modal";
+import TDLabel from "@components/ui/TDLabel/TDLabel";
 import "./SaveWarningDialog.css";
 
 interface SaveWarningDialogProps {
@@ -8,27 +10,21 @@ interface SaveWarningDialogProps {
   onCancel: () => void;
 }
 
-export default function SaveWarningDialog({
+const SaveWarningDialog = ({
   halfEmpty,
   onFixThem,
   onSaveAndConvert,
   onCancel,
-}: SaveWarningDialogProps) {
+}: SaveWarningDialogProps) => {
   const count = halfEmpty.length;
 
   return (
-    <div
-      className="keep-which-overlay"
-      onClick={(e) => {
-        e.stopPropagation();
-        onCancel();
-      }}
+    <Modal
+      variant="dialog"
+      onRequestClose={onCancel}
+      panelClassName="save-warning-box"
     >
-      <div
-        className="keep-which-box save-warning-box"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <div className="save-warning-icon">⚠️</div>
+      <div className="save-warning-icon">⚠️</div>
 
         <div className="keep-which-title">
           {count === 1
@@ -52,13 +48,13 @@ export default function SaveWarningDialog({
                   <span
                     className={`sw-half ${hasTruth ? "has-content" : "is-empty"}`}
                   >
-                    <span className="viewer-td-label truth">T</span>
+                    <TDLabel type="truth" />
                     {hasTruth || <em>empty</em>}
                   </span>
                   <span
                     className={`sw-half ${hasDare ? "has-content" : "is-empty"}`}
                   >
-                    <span className="viewer-td-label dare">D</span>
+                    <TDLabel type="dare" />
                     {hasDare || <em>empty</em>}
                   </span>
                 </div>
@@ -102,7 +98,8 @@ export default function SaveWarningDialog({
         <button className="keep-cancel" onClick={onCancel}>
           Cancel
         </button>
-      </div>
-    </div>
+    </Modal>
   );
-}
+};
+
+export default SaveWarningDialog;

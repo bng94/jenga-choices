@@ -3,7 +3,7 @@ import InfoPanel, {
   InfoGrid,
   InfoRow,
   InfoSection,
-} from "../InfoPanel/InfoPanel";
+} from "@components/ui/InfoPanel/InfoPanel";
 const ClassicModeInfoPanel = () => {
   return (
     <InfoPanel title="How Classic Mode works">

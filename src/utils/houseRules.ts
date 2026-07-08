@@ -1,4 +1,4 @@
-import type { HouseRule } from "../types";
+import type { HouseRule } from "@types";
 
 /**
  * Ready-made house rules: tap-to-add chips in the editor, and the format
@@ -36,7 +36,7 @@ export const HOUSE_RULES_MAX = 6;
  *   to the length limits, rules without a usable `then` dropped.
  * - Anything else → [].
  */
-export function normalizeHouseRules(raw: unknown): HouseRule[] {
+export const normalizeHouseRules = (raw: unknown): HouseRule[] => {
   if (typeof raw === "string") {
     const then = raw.trim().slice(0, HOUSE_RULE_THEN_MAX);
     return then.length >= HOUSE_RULE_THEN_MIN ? [{ when: "", then }] : [];
@@ -55,4 +55,4 @@ export function normalizeHouseRules(raw: unknown): HouseRule[] {
     rules.push({ when: cleanWhen, then: cleanThen });
   }
   return rules;
-}
+};

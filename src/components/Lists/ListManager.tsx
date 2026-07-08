@@ -1,19 +1,19 @@
 import { useState, useRef, useEffect } from "react";
-import { CustomList, GameMode, ImportPreview } from "../../types";
-import { generateListId } from "../../utils/listHelpers";
-import { DEFAULT_LISTS } from "../../data/defaults";
+import { CustomList, GameMode, ImportPreview } from "@types";
+import { generateListId } from "@utils/listHelpers";
+import { DEFAULT_LISTS } from "@data/defaults";
 import ListCard from "./ListCard";
 import styles from "./ListManager.module.css";
-import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
-import { saveCustomLists } from "../../utils/storage";
+import ConfirmDialog from "@components/ui/ConfirmDialog/ConfirmDialog";
+import { saveCustomLists } from "@utils/storage";
 import ListViewer from "./ListViewer";
 import ListEditor from "./ListEditor";
 import {
   buildImportedList,
   exampleImportCode,
   parseImportFile,
-} from "../../utils/importList";
-import ImportPreviewDialog from "../ImportPreviewDialog/ImportPreviewDialog";
+} from "@utils/importList";
+import ImportPreviewDialog from "@components/ImportPreviewDialog/ImportPreviewDialog";
 import ListManagerInfoPanel from "./ListManagerInfoPanel";
 
 interface ListManagerProps {
@@ -159,40 +159,40 @@ const ListManager = ({
   ];
 
   return (
-    <div className={styles["lm-overlay"]} onClick={onClose}>
+    <div className={styles.lmOverlay} onClick={onClose}>
       <div
         ref={lmModalRef}
-        className={styles["lm-modal"]}
+        className={styles.lmModal}
         role="dialog"
         aria-modal="true"
         aria-labelledby="lm-modal-title"
         tabIndex={-1}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className={styles["lm-header"]}>
-          <div className={styles["lm-header-left"]}>
-            <div className={styles["lm-title-wrap"]}>
-              <div className={styles["lm-title"]} id="lm-modal-title">
+        <div className={styles.lmHeader}>
+          <div className={styles.lmHeaderLeft}>
+            <div className={styles.lmTitleWrap}>
+              <div className={styles.lmTitle} id="lm-modal-title">
                 YOUR LISTS
               </div>
               <ListManagerInfoPanel />
             </div>
-            <div className={styles["lm-sub"]}>
+            <div className={styles.lmSub}>
               Each list holds up to 54 items, one item per Jenga block.
             </div>
           </div>
 
-          <div className={styles["lm-header-actions"]}>
-            <button className={styles["lm-close"]} onClick={onClose}>
+          <div className={styles.lmHeaderActions}>
+            <button className={styles.lmClose} onClick={onClose}>
               ✕
             </button>
           </div>
         </div>
 
-        <div className={styles["lm-body"]}>
-          <div className={styles["lm-toolbar"]}>
+        <div className={styles.lmBody}>
+          <div className={styles.lmToolbar}>
             <button
-              className={styles["lm-import-btn"]}
+              className={styles.lmImportBtn}
               onClick={() => setShowImportHelp(true)}
             >
               ⬆ Import
@@ -204,15 +204,12 @@ const ListManager = ({
               onChange={handleImportFile}
               hidden
             />
-            <button
-              className={styles["lm-create-btn"]}
-              onClick={handleCreateNew}
-            >
+            <button className={styles.lmCreateBtn} onClick={handleCreateNew}>
               + New List
             </button>
           </div>
 
-          <div className={styles["lists-grid"]}>
+          <div className={styles.listsGrid}>
             {allCards.map((card) => (
               <ListCard
                 key={card.id}
@@ -247,42 +244,38 @@ const ListManager = ({
 
       {showImportHelp && (
         <div
-          className={styles["lm-import-help-overlay"]}
+          className={styles.lmImportHelpOverlay}
           onClick={(e) => {
             e.stopPropagation();
             setShowImportHelp(false);
           }}
         >
           <div
-            className={styles["lm-import-help-dialog"]}
+            className={styles.lmImportHelpDialog}
             onClick={(e) => e.stopPropagation()}
           >
-            <h3 className={styles["lm-import-help-title"]}>Import a List</h3>
-            <p className={styles["lm-import-help-desc"]}>
+            <h3 className={styles.lmImportHelpTitle}>Import a List</h3>
+            <p className={styles.lmImportHelpDesc}>
               Import a <strong>.json</strong> file previously exported from
               Jenga Choices.
             </p>
-            <div className={styles["lm-import-help-format"]}>
-              <p className={styles["lm-import-help-format-label"]}>
-                Expected format:
-              </p>
-              <pre className={styles["lm-import-help-code"]}>
-                {exampleImportCode}
-              </pre>
+            <div className={styles.lmImportHelpFormat}>
+              <p className={styles.lmImportHelpFormatLabel}>Expected format:</p>
+              <pre className={styles.lmImportHelpCode}>{exampleImportCode}</pre>
             </div>
-            <p className={styles["lm-import-help-hint"]}>
+            <p className={styles.lmImportHelpHint}>
               You can export any list using the <strong>Export</strong> button
               inside the list viewer.
             </p>
-            <div className={styles["lm-import-help-actions"]}>
+            <div className={styles.lmImportHelpActions}>
               <button
-                className={styles["lm-import-help-cancel"]}
+                className={styles.lmImportHelpCancel}
                 onClick={() => setShowImportHelp(false)}
               >
                 Cancel
               </button>
               <button
-                className={styles["lm-import-help-confirm"]}
+                className={styles.lmImportHelpConfirm}
                 onClick={handleImportHelpConfirm}
               >
                 Choose File
