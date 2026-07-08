@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import type { StoredItem, StoredSingle, StoredTD } from "../../types";
-import { parseImportFile } from "../../utils/importList";
+import type { StoredItem, StoredSingle, StoredTD } from "@types";
+import { parseImportFile } from "@utils/importList";
 import styles from "./PastePromptsModal.module.css";
 
 interface PastePromptsModalProps {
@@ -9,7 +9,7 @@ interface PastePromptsModalProps {
   onCancel: () => void;
 }
 
-function parseLine(line: string): StoredItem {
+const parseLine = (line: string): StoredItem => {
   const trimmed = line.trim().slice(0, 350);
   if (!trimmed || trimmed.toLowerCase() === "blank") {
     return { v: "" } as StoredSingle;
@@ -21,11 +21,11 @@ function parseLine(line: string): StoredItem {
     return { t: truth, d: dare } as StoredTD;
   }
   return { v: trimmed } as StoredSingle;
-}
+};
 
-function parseLines(text: string): StoredItem[] {
+const parseLines = (text: string): StoredItem[] => {
   return text.split("\n").map(parseLine);
-}
+};
 
 const PastePromptsModal = ({
   emptySlots,

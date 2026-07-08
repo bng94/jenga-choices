@@ -1,9 +1,26 @@
+import { fileURLToPath, URL } from "node:url";
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 
 // https://vite.dev/config/
 export default defineConfig({
+  css: {
+    modules: {
+      // Keep CSS selectors kebab-case; expose them to JS as camelCase
+      // (styles.listCard), so component logic reads cleanly.
+      localsConvention: "camelCaseOnly",
+    },
+  },
+  resolve: {
+    alias: {
+      "@components": fileURLToPath(new URL("./src/components", import.meta.url)),
+      "@utils": fileURLToPath(new URL("./src/utils", import.meta.url)),
+      "@data": fileURLToPath(new URL("./src/data", import.meta.url)),
+      "@constants": fileURLToPath(new URL("./src/constants", import.meta.url)),
+      "@types": fileURLToPath(new URL("./src/types", import.meta.url)),
+    },
+  },
   plugins: [
     react(),
     VitePWA({

@@ -20,7 +20,7 @@ interface HalfRowProps {
  * The ⠿T / ⠿D handle is draggable for re-pairing.
  * The × button deletes just this half, converting the item to a single.
  */
-export default function HalfRow({
+const HalfRow = ({
   half,
   value,
   onChange,
@@ -29,7 +29,7 @@ export default function HalfRow({
   onDragOver,
   onDragLeave,
   onDrop,
-}: HalfRowProps) {
+}: HalfRowProps) => {
   const label = half === "truth" ? "T" : "D";
   const inputClass = half === "truth" ? "truth-input" : "dare-input";
   const handleClass = half === "truth" ? "truth-handle" : "dare-handle";
@@ -82,4 +82,6 @@ export default function HalfRow({
       </button> */}
     </div>
   );
-}
+};
+
+export default HalfRow;

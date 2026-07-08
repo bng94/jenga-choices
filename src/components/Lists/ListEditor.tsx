@@ -9,42 +9,43 @@ import type {
   HalfDragHalf,
   SpicySlot,
   SaveWarning,
-} from "../../types";
+} from "@types";
 import {
   deserializeItem,
   serializeItem,
   itemHasSpicy,
-} from "../../utils/itemModel";
+} from "@utils/itemModel";
 import {
   EXAMPLE_HOUSE_RULES,
   HOUSE_RULE_THEN_MAX,
   HOUSE_RULE_WHEN_MAX,
   HOUSE_RULES_MAX,
   normalizeHouseRules,
-} from "../../utils/houseRules";
+} from "@utils/houseRules";
 import ListEditorHeader from "./editor/ListEditorHeader";
 import ListEditorItem from "./editor/ListEditorItem";
 import type { EditorItemHandlers } from "./editor/ListEditorItem";
 import KeepWhichDialog from "./editor/KeepWhichDialog";
 import SaveWarningDialog from "./editor/SaveWarningDialog";
-import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
-import PastePromptsModal from "../PastePromptsModal/PastePromptsModal";
+import ConfirmDialog from "@components/ui/ConfirmDialog/ConfirmDialog";
+import PastePromptsModal from "@components/PastePromptsModal/PastePromptsModal";
+import Modal from "@components/ui/Modal/Modal";
 import "./ListEditor.css";
 
-function normalizeItems(rawItems: StoredItem[]): EditorItem[] {
+const normalizeItems = (rawItems: StoredItem[]): EditorItem[] => {
   const padded = [...rawItems];
   while (padded.length < 54) padded.push({ v: "" });
   return padded.slice(0, 54).map(deserializeItem);
-}
+};
 
-function anyHasSpicy(items: EditorItem[]): boolean {
+const anyHasSpicy = (items: EditorItem[]): boolean => {
   return items.some(itemHasSpicy);
-}
+};
 
-function itemsEqual(a: EditorItem[], b: EditorItem[]): boolean {
+const itemsEqual = (a: EditorItem[], b: EditorItem[]): boolean => {
   if (a.length !== b.length) return false;
   return a.every((item, i) => JSON.stringify(item) === JSON.stringify(b[i]));
-}
+};
 
 interface ListEditorProps {
   list: CustomList;
@@ -666,20 +667,12 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
   // ── Render ────────────────────────────────────────────────────────────────
 
   return (
-    <div
-      className="editor-overlay"
-      onClick={(e) => { e.stopPropagation(); handleClose(); }}
+    <Modal
+      onRequestClose={handleClose}
+      panelRef={panelRef}
+      ariaLabelledBy="editor-title"
     >
-      <div
-        ref={panelRef}
-        className="editor-panel"
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="editor-title"
-        tabIndex={-1}
-        onClick={(e) => e.stopPropagation()}
-      >
-        <ListEditorHeader
+      <ListEditorHeader
           isNew={isNew}
           filledCount={filledCount}
           unSavedChanges={unSavedChanges}
@@ -858,7 +851,6 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
           <button className="cancel-btn" onClick={handleClose}>Cancel</button>
           <button className="save-btn" onClick={handleSave}>Save List</button>
         </div>
-      </div>
 
       {showPaste && (
         <PastePromptsModal
@@ -895,7 +887,7 @@ const ListEditor = ({ list, isNew, onSave, onClose }: ListEditorProps) => {
           onCancel={() => setSaveWarning(null)}
         />
       )}
-    </div>
+    </Modal>
   );
 };
 

@@ -34,7 +34,7 @@ const ConfirmDialog = ({
 
   return (
     <div
-      className={styles["confirm-dialog-backdrop"]}
+      className={styles.confirmDialogBackdrop}
       onClick={(e) => {
         e.stopPropagation();
         onCancel();
@@ -42,7 +42,7 @@ const ConfirmDialog = ({
     >
       <div
         ref={dialogRef}
-        className={styles["confirm-dialog"]}
+        className={styles.confirmDialog}
         role="dialog"
         aria-modal="true"
         aria-labelledby="confirm-dialog-title"
@@ -51,11 +51,11 @@ const ConfirmDialog = ({
       >
         <h2 id="confirm-dialog-title">{title}</h2>
         <p>{message}</p>
-        <div className={styles["confirm-dialog-buttons"]}>
-          <button className={styles["confirm-button"]} onClick={onConfirm}>
+        <div className={styles.confirmDialogButtons}>
+          <button className={styles.confirmButton} onClick={onConfirm}>
             {confirmLabel}
           </button>
-          <button className={styles["cancel-button"]} onClick={onCancel}>
+          <button className={styles.cancelButton} onClick={onCancel}>
             {cancelLabel}
           </button>
         </div>

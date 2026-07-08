@@ -1,25 +1,5 @@
-.keep-which-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--overlay-dim);
-  backdrop-filter: blur(4px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 400;
-  animation: fadeIn 0.15s ease;
-}
-
-.keep-which-box {
-  background: var(--surface);
-  border: 1px solid var(--border-card);
-  border-radius: var(--radius-md);
-  padding: 26px 24px;
-  max-width: 400px;
-  width: 90%;
-  box-shadow: var(--shadow);
-  animation: slideUp 0.2s ease;
-}
+/* The modal shell (.keep-which-overlay / .keep-which-box) now lives in the
+   shared ui/Modal primitive (variant="dialog"). */
 
 .keep-which-title {
   font-size: var(--text-base);

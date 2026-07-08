@@ -9,7 +9,7 @@ import type {
   StoredItem,
   StoredSingle,
   StoredTD,
-} from "../types";
+} from "@types";
 import { EXAMPLE_HOUSE_RULES, normalizeHouseRules } from "./houseRules";
 
 export const exampleImportCode = `{
@@ -24,16 +24,16 @@ export const exampleImportCode = `{
   ]
 }`;
 
-function isExportSingle(item: unknown): item is ExportSingle {
+const isExportSingle = (item: unknown): item is ExportSingle => {
   return (
     typeof item === "object" &&
     item !== null &&
     "prompt" in item &&
     typeof (item as ExportSingle).prompt === "string"
   );
-}
+};
 
-function isExportTD(item: unknown): item is ExportTD {
+const isExportTD = (item: unknown): item is ExportTD => {
   return (
     typeof item === "object" &&
     item !== null &&
@@ -42,10 +42,10 @@ function isExportTD(item: unknown): item is ExportTD {
     typeof (item as ExportTD).truth === "string" &&
     typeof (item as ExportTD).dare === "string"
   );
-}
+};
 
 /** Converts a human-readable export item back to the internal StoredItem format. */
-function toStoredItem(item: ExportItem): StoredItem {
+const toStoredItem = (item: ExportItem): StoredItem => {
   if (isExportSingle(item)) {
     const stored: StoredSingle = { v: item.prompt.slice(0, 350) };
     if (item.spicy?.trim()) stored.s = item.spicy.slice(0, 350);
@@ -61,9 +61,9 @@ function toStoredItem(item: ExportItem): StoredItem {
     return stored;
   }
   return null;
-}
+};
 
-function validateExportFile(parsed: unknown): ExportFile {
+const validateExportFile = (parsed: unknown): ExportFile => {
   if (typeof parsed !== "object" || parsed === null) {
     throw new Error("File is not a valid JSON object.");
   }
@@ -93,13 +93,13 @@ function validateExportFile(parsed: unknown): ExportFile {
   }
 
   return parsed as ExportFile;
-}
+};
 
 /**
  * Parses a JSON string from an imported file and returns either a preview
  * (for the user to confirm) or a validation error.
  */
-export function parseImportFile(jsonText: string): ImportResult {
+export const parseImportFile = (jsonText: string): ImportResult => {
   let parsed: unknown;
 
   try {
@@ -143,16 +143,16 @@ export function parseImportFile(jsonText: string): ImportResult {
   if (houseRules.length) preview.houseRules = houseRules;
 
   return { ok: true, preview };
-}
+};
 
 /**
  * Builds a CustomList from a confirmed ImportPreview.
  * Pads to 54 items with null if the import has fewer.
  */
-export function buildImportedList(
+export const buildImportedList = (
   preview: ImportPreview,
   newId: string,
-): CustomList {
+): CustomList => {
   const padded: StoredItem[] = [...preview.rawItems];
   while (padded.length < 54) padded.push(null);
 
@@ -163,4 +163,4 @@ export function buildImportedList(
   };
   if (preview.houseRules?.length) list.houseRules = preview.houseRules;
   return list;
-}
+};

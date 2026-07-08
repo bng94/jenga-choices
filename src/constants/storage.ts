@@ -1,4 +1,4 @@
-import type { DefaultListIds, ListId } from "../types";
+import type { DefaultListIds, ListId } from "@types";
 
 export const STORAGE_KEYS = {
   customLists: "jenga_custom_lists",

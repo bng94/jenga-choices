@@ -3,7 +3,7 @@ import InfoPanel, {
   InfoGrid,
   InfoCard,
   InfoRow,
-} from "../InfoPanel/InfoPanel";
+} from "@components/ui/InfoPanel/InfoPanel";
 
 const ListEditorInfoPanel = () => {
   return (

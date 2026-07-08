@@ -6,22 +6,22 @@ interface SpicyToggleProps {
   variant?: "header" | "editor" | "viewer";
 }
 
-export default function SpicyToggle({
+const SpicyToggle = ({
   enabled,
   onToggle,
   variant = "header",
-}: SpicyToggleProps) {
+}: SpicyToggleProps) => {
   const label = "Spicy";
   const title = enabled ? "Click to disable spicy mode" : "Enable spicy mode";
 
   return (
     <button
       className={
-        styles[`spicy-toggle`] +
+        styles.spicyToggle +
         " " +
-        styles[`spicy-toggle--${variant}`] +
+        styles[`spicyToggle--${variant}`] +
         " " +
-        (enabled ? styles[`spicy-toggle--on`] : "")
+        (enabled ? styles.spicyToggleOn : "")
       }
       onClick={onToggle}
       title={title}
@@ -30,4 +30,6 @@ export default function SpicyToggle({
       🔥 {label}
     </button>
   );
-}
+};
+
+export default SpicyToggle;

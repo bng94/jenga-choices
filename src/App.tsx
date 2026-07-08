@@ -1,20 +1,20 @@
 import { useState } from "react";
-import Header from "./components/Header/Header";
-import ThemePicker from "./components/ThemePicker/ThemePicker";
-import ListManager from "./components/Lists/ListManager";
-import type { AppView, CustomList, GameMode } from "./types";
+import Header from "@components/layout/Header/Header";
+import ThemePicker from "@components/layout/ThemePicker/ThemePicker";
+import ListManager from "@components/Lists/ListManager";
+import type { AppView, CustomList, GameMode } from "@types";
 import "./App.css";
-import ClassicMode from "./components/Classic/ClassicMode";
+import ClassicMode from "@components/Classic/ClassicMode";
 import {
   loadBoardListId,
   loadClassicListId,
   loadCustomLists,
   saveBoardListId,
   saveClassicListId,
-} from "./utils/storage";
-import { getFullListById } from "./utils/listHelpers";
+} from "@utils/storage";
+import { getFullListById } from "@utils/listHelpers";
 
-function App() {
+const App = () => {
   const [view, setView] = useState<AppView>("classic");
   const [customLists, setCustomLists] = useState<CustomList[]>(() =>
     loadCustomLists(),
@@ -66,6 +66,6 @@ function App() {
       </section>
     </>
   );
-}
+};
 
 export default App;

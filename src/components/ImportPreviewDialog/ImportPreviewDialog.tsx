@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 
-import { ImportPreview } from "../../types";
+import { ImportPreview } from "@types";
 import styles from "./ImportPreviewDialog.module.css";
 
 interface ImportPreviewDialogProps {

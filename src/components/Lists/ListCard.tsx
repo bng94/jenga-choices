@@ -1,10 +1,10 @@
-import type { CustomList, StoredItem } from "../../types";
-import { itemHasContent, itemHasSpicyContent } from "../../utils/itemModel";
-import "./ListCard.css";
+import type { CustomList, StoredItem } from "@types";
+import { itemHasContent, itemHasSpicyContent } from "@utils/itemModel";
+import styles from "./ListCard.module.css";
 
-function detectListType(
+const detectListType = (
   items: StoredItem[],
-): "singles" | "truth-dare" | "mixed" | "empty" {
+): "singles" | "truth-dare" | "mixed" | "empty" => {
   if (!items || items.length === 0) return "empty";
   const isTD = (i: StoredItem) =>
     i &&
@@ -20,7 +20,7 @@ function detectListType(
   if (hasTD && hasSingle) return "mixed";
   if (hasTD) return "truth-dare";
   return "singles";
-}
+};
 
 interface ListCardProps {
   card: CustomList & { isDefault: boolean };
@@ -61,54 +61,58 @@ const ListCard = ({
 
   return (
     <div
-      className={`list-card ${isLocked ? "is-active" : ""} ${card.isDefault ? "is-default" : ""}`}
+      className={`${styles.listCard} ${isLocked ? styles.isActive : ""} ${card.isDefault ? styles.isDefault : ""}`}
     >
-      <div className="list-card-header">
-        <p className="list-card-name">{card.name}</p>
-        <p className="list-card-meta">{count} items</p>
+      <div className={styles.listCardHeader}>
+        <p className={styles.listCardName}>{card.name}</p>
+        <p className={styles.listCardMeta}>{count} items</p>
       </div>
 
-      <div className="list-card-tags">
+      <div className={styles.listCardTags}>
         {/* Future: when Board mode is live, change ": Active" → ": Classic" and handle Board separately */}
         <span
-          className={`tag ${
+          className={`${styles.tag} ${
             activeForClassic
-              ? "tag-active"
+              ? styles.tagActive
               : card.isDefault
-                ? "tag-default"
-                : "tag-custom"
+                ? styles.tagDefault
+                : styles.tagCustom
           }`}
         >
           {card.isDefault ? "Default" : "Custom"}
           {activeForClassic ? ": Active" : ""}
         </span>
         {activeForBoard && (
-          <span className="tag tag-board">Active: Board</span>
+          <span className={`${styles.tag} ${styles.tagBoard}`}>Active: Board</span>
         )}
         {listType === "truth-dare" && (
-          <span className="tag tag-td">Truth/Dare</span>
+          <span className={`${styles.tag} ${styles.tagTd}`}>Truth/Dare</span>
         )}
-        {listType === "mixed" && <span className="tag tag-mixed">Mixed</span>}
-        {hasSpicyContent && <span className="tag tag-spicy">Spicy</span>}
+        {listType === "mixed" && (
+          <span className={`${styles.tag} ${styles.tagMixed}`}>Mixed</span>
+        )}
+        {hasSpicyContent && (
+          <span className={`${styles.tag} ${styles.tagSpicy}`}>Spicy</span>
+        )}
       </div>
 
-      <div className="list-card-actions">
+      <div className={styles.listCardActions}>
         {!activeForClassic && (
           <button
-            className="card-btn primary-sm"
+            className={`${styles.cardBtn} ${styles.primarySm}`}
             onClick={onUseClassic}
             title="Use for Classic mode"
           >
             Use
           </button>
         )}
-        <button className="card-btn" onClick={onView}>
+        <button className={styles.cardBtn} onClick={onView}>
           View
         </button>
 
         {card.isDefault ? (
           <button
-            className="card-btn"
+            className={styles.cardBtn}
             onClick={onCopyAndEdit}
             title="Default lists can't be changed; this edits a copy"
           >
@@ -117,7 +121,7 @@ const ListCard = ({
         ) : (
           <>
             <button
-              className="card-btn"
+              className={styles.cardBtn}
               onClick={isLocked ? undefined : onEdit}
               disabled={isLocked}
               title={
@@ -128,7 +132,7 @@ const ListCard = ({
               Edit
             </button>
             <button
-              className="card-btn danger"
+              className={`${styles.cardBtn} ${styles.danger}`}
               onClick={onDelete}
               disabled={isLocked}
               title={

@@ -1,29 +1,6 @@
-.editor-overlay {
-  position: fixed;
-  inset: 0;
-  background: var(--overlay-deep);
-  backdrop-filter: blur(8px);
-  z-index: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.2s ease;
-}
-
-.editor-panel {
-  background: var(--surface);
-  border: 1px solid var(--border-mid);
-  border-radius: var(--radius-xl);
-  width: min(660px, 100%);
-  max-height: 88vh;
-  max-height: 88dvh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow);
-  animation: slideUp 0.25s ease;
-  overflow: hidden;
-}
+/* The modal shell (.editor-overlay / .editor-panel) now lives in the shared
+   ui/Modal primitive. Editor/viewer chrome below stays global until the
+   Lists → feature move (Phase 4). */
 
 .editor-header {
   padding: 16px 22px;
@@ -543,16 +520,6 @@
 }
 
 @media (max-width: 640px) {
-  .editor-overlay {
-    padding: 8px;
-    padding-top: max(8px, env(safe-area-inset-top));
-    padding-bottom: max(8px, env(safe-area-inset-bottom));
-    align-items: flex-start;
-  }
-  .editor-panel {
-    max-height: calc(100vh - 20px);
-    max-height: calc(100dvh - 20px);
-  }
   .item-input {
     font-size: 16px;
     padding: 8px 10px;

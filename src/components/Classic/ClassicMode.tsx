@@ -10,17 +10,17 @@ import type {
   LastReveal,
   NumberedOrder,
   RevealStep,
-} from "../../types";
-import { shuffle } from "../../utils/shuffle";
-import { deserializeItem, itemHasSpicyContent } from "../../utils/itemModel";
+} from "@types";
+import { shuffle } from "@utils/shuffle";
+import { deserializeItem, itemHasSpicyContent } from "@utils/itemModel";
 import {
   clearGameSession,
   loadGameSession,
   saveGameSession,
-} from "../../utils/storage";
-import ConfirmDialog from "../ConfirmDialog/ConfirmDialog";
-import HouseRulesDisplay from "../HouseRules/HouseRulesDisplay";
-import ActiveListViewer from "../Lists/ActiveListViewer/ActiveListViewer";
+} from "@utils/storage";
+import ConfirmDialog from "@components/ui/ConfirmDialog/ConfirmDialog";
+import HouseRulesDisplay from "@components/ui/HouseRules/HouseRulesDisplay";
+import ActiveListViewer from "@components/Lists/ActiveListViewer/ActiveListViewer";
 import styles from "./ClassicMode.module.css";
 import ClassicModeInfoPanel from "./ClassModeInfoPanel";
 import SetupScreen from "./SetupScreen";

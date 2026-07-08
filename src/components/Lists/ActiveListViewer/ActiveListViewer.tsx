@@ -4,8 +4,8 @@ import type {
   EditorSingleItem,
   EditorTDItem,
   HouseRule,
-} from "../../../types";
-import HouseRulesDisplay from "../../HouseRules/HouseRulesDisplay";
+} from "@types";
+import HouseRulesDisplay from "@components/ui/HouseRules/HouseRulesDisplay";
 import styles from "./ActiveListViewer.module.css";
 
 interface ActiveListViewerProps {
@@ -16,33 +16,33 @@ interface ActiveListViewerProps {
   houseRules?: HouseRule[];
 }
 
-export default function ActiveListViewer({
+const ActiveListViewer = ({
   listName,
   shuffledMap,
   usedPositions,
   onClose,
   houseRules,
-}: ActiveListViewerProps) {
+}: ActiveListViewerProps) => {
   const remaining = shuffledMap.length - usedPositions.size;
   const [houseRulesOpen, setHouseRulesOpen] = useState(false);
 
   const renderItem = (item: EditorItem) => {
     if (item.type === "single") {
       return (
-        <span className={styles["alv-single"]}>
+        <span className={styles.alvSingle}>
           {(item as EditorSingleItem).value}
         </span>
       );
     }
     const td = item as EditorTDItem;
     return (
-      <div className={styles["alv-td"]}>
-        <div className={styles["alv-td-row"]}>
-          <span className={styles["alv-badge truth"]}>T</span>
+      <div className={styles.alvTd}>
+        <div className={styles.alvTdRow}>
+          <span className={styles.alvBadgeTruth}>T</span>
           <span>{td.truth}</span>
         </div>
-        <div className={styles["alv-td-row"]}>
-          <span className={styles["alv-badge dare"]}>D</span>
+        <div className={styles.alvTdRow}>
+          <span className={styles.alvBadgeDare}>D</span>
           <span>{td.dare}</span>
         </div>
       </div>
@@ -51,70 +51,73 @@ export default function ActiveListViewer({
 
   return (
     <div
-      className={styles["alv-overlay"]}
+      className={styles.alvOverlay}
       onClick={(e) => {
         e.stopPropagation();
         onClose();
       }}
     >
-      <div className={styles["alv-modal"]} onClick={(e) => e.stopPropagation()}>
-        <div className={styles["alv-header"]}>
+      <div className={styles.alvModal} onClick={(e) => e.stopPropagation()}>
+        <div className={styles.alvHeader}>
           <div>
-            <div className={styles["alv-title"]}>{listName}</div>
-            <div className={styles["alv-subtitle"]}>
-              <span className={styles["alv-stat remaining"]}>
+            <div className={styles.alvTitle}>{listName}</div>
+            <div className={styles.alvSubtitle}>
+              <span className={styles.alvStatRRemaining}>
                 {remaining} remaining
               </span>
-              <span className={styles["alv-dot"]}>·</span>
-              <span className={styles["alv-stat pulled"]}>
+              <span className={styles.alvDot}>·</span>
+              <span className={styles.alvStatPulled}>
                 {usedPositions.size} pulled
               </span>
             </div>
           </div>
-          <button className={styles["alv-close"]} onClick={onClose}>
+          <button className={styles.alvClose} onClick={onClose}>
             ✕
           </button>
         </div>
 
         {(houseRules?.length ?? 0) > 0 && (
-          <div className={styles["alv-house-rules"]}>
+          <div className={styles.alvHouseRules}>
             <button
               type="button"
               className={[
-                styles["alv-house-rules-toggle"],
-                houseRulesOpen ? styles["alv-house-rules-toggle--open"] : "",
+                styles.alvHouseRulesToggle,
+                houseRulesOpen ? styles.alvHouseRulesToggleOpen : "",
               ].join(" ")}
               onClick={() => setHouseRulesOpen((v) => !v)}
             >
               <span>House Rules</span>
               <span
                 className={[
-                  styles["alv-house-rules-arrow"],
-                  houseRulesOpen ? styles["alv-house-rules-arrow--open"] : "",
+                  styles.alvHouseRulesArrow,
+                  houseRulesOpen ? styles.alvHouseRulesArrowOpen : "",
                 ].join(" ")}
               >
                 ▶
               </span>
             </button>
             {houseRulesOpen && (
-              <div className={styles["alv-house-rules-body"]}>
+              <div className={styles.alvHouseRulesBody}>
                 <HouseRulesDisplay rules={houseRules!} />
               </div>
             )}
           </div>
         )}
 
-        <div className={styles["alv-list"]}>
+        <div className={styles.alvList}>
           {shuffledMap.map((item, pos) => {
             const isPulled = usedPositions.has(pos);
             return (
               <div
                 key={pos}
-                className={`${styles["alv-item"]} ${isPulled ? styles["alv-item--pulled"] : styles["alv-item--remaining"]}`}
+                className={[
+                  styles.alvItem,
+                  isPulled ? styles.alvItemPulled : styles.alvItemRemaining,
+                ].join(" ")}
               >
-                <span className={styles["alv-pos"]}>{pos + 1}</span>
-                <div className={styles["alv-content"]}>{renderItem(item)}</div>
-                {isPulled && <span className={styles["alv-check"]}>✓</span>}
+                <span className={styles.alvPos}>{pos + 1}</span>
+                <div className={styles.alvContent}>{renderItem(item)}</div>
+                {isPulled && <span className={styles.alvCheck}>✓</span>}
               </div>
             );
           })}
@@ -122,4 +125,6 @@ export default function ActiveListViewer({
       </div>
     </div>
   );
-}
+};
+
+export default ActiveListViewer;
